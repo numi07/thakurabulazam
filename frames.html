@@ -20,7 +20,7 @@
         .active-frame { border: 3px solid #059669; position: relative; }
         .active-frame::after { content: '✓'; position: absolute; top: -10px; right: -10px; background: #059669; color: white; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; }
 
-        /* মোবাইল মেনু ট্রানজিশন */
+        
         #mobile-menu {
             transition: all 0.3s ease-in-out;
             max-height: 0;
@@ -170,7 +170,7 @@
     </footer>
 
     <script>
-        // মোবাইল মেনু টগল লজিক
+        
         const menuToggle = document.getElementById('menu-toggle');
         const mobileMenu = document.getElementById('mobile-menu');
 
@@ -178,7 +178,7 @@
             mobileMenu.classList.toggle('active');
         });
 
-        // ক্যানভাস লজিক (অপরিবর্তিত)
+        
         const canvas = document.getElementById('bannerCanvas');
         const ctx = canvas.getContext('2d');
         const imageInput = document.getElementById('imageInput');
