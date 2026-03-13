@@ -40,7 +40,6 @@
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
 
-        /* মোবাইল মেনু ট্রানজিশন */
         #mobile-menu {
             transition: all 0.3s ease-in-out;
             max-height: 0;
@@ -57,8 +56,36 @@
             background-position: center;
         }
 
-        .info-bar-bg { background-color: #009e49; color: white; border-radius: 12px; }
+        .info-bar-bg { 
+            background-color: #009e49; 
+            color: white; 
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 15px 25px;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
         
+        .prayer-box {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            padding: 8px 12px;
+            text-align: center;
+            min-width: 65px;
+        }
+
+        .weather-box {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+            padding: 10px 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
         .principle-card { transition: all 0.3s ease; border-bottom: 4px solid transparent; }
         .principle-card:hover { 
             transform: translateY(-5px); 
@@ -95,7 +122,7 @@
                 <a href="#events" class="text-gray-700 text-sm font-bold hover:text-brand-green">কর্মসূচি</a>
                 <a href="#gallery" class="text-gray-700 text-sm font-bold hover:text-brand-green">গ্যালারি</a>
                 <a href="#news" class="text-gray-700 text-sm font-bold hover:text-brand-green">সংবাদ</a>
-                <a href="voterslip.html" class="text-gray-700 text-sm font-bold hover:text-brand-green">ভোটার স্লিপ</a>
+                <a href="https://votersearchsystem.vercel.app" class="text-gray-700 text-sm font-bold hover:text-brand-green">ভোটার স্লিপ</a>
                 <a href="#contact" class="text-gray-700 text-sm font-bold hover:text-brand-green">যোগাযোগ</a>
             </nav>
         </div>
@@ -107,13 +134,14 @@
             <a href="#events" class="text-gray-700 font-bold py-2">কর্মসূচি</a>
             <a href="#gallery" class="text-gray-700 font-bold py-2">গ্যালারি</a>
             <a href="#news" class="text-gray-700 font-bold py-2">সংবাদ</a>
-            <a href="voterslip.html" class="text-gray-700 font-bold py-2">ভোটার স্লিপ</a>
+            <a href="https://votersearchsystem.vercel.app/" class="text-gray-700 font-bold py-2">ভোটার স্লিপ</a>
             <a href="#contact" class="text-gray-700 font-bold py-2">যোগাযোগ</a>
         </nav>
     </header>
 
     <div class="content-wrapper" id="home">
-        <section class="hero-section text-white relative py-20 px-6">
+
+        <section class="hero-section text-white relative py-20 px-6 mt-6">
             <div class="container mx-auto grid md:grid-cols-2 gap-8 items-center">
                 <div>
                     <span class="bg-red-600 px-3 py-1 rounded-full text-xs font-bold mb-4 inline-block">চেয়ারম্যান পদপ্রার্থী</span>
@@ -151,6 +179,37 @@
             </div>
         </section>
 
+        <section class="container mx-auto px-4 mt-10">
+            <div class="info-bar-bg shadow-lg">
+                <div class="flex flex-col gap-1">
+                    <div class="flex items-center gap-2">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"></path></svg>
+                        <span class="text-lg font-bold">নড়াগাতী, নড়াইল</span>
+                    </div>
+                    <p class="text-sm opacity-90" id="current-date">লোড হচ্ছে...</p>
+                    <h2 class="text-3xl font-black tracking-tighter" id="bn-clock">০০:০০:০০</h2>
+                </div>
+
+                <div class="flex gap-2 overflow-x-auto pb-2 md:pb-0">
+                    <div class="prayer-box"><p class="text-[10px] uppercase font-bold opacity-80">ফজর</p><p class="font-bold" id="fajr">-</p></div>
+                    <div class="prayer-box"><p class="text-[10px] uppercase font-bold opacity-80">যোহর</p><p class="font-bold" id="dhuhr">-</p></div>
+                    <div class="prayer-box"><p class="text-[10px] uppercase font-bold opacity-80">আসর</p><p class="font-bold" id="asr">-</p></div>
+                    <div class="prayer-box"><p class="text-[10px] uppercase font-bold opacity-80">মাগরিব</p><p class="font-bold" id="maghrib">-</p></div>
+                    <div class="prayer-box"><p class="text-[10px] uppercase font-bold opacity-80">এশা</p><p class="font-bold" id="isha">-</p></div>
+                </div>
+
+                <div class="weather-box">
+                    <div id="weather-icon">
+                        <svg class="w-10 h-10 animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"></path></svg>
+                    </div>
+                    <div class="text-right">
+                        <h3 class="text-4xl font-black leading-none" id="temp">--°C</h3>
+                        <p class="text-xs font-bold opacity-90" id="weather-desc">লোড হচ্ছে...</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <section class="container mx-auto py-20 px-4" id="manifesto">
             <div class="text-center mb-16">
                 <h2 class="text-4xl font-black text-brand-dark mb-4 uppercase">আমাদের মূলনীতি</h2>
@@ -179,35 +238,6 @@
                 </div>
             </div>
         </section>
-
-        <section class="bg-gray-50 py-16 px-4" id="events">
-    <div class="container mx-auto">
-        <h2 class="text-3xl font-bold mb-10 border-l-8 border-brand-green pl-4">সাম্প্রতিক কর্মসূচি</h2>
-        <div class="grid md:grid-cols-3 gap-6">
-            
-            <div class="bg-white rounded-2xl overflow-hidden shadow-md">
-                <img src="https://lh3.googleusercontent.com/d/1KeHoVTpXVGiSvLiYMKc8AWj4N8TVQ-Vw" 
-                     class="w-full h-30 object-cover" 
-                     alt="পাখিমারা বাজার নির্বাচনী পথসভা">
-                <div class="p-6">
-                    <span class="text-brand-green font-bold text-xs uppercase">২৮ জানুয়ারি, ২০২৬</span>
-                    <h4 class="font-bold mt-2">পাখিমারা বাজারে নির্বাচনী পথসভা</h4>
-                </div>
-            </div>
-
-            <div class="bg-white rounded-2xl overflow-hidden shadow-md">
-                <img src="https://lh3.googleusercontent.com/d/1tr6wmE7ci9L6b1oms345lTv9og-JZ4L-" 
-                     class="w-full h-30 object-cover" 
-                     alt="পহরডাঙ্গা বাজার নির্বাচনী সভা">
-                <div class="p-6">
-                    <span class="text-brand-green font-bold text-xs uppercase">২৯ জানুয়ারি, ২০২৬</span>
-                    <h4 class="font-bold mt-2">পহরডাঙ্গা বাজারে নির্বাচনী সভা</h4>
-                </div>
-            </div>
-
-        </div>
-    </div>
-</section>
     </div>
 
     <footer class="bg-brand-dark text-white py-12 px-6" id="contact">
@@ -241,31 +271,73 @@
     </footer>
 
     <script>
-        // মোবাইল মেনু টগল লজিক
         const menuBtn = document.getElementById('menu-btn');
         const mobileMenu = document.getElementById('mobile-menu');
-
-        menuBtn.addEventListener('click', () => {
-            mobileMenu.classList.toggle('active');
-        });
-
-        // মেনুর কোনো লিংকে ক্লিক করলে মেনু অটো বন্ধ হবে
-        const menuLinks = mobileMenu.querySelectorAll('a');
-        menuLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                mobileMenu.classList.remove('active');
-            });
-        });
+        menuBtn.addEventListener('click', () => mobileMenu.classList.toggle('active'));
 
         const toBn = n => n.toString().replace(/\d/g, d => "০১২৩৪৫৬৭৮৯"[d]);
+
         function updateClock() {
             const now = new Date();
             const time = now.toLocaleTimeString('en-GB', { hour12: false }).split(':').map(toBn).join(':');
-            const clockEl = document.getElementById('bn-clock');
-            if(clockEl) clockEl.innerText = time;
+            document.getElementById('bn-clock').innerText = time;
+
+            const days = ['রবিবার', 'সোমবার', 'মঙ্গলবার', 'বুধবার', 'বৃহস্পতিবার', 'শুক্রবার', 'শনিবার'];
+            const months = ['জানুয়ারি', 'ফেব্রুয়ারি', 'মার্চ', 'এপ্রিল', 'মে', 'জুন', 'জুলাই', 'আগস্ট', 'সেপ্টেম্বর', 'অক্টোবর', 'নভেম্বর', 'ডিসেম্বর'];
+            const dateStr = `${days[now.getDay()]}, ${toBn(now.getDate())} ${months[now.getMonth()]} ${toBn(now.getFullYear())}`;
+            document.getElementById('current-date').innerText = dateStr;
         }
         setInterval(updateClock, 1000);
         updateClock();
+
+        async function getPrayerTimes() {
+            try {
+                const res = await fetch('https://api.aladhan.com/v1/timingsByCity?city=Narail&country=Bangladesh&method=2');
+                const data = await res.json();
+                const times = data.data.timings;
+                const convert = (t) => {
+                    let [h, m] = t.split(':');
+                    h = parseInt(h);
+                    let suffix = h >= 12 ? '' : ''; 
+                    h = h % 12 || 12;
+                    return toBn(h) + ":" + toBn(m);
+                };
+                document.getElementById('fajr').innerText = convert(times.Fajr);
+                document.getElementById('dhuhr').innerText = convert(times.Dhuhr);
+                document.getElementById('asr').innerText = convert(times.Asr);
+                document.getElementById('maghrib').innerText = convert(times.Maghrib);
+                document.getElementById('isha').innerText = convert(times.Isha);
+            } catch (e) { console.error("Prayer Error"); }
+        }
+        getPrayerTimes();
+
+        
+        async function getWeather() {
+            const apiKey = "895284fb2d2c1d87930248ad4b51906a";
+            const city = "Narail";
+            try {
+                
+                const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}&lang=bn`);
+                if (!response.ok) throw new Error('Network response was not ok');
+                
+                const data = await response.json();
+                
+                
+                document.getElementById('temp').innerText = toBn(Math.round(data.main.temp)) + "°C";
+                document.getElementById('weather-desc').innerText = data.weather[0].description;
+                
+                const iconCode = data.weather[0].icon;
+                document.getElementById('weather-icon').innerHTML = `<img src="https://openweathermap.org/img/wn/${iconCode}@2x.png" class="w-12 h-12" alt="weather">`;
+                
+            } catch (error) {
+                console.error("Weather Fetch Error:", error);
+                document.getElementById('weather-desc').innerText = "তথ্য পাওয়া যায়নি";
+                document.getElementById('temp').innerText = "--°C";
+            }
+        }
+        
+
+        window.onload = getWeather;
     </script>
 </body>
 </html>
