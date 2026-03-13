@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ঠাকুর আবুল আজম | ১০নং পহরডাঙ্গা ইউনিয়ন</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: { sans: ['"Hind Siliguri"', 'sans-serif'] },
+            colors: { brand: { green: '#009e49', dark: '#1a222c', gold: '#fbbf24' } }
+          }
+        }
+      }
+    </script>
+    <style>
+        html, body { height: 100%; margin: 0; }
+        body { 
+            font-family: 'Hind Siliguri', sans-serif; 
+            background-color: #f8fafc; 
+            display: flex; 
+            flex-direction: column; 
+        }
+        
+        .content-wrapper { 
+            flex: 1 0 auto; 
+            padding-top: 80px; 
+        }
+
+        .fixed-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        /* মোবাইল মেনু ট্রানজিশন */
+        #mobile-menu {
+            transition: all 0.3s ease-in-out;
+            max-height: 0;
+            overflow: hidden;
+        }
+        #mobile-menu.active {
+            max-height: 500px;
+            padding: 1rem 0;
+        }
+
+        .hero-section { 
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1679029524057-7065d479da5c?fm=jpg&q=60&w=3000'); 
+            background-size: cover; 
+            background-position: center;
+        }
+
+        .info-bar-bg { background-color: #009e49; color: white; border-radius: 12px; }
+        
+        .principle-card { transition: all 0.3s ease; border-bottom: 4px solid transparent; }
+        .principle-card:hover { 
+            transform: translateY(-5px); 
+            border-bottom: 4px solid #1a222c;
+            background-color: white;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+        
+        footer { flex-shrink: 0; }
+    </style>
+</head>
+<body>
+
+    <header class="fixed-header">
+        <div class="container mx-auto px-6 py-3 flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <img src="https://lh3.googleusercontent.com/d/17sGo8tVgyVlOS7BMpBol7kdim1mUaFaH" class="w-10 h-10" alt="logo">
+                <div>
+                    <h2 class="text-xl font-bold text-brand-green leading-none">ঠাকুর আবুল আজম</h2>
+                    <p class="text-[10px] font-bold text-red-600 uppercase">১০নং পহরডাঙ্গা ইউনিয়ন</p>
+                </div>
+            </div>
+
+            <button id="menu-btn" class="md:hidden text-brand-dark focus:outline-none">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                </svg>
+            </button>
+
+            <nav class="hidden md:flex gap-4 items-center">
+                <a href="#home" class="bg-brand-green text-white px-4 py-1.5 rounded-lg text-sm font-bold">হোম</a>
+                <a href="#manifesto" class="text-gray-700 text-sm font-bold hover:text-brand-green">ইশতেহার</a>
+                <a href="#about" class="text-gray-700 text-sm font-bold hover:text-brand-green">প্রার্থী সম্পর্কে</a>
+                <a href="#events" class="text-gray-700 text-sm font-bold hover:text-brand-green">কর্মসূচি</a>
+                <a href="#gallery" class="text-gray-700 text-sm font-bold hover:text-brand-green">গ্যালারি</a>
+                <a href="#news" class="text-gray-700 text-sm font-bold hover:text-brand-green">সংবাদ</a>
+                <a href="voterslip.html" class="text-gray-700 text-sm font-bold hover:text-brand-green">ভোটার স্লিপ</a>
+                <a href="#contact" class="text-gray-700 text-sm font-bold hover:text-brand-green">যোগাযোগ</a>
+            </nav>
+        </div>
+
+        <nav id="mobile-menu" class="md:hidden bg-white border-t border-gray-100 flex flex-col items-center gap-4">
+            <a href="#home" class="text-brand-green font-bold py-2">হোম</a>
+            <a href="#manifesto" class="text-gray-700 font-bold py-2">ইশতেহার</a>
+            <a href="#about" class="text-gray-700 font-bold py-2">প্রার্থী সম্পর্কে</a>
+            <a href="#events" class="text-gray-700 font-bold py-2">কর্মসূচি</a>
+            <a href="#gallery" class="text-gray-700 font-bold py-2">গ্যালারি</a>
+            <a href="#news" class="text-gray-700 font-bold py-2">সংবাদ</a>
+            <a href="voterslip.html" class="text-gray-700 font-bold py-2">ভোটার স্লিপ</a>
+            <a href="#contact" class="text-gray-700 font-bold py-2">যোগাযোগ</a>
+        </nav>
+    </header>
+
+    <div class="content-wrapper" id="home">
+        <section class="hero-section text-white relative py-20 px-6">
+            <div class="container mx-auto grid md:grid-cols-2 gap-8 items-center">
+                <div>
+                    <span class="bg-red-600 px-3 py-1 rounded-full text-xs font-bold mb-4 inline-block">চেয়ারম্যান পদপ্রার্থী</span>
+                    <h1 class="text-5xl font-black mb-4 leading-tight">স্বপ্নের পহরডাঙ্গা ইউনিয়ন <br>বিনির্মাণে নিয়োজিত</h1>
+                    <p class="text-lg mb-8 opacity-90 italic border-l-4 border-brand-green pl-4">"পহরডাঙ্গা ইউনিয়নের প্রতিটি মানুষের মুখে হাসি ফোটাতে বদ্ধপরিকর।"</p>
+                    <div class="flex gap-4">
+                        <a href="#manifesto" class="bg-brand-green hover:bg-green-700 px-6 py-3 rounded-full font-bold shadow-lg flex items-center gap-2 transition">আমাদের ইশতেহার ➔</a>
+                        <a href="frames.html" class="bg-white text-brand-dark hover:bg-gray-100 px-6 py-3 rounded-full font-bold shadow-lg flex items-center gap-2 transition">📷 সমর্থক ব্যানার তৈরি করুন</a>
+                    </div>
+                </div>
+                <div class="flex justify-center md:justify-end">
+                    <img src="https://lh3.googleusercontent.com/d/1HOkLWo1TpFYIidO9b1z_4FOimRrigg8A" class="w-80 h-[450px] object-cover rounded-3xl border-8 border-white/10 shadow-2xl">
+                </div>
+            </div>
+        </section>
+
+        <section class="container mx-auto px-4 -mt-12 relative z-20">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div class="bg-white p-6 rounded-2xl shadow-xl text-center">
+                    <p class="text-3xl font-black text-brand-green">১২,৬৫৩</p>
+                    <p class="text-xs font-bold text-gray-400 uppercase tracking-widest mt-1">মোট ভোটার</p>
+                </div>
+                <div class="bg-white p-6 rounded-2xl shadow-xl text-center">
+                    <p class="text-3xl font-black text-blue-600">৬,৩৯৯</p>
+                    <p class="text-xs font-bold text-gray-400 uppercase tracking-widest mt-1">পুরুষ ভোটার</p>
+                </div>
+                <div class="bg-white p-6 rounded-2xl shadow-xl text-center">
+                    <p class="text-3xl font-black text-pink-500">৬,২৫৪</p>
+                    <p class="text-xs font-bold text-gray-400 uppercase tracking-widest mt-1">মহিলা ভোটার</p>
+                </div>
+                <div class="bg-white p-6 rounded-2xl shadow-xl text-center">
+                    <p class="text-3xl font-black text-brand-gold">৪ টি</p>
+                    <p class="text-xs font-bold text-gray-400 uppercase tracking-widest mt-1">ভোট কেন্দ্র</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="container mx-auto py-20 px-4" id="manifesto">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-black text-brand-dark mb-4 uppercase">আমাদের মূলনীতি</h2>
+                <div class="w-24 h-1 bg-brand-green mx-auto"></div>
+            </div>
+            <div class="grid md:grid-cols-4 gap-6">
+                <div class="principle-card bg-white p-10 rounded-2xl shadow-sm text-center">
+                    <div class="text-5xl mb-6">🤝</div>
+                    <h4 class="text-xl font-bold mb-3">সামাজিক সম্প্রীতি</h4>
+                    <p class="text-xs text-gray-500">সকল ধর্ম ও বর্ণের মানুষের সহাবস্থান।</p>
+                </div>
+                <div class="principle-card bg-white p-10 rounded-2xl shadow-sm text-center">
+                    <div class="text-5xl mb-6">🛡️</div>
+                    <h4 class="text-xl font-bold mb-3">সুশাসন</h4>
+                    <p class="text-xs text-gray-500">দুর্নীতিমুক্ত ও স্বচ্ছ প্রশাসনিক ব্যবস্থা।</p>
+                </div>
+                <div class="principle-card bg-white p-10 rounded-2xl shadow-sm text-center">
+                    <div class="text-5xl mb-6">🏗️</div>
+                    <h4 class="text-xl font-bold mb-3">উন্নয়ন</h4>
+                    <p class="text-xs text-gray-500">অবকাঠামো ও স্বাস্থ্যর সুষম উন্নয়ন।</p>
+                </div>
+                <div class="principle-card bg-white p-10 rounded-2xl shadow-sm text-center">
+                    <div class="text-5xl mb-6">⚖️</div>
+                    <h4 class="text-xl font-bold mb-3">ন্যায়বিচার</h4>
+                    <p class="text-xs text-gray-500">সবার জন্য সমান অধিকার নিশ্চিত করা।</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="bg-gray-50 py-16 px-4" id="events">
+    <div class="container mx-auto">
+        <h2 class="text-3xl font-bold mb-10 border-l-8 border-brand-green pl-4">সাম্প্রতিক কর্মসূচি</h2>
+        <div class="grid md:grid-cols-3 gap-6">
+            
+            <div class="bg-white rounded-2xl overflow-hidden shadow-md">
+                <img src="https://lh3.googleusercontent.com/d/1KeHoVTpXVGiSvLiYMKc8AWj4N8TVQ-Vw" 
+                     class="w-full h-30 object-cover" 
+                     alt="পাখিমারা বাজার নির্বাচনী পথসভা">
+                <div class="p-6">
+                    <span class="text-brand-green font-bold text-xs uppercase">২৮ জানুয়ারি, ২০২৬</span>
+                    <h4 class="font-bold mt-2">পাখিমারা বাজারে নির্বাচনী পথসভা</h4>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-2xl overflow-hidden shadow-md">
+                <img src="https://lh3.googleusercontent.com/d/1tr6wmE7ci9L6b1oms345lTv9og-JZ4L-" 
+                     class="w-full h-30 object-cover" 
+                     alt="পহরডাঙ্গা বাজার নির্বাচনী সভা">
+                <div class="p-6">
+                    <span class="text-brand-green font-bold text-xs uppercase">২৯ জানুয়ারি, ২০২৬</span>
+                    <h4 class="font-bold mt-2">পহরডাঙ্গা বাজারে নির্বাচনী সভা</h4>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+    </div>
+
+    <footer class="bg-brand-dark text-white py-12 px-6" id="contact">
+        <div class="container mx-auto grid md:grid-cols-3 gap-10 border-b border-gray-700 pb-10">
+            <div>
+                <div class="flex items-center gap-2 mb-6">
+                    <img src="https://lh3.googleusercontent.com/d/17sGo8tVgyVlOS7BMpBol7kdim1mUaFaH" class="w-8 h-8 filter invert" alt="logo">
+                    <h2 class="text-xl font-bold">ঠাকুর আবুল আজম</h2>
+                </div>
+                <p class="text-sm text-gray-400">ন্যায়বিচার, উন্নয়ন এবং সুশাসনের লক্ষ্যে আমাদের পথচলা।</p>
+            </div>
+            <div>
+                <h4 class="font-bold mb-6 text-brand-green uppercase">দ্রুত লিংক</h4>
+                <ul class="text-sm text-gray-400 space-y-3">
+                    <li><a href="#manifesto" class="hover:text-brand-green transition">➔ নির্বাচনী ইশতেহার</a></li>
+                    <li><a href="#events" class="hover:text-brand-green transition">➔ কর্মসূচি সমূহ</a></li>
+                    <li><a href="#gallery" class="hover:text-brand-green transition">➔ ফটো গ্যালারী</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-bold mb-6 text-brand-green uppercase">যোগাযোগ</h4>
+                <ul class="text-sm text-gray-400 space-y-3">
+                    <li>📍 পহরডাঙ্গা, নড়াগাতী, নড়াইল</li>
+                </ul>
+            </div>
+        </div>
+        <div class="container mx-auto pt-6 flex justify-between text-[10px] text-gray-500 uppercase font-bold">
+            <p>© ২০২৬ ঠাকুর আবুল আজম | সর্বস্বত্ব সংরক্ষিত</p>
+            <p>কারিগরি সহায়তায়: <span class="text-brand-green">আল নোমান শিকদার</span></p>
+        </div>
+    </footer>
+
+    <script>
+        // মোবাইল মেনু টগল লজিক
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('active');
+        });
+
+        // মেনুর কোনো লিংকে ক্লিক করলে মেনু অটো বন্ধ হবে
+        const menuLinks = mobileMenu.querySelectorAll('a');
+        menuLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('active');
+            });
+        });
+
+        const toBn = n => n.toString().replace(/\d/g, d => "০১২৩৪৫৬৭৮৯"[d]);
+        function updateClock() {
+            const now = new Date();
+            const time = now.toLocaleTimeString('en-GB', { hour12: false }).split(':').map(toBn).join(':');
+            const clockEl = document.getElementById('bn-clock');
+            if(clockEl) clockEl.innerText = time;
+        }
+        setInterval(updateClock, 1000);
+        updateClock();
+    </script>
+</body>
+</html>
