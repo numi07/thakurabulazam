@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>নিউজ পোর্টাল - অ্যাডমিন প্যানেল</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'brand-dark': '#1a1a1a',
+                        'brand-green': '#16a34a',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;600;700&display=swap');
+        body { font-family: 'Hind Siliguri', sans-serif; background-color: #f3f4f6; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; }
+        .hidden { display: none; }
+        .line-clamp-3 { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+        #mobile-menu { max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; }
+        #mobile-menu.active { max-height: 500px; padding-bottom: 20px; }
+    </style>
+</head>
+<body oncontextmenu="return false;">
+
+    <nav class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <h1 class="text-2xl font-bold text-green-700">সংবাদ পোর্টাল</h1>
+            
+            <nav class="hidden md:flex gap-4 items-center">
+                <a href="https://thakurabulazam.vercel.app/" class="bg-brand-green text-white px-4 py-1.5 rounded-lg text-sm font-bold">হোম</a>
+                <a href="#manifesto" class="text-gray-700 text-sm font-bold hover:text-brand-green">ইশতেহার</a>
+                <a href="#about" class="text-gray-700 text-sm font-bold hover:text-brand-green">প্রার্থী সম্পর্কে</a>
+                <a href="#events" class="text-gray-700 text-sm font-bold hover:text-brand-green">কর্মসূচি</a>
+                <a href="#gallery" class="text-gray-700 text-sm font-bold hover:text-brand-green">গ্যালারি</a>
+                <a href="https://votersearchsystem.vercel.app" class="text-gray-700 text-sm font-bold hover:text-brand-green">ভোটার স্লিপ</a>
+                <a href="#contact" class="text-gray-700 text-sm font-bold hover:text-brand-green">যোগাযোগ</a>
+                <button id="loginBtn" onclick="showLogin()" class="bg-gray-100 text-gray-700 px-3 py-1 rounded-lg text-xs font-bold border hover:bg-green-50">লগইন</button>
+                <button id="logoutBtn" onclick="logout()" class="hidden bg-red-500 text-white px-3 py-1 rounded-lg text-xs font-bold">লগআউট</button>
+            </nav>
+
+            <div class="md:hidden flex items-center gap-2">
+                <button id="loginBtnMob" onclick="showLogin()" class="text-xs font-bold border px-2 py-1 rounded">লগইন</button>
+                <button onclick="toggleMobileMenu()" class="text-gray-700 focus:outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                </button>
+            </div>
+        </div>
+
+        <nav id="mobile-menu" class="md:hidden bg-white border-t border-gray-100 flex flex-col items-center gap-2">
+            <a href="https://thakurabulazam.vercel.app/" class="text-brand-green font-bold py-2">হোম</a>
+            <a href="#manifesto" class="text-gray-700 font-bold py-2">ইশতেহার</a>
+            <a href="#about" class="text-gray-700 font-bold py-2">প্রার্থী সম্পর্কে</a>
+            <a href="#events" class="text-gray-700 font-bold py-2">কর্মসূচি</a>
+            <a href="#gallery" class="text-gray-700 font-bold py-2">গ্যালারি</a>
+            <a href="https://votersearchsystem.vercel.app/" class="text-gray-700 font-bold py-2">ভোটার স্লিপ</a>
+            <a href="#contact" class="text-gray-700 font-bold py-2">যোগাযোগ</a>
+            <button id="logoutBtnMob" onclick="logout()" class="hidden text-red-600 font-bold py-2">লগআউট</button>
+        </nav>
+    </nav>
+
+    <div id="loginModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+        <div class="bg-white p-6 rounded-lg shadow-xl w-full max-w-sm">
+            <h2 class="text-xl font-bold mb-4">অ্যাডমিন লগইন</h2>
+            <input type="text" id="username" onkeypress="handleEnter(event)" placeholder="ইউজারনেম" class="w-full border p-2 mb-3 rounded">
+            <input type="password" id="password" onkeypress="handleEnter(event)" placeholder="পাসওয়ার্ড" class="w-full border p-2 mb-4 rounded">
+            <div class="flex justify-end gap-2">
+                <button onclick="hideLogin()" class="px-4 py-2 text-gray-500">বাতিল</button>
+                <button onclick="attemptLogin()" class="px-4 py-2 bg-green-600 text-white rounded">লগইন</button>
+            </div>
+        </div>
+    </div>
+
+    <section id="adminPanel" class="hidden container mx-auto mt-8 p-4 bg-white rounded-lg shadow-md max-w-2xl">
+        <h2 id="formTitle" class="text-lg font-bold mb-4 border-b pb-2 text-green-700">নতুন নিউজ পোস্ট করুন</h2>
+        <input type="hidden" id="editIndex" value="-1">
+        <div class="space-y-3">
+            <input type="text" id="postTitle" placeholder="নিউজ শিরোনাম" class="w-full border p-2 rounded">
+            <textarea id="postDetails" placeholder="বিস্তারিত তথ্য লিখুন..." class="w-full border p-2 rounded h-32"></textarea>
+            <input type="text" id="postImageLink" placeholder="গুগল ড্রাইভ ইমেজ লিংক" class="w-full border p-2 rounded">
+            <div class="grid grid-cols-2 gap-2">
+                <input type="text" id="postLocation" value="পহরডাঙ্গা" class="border p-2 rounded">
+                <input type="date" id="postDate" class="border p-2 rounded">
+            </div>
+            <div class="flex gap-2">
+                <button id="saveBtn" onclick="savePost()" class="flex-1 bg-green-700 text-white py-2 rounded font-bold">পাবলিশ করুন</button>
+                <button id="cancelEditBtn" onclick="resetForm()" class="hidden flex-1 bg-gray-500 text-white py-2 rounded font-bold">বাতিল</button>
+            </div>
+        </div>
+    </section>
+
+    <main class="container mx-auto mt-10 px-4 mb-20 min-h-[500px]">
+        <h2 class="text-2xl font-bold mb-6 text-center text-gray-800">সর্বশেষ আপডেট</h2>
+        <div id="newsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+    </main>
+
+    <footer class="bg-brand-dark text-white py-12 px-6" id="contact">
+        <div class="container mx-auto grid md:grid-cols-3 gap-10 border-b border-gray-700 pb-10">
+            <div>
+                <div class="flex items-center gap-2 mb-6">
+                    <img src="https://lh3.googleusercontent.com/d/17sGo8tVgyVlOS7BMpBol7kdim1mUaFaH" class="w-8 h-8 filter invert" alt="logo">
+                    <h2 class="text-xl font-bold">ঠাকুর আবুল আজম</h2>
+                </div>
+                <p class="text-sm text-gray-400">ন্যায়বিচার, উন্নয়ন এবং সুশাসনের লক্ষ্যে আমাদের পথচলা।</p>
+            </div>
+            <div>                
+                <h4 class="font-bold mb-6 text-brand-green uppercase">দ্রুত লিংক</h4>
+                <ul class="text-sm text-gray-400 space-y-3">
+                    <li><a href="#manifesto" class="hover:text-brand-green transition">➔ নির্বাচনী ইশতেহার</a></li>
+                    <li><a href="#events" class="hover:text-brand-green transition">➔ কর্মসূচি সমূহ</a></li>
+                    <li><a href="#gallery" class="hover:text-brand-green transition">➔ ফটো গ্যালারী</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-bold mb-6 text-brand-green uppercase">যোগাযোগ</h4>
+                <ul class="text-sm text-gray-400 space-y-3">
+                    <li>📍 পহরডাঙ্গা, নড়াগাতী, নড়াইল</li>
+                </ul>
+            </div>
+        </div>
+        <div class="container mx-auto pt-6 flex flex-col md:flex-row justify-between text-[14px] md:text-[18px] text-gray-500 uppercase font-bold text-center">
+            <p>© ২০২৬ ঠাকুর আবুল আজম | সর্বস্বত্ব সংরক্ষিত</p>
+            <p>কারিগরি সহায়তায়: <span class="text-brand-green">আল নোমান শিকদার</span></p>
+        </div>
+    </footer>
+
+    <script>
+        // সিকিউরিটি স্ক্রিপ্ট: রাইট ক্লিক এবং শর্টকাট ব্লক
+        document.addEventListener('keydown', function(e) {
+            if (e.keyCode == 123 || 
+                (e.ctrlKey && e.shiftKey && (e.keyCode == 73 || e.keyCode == 74 || e.keyCode == 67)) || 
+                (e.ctrlKey && e.keyCode == 85)) {
+                e.preventDefault();
+                return false;
+            }
+        });
+
+        const _u = "c2hpa2Rlcm51bWk="; 
+        const _p = "TnVtaUAjJCUwMDIxOTI=";
+
+        function toBengaliNumber(n) {
+            const englishDigits = { '0':'০','1':'১','2':'২','3':'৩','4':'৪','5':'৫','6':'৬','7':'৭','8':'৮','9':'৯' };
+            return String(n).replace(/[0-9]/g, w => englishDigits[w]);
+        }
+
+        function toggleMobileMenu() { document.getElementById('mobile-menu').classList.toggle('active'); }
+        function showLogin() { 
+            document.getElementById('loginModal').classList.remove('hidden'); 
+            document.getElementById('username').focus(); // লগইন বক্স খুললে ইউজারনেমে ফোকাস হবে
+        }
+        function hideLogin() { document.getElementById('loginModal').classList.add('hidden'); }
+
+        // এন্টার বাটন হ্যান্ডেল করার ফাংশন
+        function handleEnter(event) {
+            if (event.key === "Enter") {
+                attemptLogin();
+            }
+        }
+
+        function attemptLogin() {
+            const user = document.getElementById('username').value;
+            const pass = document.getElementById('password').value;
+            if(btoa(user) === _u && btoa(pass) === _p) {
+                localStorage.setItem('isAdmin', 'true');
+                checkAuth();
+                hideLogin();
+                // লগইন সফল হলে ফিল্ডগুলো খালি করে দেওয়া
+                document.getElementById('username').value = '';
+                document.getElementById('password').value = '';
+            } else { alert("ভুল তথ্য!"); }
+        }
+
+        function logout() {
+            localStorage.removeItem('isAdmin');
+            checkAuth();
+            resetForm();
+        }
+
+        function checkAuth() {
+            const isAdmin = localStorage.getItem('isAdmin');
+            document.getElementById('adminPanel').classList.toggle('hidden', !isAdmin);
+            document.getElementById('logoutBtn').classList.toggle('hidden', !isAdmin);
+            document.getElementById('logoutBtnMob').classList.toggle('hidden', !isAdmin);
+            document.getElementById('loginBtn').classList.toggle('hidden', isAdmin);
+            document.getElementById('loginBtnMob').classList.toggle('hidden', isAdmin);
+            renderPosts();
+        }
+
+        function formatDriveLink(link) {
+            const fileId = link.match(/\/d\/(.+?)\//) || link.match(/id=(.+?)(&|$)/);
+            return fileId ? `https://lh3.googleusercontent.com/d/${fileId[1]}` : link;
+        }
+
+        function formatDateDisplay(dateStr) {
+            const d = new Date(dateStr);
+            if(isNaN(d)) return dateStr;
+            const day = toBengaliNumber(String(d.getDate()).padStart(2, '0'));
+            const month = toBengaliNumber(String(d.getMonth() + 1).padStart(2, '0'));
+            const year = toBengaliNumber(String(d.getFullYear()).slice(-2));
+            return `${day}.${month}.${year}`;
+        }
+
+        function shareOnFacebook(title) {
+            const url = window.location.href;
+            const facebookUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}&quote=${encodeURIComponent(title)}`;
+            window.open(facebookUrl, 'facebook-share-dialog', 'width=800,height=600');
+            return false;
+        }
+
+        function savePost() {
+            const title = document.getElementById('postTitle').value;
+            const details = document.getElementById('postDetails').value;
+            const link = document.getElementById('postImageLink').value;
+            const loc = document.getElementById('postLocation').value;
+            const date = document.getElementById('postDate').value;
+            const editIndex = parseInt(document.getElementById('editIndex').value);
+
+            if(!title || !details || !date) return alert("সব ঘর পূরণ করুন");
+
+            let posts = JSON.parse(localStorage.getItem('news_posts') || '[]');
+            const newPost = { title, details, image: formatDriveLink(link), location: loc, date };
+
+            if(editIndex > -1) posts[editIndex] = newPost;
+            else posts.push(newPost);
+            
+            localStorage.setItem('news_posts', JSON.stringify(posts));
+            resetForm();
+            renderPosts();
+        }
+
+        function deletePost(index) {
+            if(confirm('মুছতে চান?')) {
+                let posts = JSON.parse(localStorage.getItem('news_posts') || '[]');
+                posts.splice(index, 1);
+                localStorage.setItem('news_posts', JSON.stringify(posts));
+                renderPosts();
+            }
+        }
+
+        function editPost(index) {
+            let posts = JSON.parse(localStorage.getItem('news_posts') || '[]');
+            const post = posts[index];
+            document.getElementById('postTitle').value = post.title;
+            document.getElementById('postDetails').value = post.details;
+            document.getElementById('postImageLink').value = post.image;
+            document.getElementById('postLocation').value = post.location;
+            document.getElementById('postDate').value = post.date;
+            document.getElementById('editIndex').value = index;
+            document.getElementById('formTitle').innerText = "নিউজ আপডেট করুন";
+            document.getElementById('saveBtn').innerText = "আপডেট";
+            document.getElementById('cancelEditBtn').classList.remove('hidden');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function resetForm() {
+            document.getElementById('postTitle').value = '';
+            document.getElementById('postDetails').value = '';
+            document.getElementById('postImageLink').value = '';
+            document.getElementById('postLocation').value = 'পহরডাঙ্গা';
+            document.getElementById('postDate').value = '';
+            document.getElementById('editIndex').value = '-1';
+            document.getElementById('formTitle').innerText = "নতুন নিউজ পোস্ট";
+            document.getElementById('saveBtn').innerText = "পাবলিশ করুন";
+            document.getElementById('cancelEditBtn').classList.add('hidden');
+        }
+
+        function renderPosts() {
+            const grid = document.getElementById('newsGrid');
+            const posts = JSON.parse(localStorage.getItem('news_posts') || '[]');
+            const isAdmin = localStorage.getItem('isAdmin');
+            
+            const sortedPosts = posts.map((p, i) => ({...p, originalIndex: i}))
+                                     .sort((a, b) => new Date(b.date) - new Date(a.date));
+
+            grid.innerHTML = sortedPosts.map(post => `
+                <div class="bg-white rounded-lg shadow overflow-hidden border relative group">
+                    ${isAdmin ? `<div class="absolute top-2 right-2 flex gap-2 z-10 opacity-0 group-hover:opacity-100 transition">
+                        <button onclick="editPost(${post.originalIndex})" class="bg-blue-600 text-white p-1 rounded text-xs">এডিট</button>
+                        <button onclick="deletePost(${post.originalIndex})" class="bg-red-600 text-white p-1 rounded text-xs">মুছুন</button>
+                    </div>` : ''}
+                    <div class="relative h-48 bg-gray-200">
+                        <img src="${post.image}" alt="News" class="w-full h-full object-cover" onerror="this.src='https://via.placeholder.com/400x300?text=No+Image'">
+                        <div class="absolute top-2 left-2 bg-white px-2 py-1 text-xs font-bold rounded shadow">${formatDateDisplay(post.date)}</div>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-bold text-lg text-green-800 mb-2 leading-tight">${post.title}</h3>
+                        <p class="text-gray-600 text-sm mb-4 line-clamp-3">${post.details}</p>
+                        <div class="flex justify-between items-center border-t pt-3">
+                            <span class="text-xs text-gray-400 flex items-center">
+                                <svg class="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20"><path d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"/></svg>
+                                ${post.location}
+                            </span>
+                            <div class="flex items-center gap-3">
+                                <button onclick="shareOnFacebook('${post.title.replace(/'/g, "\\'")}')" class="text-blue-600 hover:text-blue-800 transition shadow-sm p-1 rounded-full border border-blue-100 flex items-center justify-center bg-blue-50">
+                                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                                </button>
+                                <a href="#" class="text-green-600 font-bold text-sm">বিস্তারিত পড়ুন →</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+        checkAuth();
+    </script>
+</body>
+</html>
