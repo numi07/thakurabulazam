@@ -71,7 +71,7 @@
         
         .line-clamp-2 { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
         
-        /* Modal Scroll Fix - শুধুমাত্র ভেতরের টেক্সট স্ক্রল হবে */
+      
         #news-modal { 
             display: none; 
             align-items: center; 
@@ -93,7 +93,7 @@
             flex: 1;
         }
 
-        /* Custom Scrollbar for Modal */
+      
         .modal-scroll-area::-webkit-scrollbar { width: 6px; }
         .modal-scroll-area::-webkit-scrollbar-track { background: #f1f1f1; }
         .modal-scroll-area::-webkit-scrollbar-thumb { background: #009e49; border-radius: 10px; }
@@ -404,7 +404,7 @@
             modal.classList.add('active');
             document.body.style.overflow = 'hidden';
             
-            // Reset scroll position of the text area
+        
             document.querySelector('.modal-scroll-area').scrollTop = 0;
         }
 
@@ -413,7 +413,7 @@
             document.body.style.overflow = 'auto';
         }
 
-        // Close on clicking outside
+  
         document.getElementById('news-modal').addEventListener('click', function(e) {
             if (e.target === this) closeNewsModal();
         });
