@@ -19,7 +19,16 @@
     </script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;600;700&display=swap');
-        body { font-family: 'Hind Siliguri', sans-serif; background-color: #f3f4f6; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; }
+        /* Footer Fix: Flexbox layout for sticky footer */
+        body { 
+            font-family: 'Hind Siliguri', sans-serif; 
+            background-color: #f3f4f6; 
+            -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        main { flex: 1; }
         .hidden { display: none; }
         .line-clamp-3 { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
         #mobile-menu { max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; }
@@ -94,7 +103,7 @@
         </div>
     </section>
 
-    <main class="container mx-auto mt-10 px-4 mb-20 min-h-[500px]">
+    <main class="container mx-auto mt-10 px-4 mb-20">
         <h2 class="text-2xl font-bold mb-6 text-center text-gray-800">সর্বশেষ আপডেট</h2>
         <div id="newsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
     </main>
@@ -151,11 +160,10 @@
         function toggleMobileMenu() { document.getElementById('mobile-menu').classList.toggle('active'); }
         function showLogin() { 
             document.getElementById('loginModal').classList.remove('hidden'); 
-            document.getElementById('username').focus(); // লগইন বক্স খুললে ইউজারনেমে ফোকাস হবে
+            document.getElementById('username').focus();
         }
         function hideLogin() { document.getElementById('loginModal').classList.add('hidden'); }
 
-        // এন্টার বাটন হ্যান্ডেল করার ফাংশন
         function handleEnter(event) {
             if (event.key === "Enter") {
                 attemptLogin();
@@ -169,7 +177,6 @@
                 localStorage.setItem('isAdmin', 'true');
                 checkAuth();
                 hideLogin();
-                // লগইন সফল হলে ফিল্ডগুলো খালি করে দেওয়া
                 document.getElementById('username').value = '';
                 document.getElementById('password').value = '';
             } else { alert("ভুল তথ্য!"); }
@@ -193,7 +200,7 @@
 
         function formatDriveLink(link) {
             const fileId = link.match(/\/d\/(.+?)\//) || link.match(/id=(.+?)(&|$)/);
-            return fileId ? `https://lh3.googleusercontent.com/d/${fileId[1]}` : link;
+            return fileId ? `https://lh3.googleusercontent.com/u/0/d/${fileId[1]}` : link;
         }
 
         function formatDateDisplay(dateStr) {
@@ -201,7 +208,7 @@
             if(isNaN(d)) return dateStr;
             const day = toBengaliNumber(String(d.getDate()).padStart(2, '0'));
             const month = toBengaliNumber(String(d.getMonth() + 1).padStart(2, '0'));
-            const year = toBengaliNumber(String(d.getFullYear()).slice(-2));
+            const year = toBengaliNumber(String(d.getFullYear()));
             return `${day}.${month}.${year}`;
         }
 
