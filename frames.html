@@ -11,7 +11,6 @@
         body { font-family: 'Hind Siliguri', sans-serif; background-color: #f1f5f9; display: flex; flex-direction: column; }
         main { flex: 1 0 auto; }
         footer { flex-shrink: 0; }
-
         .canvas-container { position: relative; width: 100%; max-width: 600px; margin: 0 auto; touch-action: none; }
         canvas { width: 100%; height: auto; border-radius: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.1); background: #ffffff; cursor: move; border: 8px solid white; }
         .upload-card { border: 2px dashed #e2e8f0; border-radius: 16px; transition: all 0.3s ease; }
@@ -19,17 +18,8 @@
         input[type=range] { accent-color: #059669; }
         .active-frame { border: 3px solid #059669; position: relative; }
         .active-frame::after { content: '✓'; position: absolute; top: -10px; right: -10px; background: #059669; color: white; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; }
-
-        
-        #mobile-menu {
-            transition: all 0.3s ease-in-out;
-            max-height: 0;
-            overflow: hidden;
-        }
-        #mobile-menu.active {
-            max-height: 500px;
-            border-top: 1px solid #f1f5f9;
-        }
+        #mobile-menu { transition: all 0.3s ease-in-out; max-height: 0; overflow: hidden; }
+        #mobile-menu.active { max-height: 500px; border-top: 1px solid #f1f5f9; }
     </style>
 </head>
 <body class="text-slate-800">
@@ -43,25 +33,22 @@
                     <span class="text-xs text-red-600 font-bold uppercase tracking-tight">১০নং পহরডাঙ্গা ইউনিয়ন</span>
                 </div>
             </div>
-
             <button id="menu-toggle" class="lg:hidden text-slate-600 focus:outline-none">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
                 </svg>
             </button>
-
             <div class="hidden lg:flex gap-6 text-sm font-bold text-slate-600">
                 <a href="index.html" class="hover:text-green-600">হোম</a>
                 <a href="#" class="hover:text-green-600">ইশতেহার</a>
                 <a href="#" class="hover:text-green-600">প্রার্থী সম্পর্কে</a>
                 <a href="#" class="hover:text-green-600">কর্মসূচি</a>
                 <a href="#" class="hover:text-green-600">গ্যালারি</a>
-                <a href="#" class="hover:text-green-600">সংবাদ</a>
+                <a href="news.html" class="hover:text-green-600">সংবাদ</a>
                 <a href="https://votersearchsystem.vercel.app" class="hover:text-green-600">ভোটার স্লিপ</a>
                 <a href="#" class="hover:text-green-600">যোগাযোগ</a>
             </div>
         </div>
-
         <div id="mobile-menu" class="lg:hidden bg-white px-4">
             <div class="flex flex-col gap-3 py-4 text-sm font-bold text-slate-600">
                 <a href="index.html" class="hover:text-green-600 border-b pb-2">হোম</a>
@@ -69,7 +56,7 @@
                 <a href="#" class="hover:text-green-600 border-b pb-2">প্রার্থী সম্পর্কে</a>
                 <a href="#" class="hover:text-green-600 border-b pb-2">কর্মসূচি</a>
                 <a href="#" class="hover:text-green-600 border-b pb-2">গ্যালারি</a>
-                <a href="#" class="hover:text-green-600 border-b pb-2">সংবাদ</a>
+                <a href="news.html" class="hover:text-green-600 border-b pb-2">সংবাদ</a>
                 <a href="https://votersearchsystem.vercel.app" class="hover:text-green-600 border-b pb-2">ভোটার স্লিপ</a>
                 <a href="#" class="hover:text-green-600">যোগাযোগ</a>
             </div>
@@ -89,9 +76,9 @@
                     <canvas id="bannerCanvas" width="1000" height="1000"></canvas>
                 </div>
                 <div class="mt-6 flex flex-wrap justify-center gap-5 text-[10px] font-bold text-slate-400 uppercase tracking-widest">
-                    <span class="flex items-center gap-1">⬆️ ছবি আপলোড করুন</span>
-                    <span class="flex items-center gap-1">↔️ ড্র্যাগ করে পজিশন ঠিক করুন</span>
-                    <span class="flex items-center gap-1">🔍 জুম স্লাইডার ব্যবহার করুন</span>
+                    <span>⬆️ ছবি আপলোড করুন</span>
+                    <span>↔️ ড্র্যাগ করে পজিশন ঠিক করুন</span>
+                    <span>🔍 জুম স্লাইডার ব্যবহার করুন</span>
                 </div>
             </div>
 
@@ -145,7 +132,7 @@
                     <img src="https://lh3.googleusercontent.com/d/17sGo8tVgyVlOS7BMpBol7kdim1mUaFaH" class="w-10 brightness-200">
                     <h4 class="text-white font-bold text-lg">ঠাকুর আবুল আজম</h4>
                 </div>
-                <p class="text-xs leading-relaxed text-slate-400">ন্যায়বিচার, উন্নয়ন এবং সু শাসনের লক্ষ্যে আমাদের পথচলা। আপনাদের ভালোবাসায় সিক্ত হয়ে কাপাসিয়ার ভবিষ্যৎ বদলে দিতে আমরা বদ্ধপরিকর। আমাদের সাথে থাকুন।</p>
+                <p class="text-xs leading-relaxed text-slate-400">ন্যায়বিচার, উন্নয়ন এবং সু শাসনের লক্ষ্যে আমাদের পথচলা। আপনাদের ভালোবাসায় সিক্ত হয়ে পহরডাঙ্গার ভবিষ্যৎ বদলে দিতে আমরা বদ্ধপরিকর।</p>
             </div>
             <div>
                 <h4 class="text-white font-bold mb-6">দ্রুত লিংক</h4>
@@ -158,9 +145,7 @@
             </div>
             <div>
                 <h4 class="text-white font-bold mb-6">যোগাযোগ</h4>
-                <ul class="text-xs space-y-3">
-                    <li class="flex items-start gap-2 italic">📍 পহরডাঙ্গা, নড়াগাতী, নড়াইল</li>
-                </ul>
+                <p class="text-xs italic">📍 পহরডাঙ্গা, নড়াগাতী, নড়াইল</p>
             </div>
         </div>
         <div class="container mx-auto px-4 border-t border-slate-800 mt-10 pt-6 flex flex-col md:flex-row justify-between items-center text-[10px] uppercase tracking-widest">
@@ -170,128 +155,110 @@
     </footer>
 
     <script>
-        
+        // ১. নিরাপত্তা প্রটেকশন (রাইট ক্লিক ও কীবোর্ড শর্টকাট ব্লক)
+        (function() {
+            document.addEventListener('contextmenu', e => e.preventDefault());
+            document.addEventListener('keydown', e => {
+                if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J' || e.key === 'C')) || (e.ctrlKey && (e.key === 'u' || e.key === 's'))) {
+                    e.preventDefault();
+                    return false;
+                }
+            });
+        })();
+
+        // ২. মোবাইল মেনু
         const menuToggle = document.getElementById('menu-toggle');
         const mobileMenu = document.getElementById('mobile-menu');
+        menuToggle.addEventListener('click', () => mobileMenu.classList.toggle('active'));
 
-        menuToggle.addEventListener('click', () => {
-            mobileMenu.classList.toggle('active');
-        });
+        // ৩. ব্যানার মেকার লজিক (এনক্যাপসুলেটেড)
+        const BannerApp = (function() {
+            const canvas = document.getElementById('bannerCanvas');
+            const ctx = canvas.getContext('2d');
+            const imageInput = document.getElementById('imageInput');
+            const zoomSlider = document.getElementById('zoomSlider');
+            const controls = document.getElementById('controls');
+            const downloadBtn = document.getElementById('downloadBtn');
+            const zoomVal = document.getElementById('zoomVal');
 
-        
-        const canvas = document.getElementById('bannerCanvas');
-        const ctx = canvas.getContext('2d');
-        const imageInput = document.getElementById('imageInput');
-        const zoomSlider = document.getElementById('zoomSlider');
-        const controls = document.getElementById('controls');
-        const downloadBtn = document.getElementById('downloadBtn');
-        const zoomVal = document.getElementById('zoomVal');
+            let frameImg = new Image();
+            let userImg = new Image();
+            let isUserLoaded = false;
+            let scale = 1;
+            let currentX = 500, currentY = 380;
+            let isDragging = false;
+            let startX, startY;
 
-        let frameImg = new Image();
-        let userImg = new Image();
-        let isUserLoaded = false;
-        
-        let scale = 1;
-        let currentX = 500, currentY = 380;
-        let isDragging = false;
-        let startX, startY;
+            frameImg.crossOrigin = "anonymous";
+            frameImg.src = 'https://lh3.googleusercontent.com/d/1JAHUDr3b-TL44XtgstokbI-PuaNxOFTs';
+            frameImg.onload = draw;
 
-        frameImg.crossOrigin = "anonymous";
-        frameImg.src = 'https://lh3.googleusercontent.com/d/1JAHUDr3b-TL44XtgstokbI-PuaNxOFTs';
-        frameImg.onload = draw;
-
-        imageInput.addEventListener('change', (e) => {
-            const file = e.target.files[0];
-            if (!file) return;
-            const reader = new FileReader();
-            reader.onload = (f) => {
-                userImg.src = f.target.result;
-                userImg.onload = () => {
-                    isUserLoaded = true;
-                    controls.classList.remove('hidden');
-                    const minScale = Math.max(900 / userImg.width, 900 / userImg.height);
-                    scale = minScale;
-                    zoomSlider.min = minScale * 0.5;
-                    zoomSlider.max = minScale * 4;
-                    zoomSlider.value = scale;
-                    updateZoomText();
-                    draw();
-                };
-            };
-            reader.readAsDataURL(file);
-        });
-
-        zoomSlider.addEventListener('input', (e) => {
-            scale = parseFloat(e.target.value);
-            updateZoomText();
-            draw();
-        });
-
-        function updateZoomText() {
-            zoomVal.innerText = Math.round((scale / zoomSlider.min) * 100) + "%";
-        }
-
-        function draw() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            if (isUserLoaded) {
-                const w = userImg.width * scale;
-                const h = userImg.height * scale;
-                ctx.drawImage(userImg, currentX - w/2, currentY - h/2, w, h);
-            } else {
-                ctx.fillStyle = "#f8fafc";
-                ctx.fillRect(0,0, canvas.width, canvas.height);
-                ctx.fillStyle = "#cbd5e1";
-                ctx.font = "bold 32px 'Hind Siliguri'";
-                ctx.textAlign = "center";
-                ctx.fillText("📷 এখানে আপনার ছবি দেখা যাবে", 500, 380);
-                ctx.font = "20px 'Hind Siliguri'";
-                ctx.fillText("ডান পাশ থেকে ফটো আপলোড করুন", 500, 420);
+            function draw() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                if (isUserLoaded) {
+                    const w = userImg.width * scale;
+                    const h = userImg.height * scale;
+                    ctx.drawImage(userImg, currentX - w/2, currentY - h/2, w, h);
+                } else {
+                    ctx.fillStyle = "#f8fafc";
+                    ctx.fillRect(0,0, canvas.width, canvas.height);
+                    ctx.fillStyle = "#cbd5e1";
+                    ctx.font = "bold 32px 'Hind Siliguri'";
+                    ctx.textAlign = "center";
+                    ctx.fillText("📷 এখানে আপনার ছবি দেখা যাবে", 500, 380);
+                }
+                ctx.drawImage(frameImg, 0, 0, canvas.width, canvas.height);
             }
-            ctx.drawImage(frameImg, 0, 0, canvas.width, canvas.height);
-        }
 
-        function getPos(e) {
-            const rect = canvas.getBoundingClientRect();
-            const clientX = e.touches ? e.touches[0].clientX : e.clientX;
-            const clientY = e.touches ? e.touches[0].clientY : e.clientY;
-            return {
-                x: (clientX - rect.left) * (canvas.width / rect.width),
-                y: (clientY - rect.top) * (canvas.height / rect.height)
+            imageInput.addEventListener('change', (e) => {
+                const file = e.target.files[0];
+                if (!file) return;
+                const reader = new FileReader();
+                reader.onload = (f) => {
+                    userImg.src = f.target.result;
+                    userImg.onload = () => {
+                        isUserLoaded = true;
+                        controls.classList.remove('hidden');
+                        const minScale = Math.max(900 / userImg.width, 900 / userImg.height);
+                        scale = minScale;
+                        zoomSlider.min = minScale * 0.5;
+                        zoomSlider.max = minScale * 4;
+                        zoomSlider.value = scale;
+                        zoomVal.innerText = "100%";
+                        draw();
+                    };
+                };
+                reader.readAsDataURL(file);
+            });
+
+            zoomSlider.addEventListener('input', (e) => {
+                scale = parseFloat(e.target.value);
+                zoomVal.innerText = Math.round((scale / zoomSlider.min) * 100) + "%";
+                draw();
+            });
+
+            const getPos = (e) => {
+                const rect = canvas.getBoundingClientRect();
+                const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+                const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+                return { x: (clientX - rect.left) * (canvas.width / rect.width), y: (clientY - rect.top) * (canvas.height / rect.height) };
             };
-        }
 
-        const startDrag = (e) => {
-            if (!isUserLoaded) return;
-            isDragging = true;
-            const pos = getPos(e);
-            startX = pos.x - currentX;
-            startY = pos.y - currentY;
-        };
+            canvas.addEventListener('mousedown', e => { if(!isUserLoaded) return; isDragging = true; const pos = getPos(e); startX = pos.x - currentX; startY = pos.y - currentY; });
+            window.addEventListener('mousemove', e => { if(!isDragging) return; const pos = getPos(e); currentX = pos.x - startX; currentY = pos.y - startY; draw(); });
+            window.addEventListener('mouseup', () => isDragging = false);
+            canvas.addEventListener('touchstart', e => { if(!isUserLoaded) return; isDragging = true; const pos = getPos(e); startX = pos.x - currentX; startY = pos.y - currentY; }, {passive: false});
+            window.addEventListener('touchmove', e => { if(isDragging) { e.preventDefault(); const pos = getPos(e); currentX = pos.x - startX; currentY = pos.y - startY; draw(); } }, {passive: false});
+            window.addEventListener('touchend', () => isDragging = false);
 
-        const moveDrag = (e) => {
-            if (!isDragging) return;
-            const pos = getPos(e);
-            currentX = pos.x - startX;
-            currentY = pos.y - startY;
-            draw();
-        };
-
-        const endDrag = () => isDragging = false;
-
-        canvas.addEventListener('mousedown', startDrag);
-        window.addEventListener('mousemove', moveDrag);
-        window.addEventListener('mouseup', endDrag);
-        canvas.addEventListener('touchstart', startDrag, {passive: false});
-        window.addEventListener('touchmove', (e) => { if(isDragging) e.preventDefault(); moveDrag(e); }, {passive: false});
-        window.addEventListener('touchend', endDrag);
-
-        downloadBtn.addEventListener('click', () => {
-            if(!isUserLoaded) return alert("দয়া করে ছবি আপলোড করুন");
-            const link = document.createElement('a');
-            link.download = 'Thakur_Abul_Azam_Banner.png';
-            link.href = canvas.toDataURL('image/png', 1.0);
-            link.click();
-        });
+            downloadBtn.addEventListener('click', () => {
+                if(!isUserLoaded) return alert("দয়া করে ছবি আপলোড করুন");
+                const link = document.createElement('a');
+                link.download = 'Thakur_Abul_Azam_Banner.png';
+                link.href = canvas.toDataURL('image/png', 1.0);
+                link.click();
+            });
+        })();
     </script>
 </body>
 </html>
