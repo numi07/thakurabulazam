@@ -153,7 +153,6 @@
     </footer>
 
     <script>
-        // ১. নিরাপত্তা প্রটেকশন (রাইট ক্লিক ও কীবোর্ড শর্টকাট ব্লক)
         (function() {
             document.addEventListener('contextmenu', e => e.preventDefault());
             document.addEventListener('keydown', e => {
@@ -164,12 +163,11 @@
             });
         })();
 
-        // ২. মোবাইল মেনু
         const menuToggle = document.getElementById('menu-toggle');
         const mobileMenu = document.getElementById('mobile-menu');
         menuToggle.addEventListener('click', () => mobileMenu.classList.toggle('active'));
 
-        // ৩. ব্যানার মেকার লজিক (এনক্যাপসুলেটেড)
+
         const BannerApp = (function() {
             const canvas = document.getElementById('bannerCanvas');
             const ctx = canvas.getContext('2d');
