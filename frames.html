@@ -17,7 +17,6 @@
         .upload-card:hover { border-color: #059669; background-color: #f0fdf4; }
         input[type=range] { accent-color: #059669; }
         
-        /* ফ্রেম সিলেকশন স্টাইল - ছোট ও মোবাইল ফ্রেন্ডলি */
         .frame-option { transition: all 0.2s; border: 2px solid transparent; border-radius: 8px; overflow: hidden; }
         .active-frame { border: 2px solid #059669 !important; position: relative; }
         .active-frame::after { 
@@ -41,11 +40,10 @@
     </style>
 </head>
 <body class="text-slate-800">
-
     <nav class="bg-white border-b sticky top-0 z-50 py-3 shadow-sm">
         <div class="container mx-auto px-4 flex justify-between items-center">
             <div class="flex items-center gap-3">
-                <img src="https://lh3.googleusercontent.com/d/17sGo8tVgyVlOS7BMpBol7kdim1mUaFaH" alt="Logo" class="w-12 h-12 object-contain">
+                <img src="https://lh3.googleusercontent.com/d/1HOkLWo1TpFYIidO9b1z_4FOimRrigg8A" alt="Logo" class="w-12 h-12 object-contain">
                 <div>
                     <h1 class="text-xl font-bold text-green-700 leading-none">ঠাকুর আবুল আজম</h1>
                     <span class="text-xs text-red-600 font-bold uppercase tracking-tight">১০নং পহরডাঙ্গা ইউনিয়ন</span>
@@ -70,13 +68,9 @@
         <div id="mobile-menu" class="lg:hidden bg-white px-4">
             <div class="flex flex-col gap-3 py-4 text-sm font-bold text-slate-600">
                 <a href="index.html" class="hover:text-green-600 border-b pb-2">হোম</a>
-                <a href="#" class="hover:text-green-600 border-b pb-2">ইশতেহার</a>
-                <a href="#" class="hover:text-green-600 border-b pb-2">প্রার্থী সম্পর্কে</a>
-                <a href="#" class="hover:text-green-600 border-b pb-2">কর্মসূচি</a>
-                <a href="#" class="hover:text-green-600 border-b pb-2">গ্যালারি</a>
                 <a href="news.html" class="hover:text-green-600 border-b pb-2">সংবাদ</a>
                 <div hidden><a href="https://votersearchsystem.vercel.app" class="hover:text-green-600 border-b pb-2">ভোটার স্লিপ</a></div>
-                <a href="#" class="hover:text-green-600">যোগাযোগ</a>
+                <a href="#" class="hover:text-green-600 border-b pb-2">যোগাযোগ</a>
             </div>
         </div>
     </nav>
@@ -128,19 +122,16 @@
                         <span class="w-5 h-5 bg-green-100 text-green-600 rounded-full flex items-center justify-center text-[10px] font-bold">২</span>
                         <h3 class="font-bold text-slate-800 text-sm">ফ্রেম পছন্দ করুন</h3>
                     </div>
-                    <div class="grid grid-cols-4 sm:grid-cols-5 gap-2">
-                        <div class="frame-option active-frame cursor-pointer" onclick="BannerApp.changeFrame('https://lh3.googleusercontent.com/d/1YydlGq3QbcLlJsKXL130Rd4H7ize1gGN', this)">
-                            <img src="https://lh3.googleusercontent.com/d/1YydlGq3QbcLlJsKXL130Rd4H7ize1gGN" class="w-full aspect-square object-cover" alt="Frame 1">
-                        </div>
-                        <div class="frame-option cursor-pointer" onclick="BannerApp.changeFrame('https://lh3.googleusercontent.com/d/1d2UShdm_ekvOIPGfDnIngyV-BriBODNu', this)">
-                            <img src="https://lh3.googleusercontent.com/d/1d2UShdm_ekvOIPGfDnIngyV-BriBODNu" class="w-full aspect-square object-cover" alt="Frame 2">
-                        </div>
+                    <div id="frameContainer" class="grid grid-cols-4 sm:grid-cols-5 gap-2 min-h-[60px]">
+                        <div class="col-span-full text-center text-[10px] text-slate-400">ফ্রেম লোড হচ্ছে...</div>
                     </div>
                 </div>
 
-                <button id="downloadBtn" class="w-full bg-green-700 hover:bg-green-800 text-white font-bold py-4 rounded-xl shadow-lg flex items-center justify-center gap-3 transition-all transform active:scale-95 text-sm">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
-                    ব্যানার ডাউনলোড করুন
+                <button id="downloadBtn" class="w-full bg-green-700 hover:bg-green-800 text-white font-bold py-4 rounded-xl shadow-lg flex flex-col items-center justify-center gap-1 transition-all transform active:scale-95">
+                    <div class="flex items-center gap-3 text-sm">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                        ব্যানার ডাউনলোড করুন
+                    </div>
                 </button>
             </div>
         </div>
@@ -160,30 +151,22 @@
                 <ul class="text-[11px] space-y-2">
                     <li><a href="#" class="hover:text-green-500">নির্বাচনী ইশতেহার</a></li>
                     <li><a href="#" class="hover:text-green-500">কর্মসূচি সমূহ</a></li>
-                    <li><a href="https://votersearchsystem.vercel.app" class="hover:text-green-500">ভোটার স্লিপ</a></li>
                 </ul>
             </div>
             <div>
                 <h4 class="text-white font-bold mb-4 text-sm">যোগাযোগ</h4>
-                <p class="text-[11px] italic">📍 পহরডাঙ্গা, নড়াগাতী, নড়াইল</p>
+                <p class="text-[14px] italic">📍 পহরডাঙ্গা, নড়াগাতী, নড়াইল</p>
             </div>
         </div>
-        <div class="container mx-auto px-4 border-t border-slate-800 mt-8 pt-6 flex flex-col md:flex-row justify-between items-center text-[9px] uppercase tracking-widest gap-2">
+        <div class="container mx-auto px-4 border-t border-slate-800 mt-8 pt-6 flex flex-col md:flex-row justify-between items-center text-[14px] uppercase tracking-widest gap-2">
             <p>© ২০২৬ ঠাকুর আবুল আজম | সর্বস্বত্ব সংরক্ষিত</p>
             <p>কারিগরি সহযোগিতায়: <span class="text-green-500">আল নোমান শিকদার</span></p>
         </div>
     </footer>
 
     <script>
-        (function() {
-            document.addEventListener('contextmenu', e => e.preventDefault());
-            document.addEventListener('keydown', e => {
-                if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J' || e.key === 'C')) || (e.ctrlKey && (e.key === 'u' || e.key === 's'))) {
-                    e.preventDefault();
-                    return false;
-                }
-            });
-        })();
+
+        const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyhmiT0zc6z3jaKITd_4CyqYgTlzgjXfbXgeFSWQnMzKRKvyyGfhFvly17FiyWa_99GZw/exec';
 
         const menuToggle = document.getElementById('menu-toggle');
         const mobileMenu = document.getElementById('mobile-menu');
@@ -197,18 +180,45 @@
             const controls = document.getElementById('controls');
             const downloadBtn = document.getElementById('downloadBtn');
             const zoomVal = document.getElementById('zoomVal');
+            const frameContainer = document.getElementById('frameContainer');
 
             let frameImg = new Image();
             let userImg = new Image();
             let isUserLoaded = false;
             let scale = 1;
-            let currentX = 500, currentY = 380;
+            let currentX = 500, currentY = 500;
             let isDragging = false;
             let startX, startY;
 
             frameImg.crossOrigin = "anonymous";
-            frameImg.src = 'https://lh3.googleusercontent.com/d/1YydlGq3QbcLlJsKXL130Rd4H7ize1gGN';
-            frameImg.onload = draw;
+
+
+            async function loadFrames() {
+                try {
+                    const response = await fetch(APPS_SCRIPT_URL);
+                    const frames = await response.json();
+                    
+                    if (frames && frames.length > 0) {
+                        frameContainer.innerHTML = ''; 
+                        frames.forEach((frame, index) => {
+                            const div = document.createElement('div');
+                            div.className = `frame-option cursor-pointer ${index === 0 ? 'active-frame' : ''}`;
+                            div.onclick = () => changeFrame(frame.url, div);
+                            div.innerHTML = `<img src="${frame.url}" class="w-full aspect-square object-cover" alt="Frame">`;
+                            frameContainer.appendChild(div);
+
+
+                            if (index === 0) {
+                                frameImg.src = frame.url;
+                                frameImg.onload = draw;
+                            }
+                        });
+                    }
+                } catch (error) {
+                    console.error("Error loading frames:", error);
+                    frameContainer.innerHTML = '<div class="col-span-full text-red-500 text-[10px]">ফ্রেম লোড করা সম্ভব হয়নি</div>';
+                }
+            }
 
             function draw() {
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -222,9 +232,11 @@
                     ctx.fillStyle = "#cbd5e1";
                     ctx.font = "bold 32px 'Hind Siliguri'";
                     ctx.textAlign = "center";
-                    ctx.fillText("📷 এখানে ছবি দেখা যাবে", 500, 380);
+                    ctx.fillText("📷 এখানে ছবি দেখা যাবে", 500, 500);
                 }
-                ctx.drawImage(frameImg, 0, 0, canvas.width, canvas.height);
+                if (frameImg.src) {
+                    ctx.drawImage(frameImg, 0, 0, canvas.width, canvas.height);
+                }
             }
 
             function changeFrame(src, element) {
@@ -243,7 +255,7 @@
                     userImg.onload = () => {
                         isUserLoaded = true;
                         controls.classList.remove('hidden');
-                        const minScale = Math.max(900 / userImg.width, 900 / userImg.height);
+                        const minScale = Math.max(1000 / userImg.width, 1000 / userImg.height);
                         scale = minScale;
                         zoomSlider.min = minScale * 0.5;
                         zoomSlider.max = minScale * 4;
@@ -271,6 +283,7 @@
             canvas.addEventListener('mousedown', e => { if(!isUserLoaded) return; isDragging = true; const pos = getPos(e); startX = pos.x - currentX; startY = pos.y - currentY; });
             window.addEventListener('mousemove', e => { if(!isDragging) return; const pos = getPos(e); currentX = pos.x - startX; currentY = pos.y - startY; draw(); });
             window.addEventListener('mouseup', () => isDragging = false);
+            
             canvas.addEventListener('touchstart', e => { if(!isUserLoaded) return; isDragging = true; const pos = getPos(e); startX = pos.x - currentX; startY = pos.y - currentY; }, {passive: false});
             window.addEventListener('touchmove', e => { if(isDragging) { e.preventDefault(); const pos = getPos(e); currentX = pos.x - startX; currentY = pos.y - startY; draw(); } }, {passive: false});
             window.addEventListener('touchend', () => isDragging = false);
@@ -281,7 +294,15 @@
                 link.download = 'Thakur_Abul_Azam_Banner.png';
                 link.href = canvas.toDataURL('image/png', 1.0);
                 link.click();
+                
+
+                setTimeout(() => {
+                    alert("ব্যানারটি ডাউনলোড হয়েছে! এখন আপনি এটি আপনার ফেসবুক প্রোফাইলে শেয়ার করতে পারেন।");
+                }, 500);
             });
+
+
+            loadFrames();
 
             return { changeFrame };
         })();
