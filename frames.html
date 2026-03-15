@@ -16,8 +16,26 @@
         .upload-card { border: 2px dashed #e2e8f0; border-radius: 16px; transition: all 0.3s ease; }
         .upload-card:hover { border-color: #059669; background-color: #f0fdf4; }
         input[type=range] { accent-color: #059669; }
-        .active-frame { border: 3px solid #059669; position: relative; }
-        .active-frame::after { content: '✓'; position: absolute; top: -10px; right: -10px; background: #059669; color: white; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; }
+        
+        /* ফ্রেম সিলেকশন স্টাইল - ছোট ও মোবাইল ফ্রেন্ডলি */
+        .frame-option { transition: all 0.2s; border: 2px solid transparent; border-radius: 8px; overflow: hidden; }
+        .active-frame { border: 2px solid #059669 !important; position: relative; }
+        .active-frame::after { 
+            content: '✓'; 
+            position: absolute; 
+            top: -5px; 
+            right: -5px; 
+            background: #059669; 
+            color: white; 
+            width: 18px; 
+            height: 18px; 
+            border-radius: 50%; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            font-size: 10px; 
+        }
+        
         #mobile-menu { transition: all 0.3s ease-in-out; max-height: 0; overflow: hidden; }
         #mobile-menu.active { max-height: 500px; border-top: 1px solid #f1f5f9; }
     </style>
@@ -45,6 +63,7 @@
                 <a href="#" class="hover:text-green-600">কর্মসূচি</a>
                 <a href="#" class="hover:text-green-600">গ্যালারি</a>
                 <a href="news.html" class="hover:text-green-600">সংবাদ</a>
+                <a href="https://votersearchsystem.vercel.app" class="hover:text-green-600">ভোটার স্লিপ</a>
                 <a href="#" class="hover:text-green-600">যোগাযোগ</a>
             </div>
         </div>
@@ -56,66 +75,70 @@
                 <a href="#" class="hover:text-green-600 border-b pb-2">কর্মসূচি</a>
                 <a href="#" class="hover:text-green-600 border-b pb-2">গ্যালারি</a>
                 <a href="news.html" class="hover:text-green-600 border-b pb-2">সংবাদ</a>
+                <a href="https://votersearchsystem.vercel.app" class="hover:text-green-600 border-b pb-2">ভোটার স্লিপ</a>
                 <a href="#" class="hover:text-green-600">যোগাযোগ</a>
             </div>
         </div>
     </nav>
 
-    <main class="container mx-auto px-4 py-10">
-        <div class="text-center mb-10">
-            <h2 class="text-4xl font-black text-slate-900 mb-3">সমর্থক ব্যানার তৈরি করুন</h2>
-            <p class="text-slate-500 max-w-2xl mx-auto text-sm">আপনার ছবি দিয়ে সহজেই তৈরি করুন নির্বাচনী প্রচারণার ব্যানার এবং শেয়ার করুন সোশ্যাল মিডিয়ায়।</p>
+    <main class="container mx-auto px-4 py-8">
+        <div class="text-center mb-8">
+            <h2 class="text-3xl md:text-4xl font-black text-slate-900 mb-3">সমর্থক ব্যানার তৈরি করুন</h2>
+            <p class="text-slate-500 max-w-2xl mx-auto text-sm px-4">আপনার ছবি দিয়ে সহজেই তৈরি করুন নির্বাচনী প্রচারণার ব্যানার এবং শেয়ার করুন সোশ্যাল মিডিয়ায়।</p>
             <div class="w-20 h-1.5 bg-green-600 mx-auto mt-5 rounded-full"></div>
         </div>
 
-        <div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-            <div class="lg:col-span-7 bg-white p-6 rounded-[32px] shadow-sm border border-slate-100">
+        <div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+            <div class="lg:col-span-7 bg-white p-4 md:p-6 rounded-[32px] shadow-sm border border-slate-100">
                 <div class="canvas-container">
                     <canvas id="bannerCanvas" width="1000" height="1000"></canvas>
                 </div>
-                <div class="mt-6 flex flex-wrap justify-center gap-5 text-[10px] font-bold text-slate-400 uppercase tracking-widest">
-                    <span>⬆️ ছবি আপলোড করুন</span>
-                    <span>↔️ ড্র্যাগ করে পজিশন ঠিক করুন</span>
-                    <span>🔍 জুম স্লাইডার ব্যবহার করুন</span>
+                <div class="mt-4 flex flex-wrap justify-center gap-4 text-[9px] font-bold text-slate-400 uppercase tracking-widest">
+                    <span>⬆️ আপলোড</span>
+                    <span>↔️ ড্র্যাগ</span>
+                    <span>🔍 জুম</span>
                 </div>
             </div>
 
-            <div class="lg:col-span-5 space-y-5">
-                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
+            <div class="lg:col-span-5 space-y-4">
+                <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-100">
                     <div class="flex items-center gap-2 mb-4">
-                        <span class="w-6 h-6 bg-green-100 text-green-600 rounded-full flex items-center justify-center text-xs font-bold">১</span>
-                        <h3 class="font-bold text-slate-800">ছবি বাছাই করুন</h3>
+                        <span class="w-5 h-5 bg-green-100 text-green-600 rounded-full flex items-center justify-center text-[10px] font-bold">১</span>
+                        <h3 class="font-bold text-slate-800 text-sm">ছবি বাছাই করুন</h3>
                     </div>
                     <input type="file" id="imageInput" class="hidden" accept="image/*">
-                    <label for="imageInput" class="upload-card flex flex-col items-center justify-center py-10 cursor-pointer group">
-                        <div class="w-12 h-12 bg-green-50 text-green-600 rounded-full flex items-center justify-center mb-2 group-hover:scale-110 transition">
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"></path><path d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                    <label for="imageInput" class="upload-card flex flex-col items-center justify-center py-6 cursor-pointer group">
+                        <div class="w-10 h-10 bg-green-50 text-green-600 rounded-full flex items-center justify-center mb-2 group-hover:scale-110 transition">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"></path><path d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
                         </div>
-                        <span class="text-sm font-bold text-slate-600">ক্লিক করে ছবি আপলোড করুন</span>
+                        <span class="text-xs font-bold text-slate-600">গ্যালারি থেকে ছবি নিন</span>
                     </label>
 
-                    <div id="controls" class="mt-6 hidden">
+                    <div id="controls" class="mt-4 hidden">
                         <div class="flex justify-between items-center mb-2">
-                            <label class="text-[10px] font-bold text-slate-400 uppercase">ছবি জুম করুন</label>
-                            <span id="zoomVal" class="text-xs font-bold text-green-600 bg-green-50 px-2 py-0.5 rounded">100%</span>
+                            <label class="text-[9px] font-bold text-slate-400 uppercase">ছবি জুম করুন</label>
+                            <span id="zoomVal" class="text-[10px] font-bold text-green-600 bg-green-50 px-2 py-0.5 rounded">100%</span>
                         </div>
                         <input type="range" id="zoomSlider" min="0.1" max="3" step="0.01" value="1" class="w-full h-1.5 bg-slate-100 rounded-lg appearance-none cursor-pointer">
                     </div>
                 </div>
 
-                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
+                <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-100">
                     <div class="flex items-center gap-2 mb-4">
-                        <span class="w-6 h-6 bg-green-100 text-green-600 rounded-full flex items-center justify-center text-xs font-bold">২</span>
-                        <h3 class="font-bold text-slate-800">ফ্রেম পছন্দ করুন</h3>
+                        <span class="w-5 h-5 bg-green-100 text-green-600 rounded-full flex items-center justify-center text-[10px] font-bold">২</span>
+                        <h3 class="font-bold text-slate-800 text-sm">ফ্রেম পছন্দ করুন</h3>
                     </div>
-                    <div class="grid grid-cols-3 gap-3">
-                        <div class="active-frame rounded-lg overflow-hidden cursor-pointer">
-                            <img src="https://lh3.googleusercontent.com/d/1JAHUDr3b-TL44XtgstokbI-PuaNxOFTs" class="w-full h-auto" alt="Frame 1">
+                    <div class="grid grid-cols-4 sm:grid-cols-5 gap-2">
+                        <div class="frame-option active-frame cursor-pointer" onclick="BannerApp.changeFrame('https://lh3.googleusercontent.com/d/1YydlGq3QbcLlJsKXL130Rd4H7ize1gGN', this)">
+                            <img src="https://lh3.googleusercontent.com/d/1YydlGq3QbcLlJsKXL130Rd4H7ize1gGN" class="w-full aspect-square object-cover" alt="Frame 1">
+                        </div>
+                        <div class="frame-option cursor-pointer" onclick="BannerApp.changeFrame('https://lh3.googleusercontent.com/d/1d2UShdm_ekvOIPGfDnIngyV-BriBODNu', this)">
+                            <img src="https://lh3.googleusercontent.com/d/1d2UShdm_ekvOIPGfDnIngyV-BriBODNu" class="w-full aspect-square object-cover" alt="Frame 2">
                         </div>
                     </div>
                 </div>
 
-                <button id="downloadBtn" class="w-full bg-green-700 hover:bg-green-800 text-white font-bold py-5 rounded-2xl shadow-lg flex items-center justify-center gap-3 transition-all transform active:scale-95">
+                <button id="downloadBtn" class="w-full bg-green-700 hover:bg-green-800 text-white font-bold py-4 rounded-xl shadow-lg flex items-center justify-center gap-3 transition-all transform active:scale-95 text-sm">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
                     ব্যানার ডাউনলোড করুন
                 </button>
@@ -123,30 +146,29 @@
         </div>
     </main>
 
-    <footer class="bg-slate-900 text-slate-400 py-12">
-        <div class="container mx-auto px-4 grid grid-cols-1 md:grid-cols-4 gap-10">
-            <div class="col-span-1 md:col-span-1">
+    <footer class="bg-slate-900 text-slate-400 py-10 mt-10">
+        <div class="container mx-auto px-4 grid grid-cols-1 md:grid-cols-4 gap-8">
+            <div class="col-span-1">
                 <div class="flex items-center gap-2 mb-4">
-                    <img src="https://lh3.googleusercontent.com/d/17sGo8tVgyVlOS7BMpBol7kdim1mUaFaH" class="w-10 brightness-200">
-                    <h4 class="text-white font-bold text-lg">ঠাকুর আবুল আজম</h4>
+                    <img src="https://lh3.googleusercontent.com/d/17sGo8tVgyVlOS7BMpBol7kdim1mUaFaH" class="w-8 brightness-200">
+                    <h4 class="text-white font-bold text-base">ঠাকুর আবুল আজম</h4>
                 </div>
-                <p class="text-xs leading-relaxed text-slate-400">ন্যায়বিচার, উন্নয়ন এবং সু শাসনের লক্ষ্যে আমাদের পথচলা। আপনাদের ভালোবাসায় সিক্ত হয়ে পহরডাঙ্গার ভবিষ্যৎ বদলে দিতে আমরা বদ্ধপরিকর।</p>
+                <p class="text-[11px] leading-relaxed">ন্যায়বিচার, উন্নয়ন এবং সু শাসনের লক্ষ্যে আমাদের পথচলা। আপনাদের ভালোবাসায় সিক্ত হয়ে পহরডাঙ্গার ভবিষ্যৎ বদলে দিতে আমরা বদ্ধপরিকর।</p>
             </div>
             <div>
-                <h4 class="text-white font-bold mb-6">দ্রুত লিংক</h4>
-                <ul class="text-xs space-y-3">
+                <h4 class="text-white font-bold mb-4 text-sm">দ্রুত লিংক</h4>
+                <ul class="text-[11px] space-y-2">
                     <li><a href="#" class="hover:text-green-500">নির্বাচনী ইশতেহার</a></li>
                     <li><a href="#" class="hover:text-green-500">কর্মসূচি সমূহ</a></li>
-                    <li><a href="#" class="hover:text-green-500">ফটো গ্যালারি</a></li>
-                    <li><a href="#" class="hover:text-green-500">যোগাযোগ করুন</a></li>
+                    <li><a href="https://votersearchsystem.vercel.app" class="hover:text-green-500">ভোটার স্লিপ</a></li>
                 </ul>
             </div>
             <div>
-                <h4 class="text-white font-bold mb-6">যোগাযোগ</h4>
-                <p class="text-xs italic">📍 পহরডাঙ্গা, নড়াগাতী, নড়াইল</p>
+                <h4 class="text-white font-bold mb-4 text-sm">যোগাযোগ</h4>
+                <p class="text-[11px] italic">📍 পহরডাঙ্গা, নড়াগাতী, নড়াইল</p>
             </div>
         </div>
-        <div class="container mx-auto px-4 border-t border-slate-800 mt-10 pt-6 flex flex-col md:flex-row justify-between items-center text-[10px] uppercase tracking-widest">
+        <div class="container mx-auto px-4 border-t border-slate-800 mt-8 pt-6 flex flex-col md:flex-row justify-between items-center text-[9px] uppercase tracking-widest gap-2">
             <p>© ২০২৬ ঠাকুর আবুল আজম | সর্বস্বত্ব সংরক্ষিত</p>
             <p>কারিগরি সহযোগিতায়: <span class="text-green-500">আল নোমান শিকদার</span></p>
         </div>
@@ -167,7 +189,6 @@
         const mobileMenu = document.getElementById('mobile-menu');
         menuToggle.addEventListener('click', () => mobileMenu.classList.toggle('active'));
 
-
         const BannerApp = (function() {
             const canvas = document.getElementById('bannerCanvas');
             const ctx = canvas.getContext('2d');
@@ -186,7 +207,7 @@
             let startX, startY;
 
             frameImg.crossOrigin = "anonymous";
-            frameImg.src = 'https://lh3.googleusercontent.com/d/1JAHUDr3b-TL44XtgstokbI-PuaNxOFTs';
+            frameImg.src = 'https://lh3.googleusercontent.com/d/1YydlGq3QbcLlJsKXL130Rd4H7ize1gGN';
             frameImg.onload = draw;
 
             function draw() {
@@ -201,9 +222,16 @@
                     ctx.fillStyle = "#cbd5e1";
                     ctx.font = "bold 32px 'Hind Siliguri'";
                     ctx.textAlign = "center";
-                    ctx.fillText("📷 এখানে আপনার ছবি দেখা যাবে", 500, 380);
+                    ctx.fillText("📷 এখানে ছবি দেখা যাবে", 500, 380);
                 }
                 ctx.drawImage(frameImg, 0, 0, canvas.width, canvas.height);
+            }
+
+            function changeFrame(src, element) {
+                frameImg.src = src;
+                frameImg.onload = draw;
+                document.querySelectorAll('.frame-option').forEach(el => el.classList.remove('active-frame'));
+                element.classList.add('active-frame');
             }
 
             imageInput.addEventListener('change', (e) => {
@@ -254,6 +282,8 @@
                 link.href = canvas.toDataURL('image/png', 1.0);
                 link.click();
             });
+
+            return { changeFrame };
         })();
     </script>
 </body>
