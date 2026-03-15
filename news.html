@@ -154,17 +154,14 @@
         function formatDriveLink(link) {
     if (!link || typeof link !== 'string') return 'https://via.placeholder.com/400x300?text=No+Image';
     
-    // ড্রাইভ আইডি খুঁজে বের করার জন্য
     const fileIdMatch = link.match(/\/d\/(.+?)\//) || link.match(/id=([^&]+)/);
     
     if (fileIdMatch && fileIdMatch[1]) {
-        // সরাসরি ছবির সোর্স লিঙ্ক
         return `https://lh3.googleusercontent.com/u/0/d/${fileIdMatch[1]}`;
     }
     return link;
 }
 
-        // বিস্তারিত নিউজ দেখানোর ফাংশন
         function openDetails(title, details, image, location, date) {
             const modal = document.getElementById('newsDetailsModal');
             const body = document.getElementById('modalBody');
@@ -270,7 +267,6 @@
         }
         checkAuth();
 
-        // মোডালের বাইরে ক্লিক করলে বন্ধ হবে
         window.onclick = function(event) {
             const modal = document.getElementById('newsDetailsModal');
             if (event.target == modal) closeDetails();
