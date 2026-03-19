@@ -8,96 +8,142 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Bengali:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <script>
-      tailwind.config = {
+    tailwind.config = {
         theme: {
-          extend: {
-            fontFamily: { sans: ['"Noto Serif Bengali"', 'sans-serif'] },
-            colors: { brand: { green: '#009e49', dark: '#1a222c', gold: '#fbbf24' } }
-          }
+            extend: {
+                fontFamily: {
+                    sans: ['"Noto Serif Bengali"', 'sans-serif'],
+                    serif: ['"Noto Serif Bengali"', 'serif']
+                },
+                colors: {
+                    brand: {
+                        green: '#009e49',
+                        emerald: '#059669',
+                        blue: '#1d4ed8',
+                        pink: '#be185d',
+                        amber: '#b45309',
+                        gold: '#fbbf24',
+                        dark: '#0f172a'
+                    }
+                }
+            }
         }
-      }
-    </script>
-    <style>
-        html { scroll-behavior: smooth; }
-        body { 
-            font-family: 'Noto Serif Bengali', sans-serif; 
-            background-color: #f8fafc; 
-            display: flex; 
-            flex-direction: column; 
-            user-select: none; 
-            min-height: 100vh;
-        }
-        
-        .content-wrapper { flex: 1 0 auto; padding-top: 80px; }
+    }
+</script>
 
-        .fixed-header {
-            position: fixed; top: 0; left: 0; width: 100%; z-index: 1000;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-        }
+<!-- Combined Custom Styles -->
+<style>
+    /* Global Styles */
+    html { scroll-behavior: smooth; }
+    body { 
+        font-family: 'Noto Serif Bengali', serif; 
+        background-color: #f1f5f9; 
+        display: flex; 
+        flex-direction: column; 
+        user-select: none; 
+        min-height: 100vh;
+    }
 
-        #mobile-menu {
-            transition: all 0.3s ease-in-out;
-            max-height: 0; overflow: hidden;
-        }
-        #mobile-menu.active { max-height: 500px; padding: 1rem 0; }
+    /* Layout Components */
+    .content-wrapper { flex: 1 0 auto; padding-top: 80px; }
+    
+    .fixed-header {
+        position: fixed; top: 0; left: 0; width: 100%; z-index: 1000;
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    }
 
-        .hero-section { 
-            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1679029524057-7065d479da5c?fm=jpg&q=60&w=3000'); 
-            background-size: cover; background-position: center;
-        }
+    /* Navigation & Menus */
+    #mobile-menu {
+        transition: all 0.3s ease-in-out;
+        max-height: 0; overflow: hidden;
+    }
+    #mobile-menu.active { max-height: 500px; padding: 1rem 0; }
 
-        .info-bar-bg { 
-            background: linear-gradient(135deg, #009e49 0%, #007a38 100%);
-            color: white; border-radius: 16px;
-            padding: 20px 25px; gap: 20px;
-        }
-        
-        .prayer-box {
-            background: rgba(255, 255, 255, 0.15);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            border-radius: 12px; padding: 10px;
-            text-align: center; min-width: 75px;
-            transition: background 0.3s;
-        }
-        .prayer-box:hover { background: rgba(255, 255, 255, 0.25); }
+    /* Hero & Sections */
+    .hero-section { 
+        background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1679029524057-7065d479da5c?fm=jpg&q=60&w=3000'); 
+        background-size: cover; background-position: center;
+    }
+    .hero-bg {
+        background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+        position: relative;
+    }
 
-        .principle-card { transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
-        .principle-card:hover { 
-            transform: translateY(-10px); 
-            box-shadow: 0 20px 30px -10px rgba(0, 158, 73, 0.2);
-        }
-        
-        .line-clamp-2 { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
-        
-      
-        #news-modal { 
-            display: none; 
-            align-items: center; 
-            justify-content: center;
-        }
-        #news-modal.active { display: flex; }
-        
-        .modal-content-container { 
-            max-height: 90vh; 
-            display: flex; 
-            flex-direction: column; 
-            background: white;
-            border-radius: 2rem;
-            overflow: hidden;
-        }
+    /* Information & Cards */
+    .info-bar-bg { 
+        background: linear-gradient(135deg, #009e49 0%, #007a38 100%);
+        color: white; border-radius: 16px;
+        padding: 20px 25px; gap: 20px;
+    }
+    
+    .prayer-box {
+        background: rgba(255, 255, 255, 0.15);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        border-radius: 12px; padding: 10px;
+        text-align: center; min-width: 75px;
+        transition: background 0.3s;
+    }
+    .prayer-box:hover { background: rgba(255, 255, 255, 0.25); }
 
-        .modal-scroll-area {
-            overflow-y: auto;
-            flex: 1;
-        }
+    .principle-card, .stat-card { 
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
+        background: white;
+    }
+    .principle-card:hover, .stat-card:hover { 
+        transform: translateY(-10px); 
+        box-shadow: 0 20px 30px -10px rgba(0, 0, 0, 0.1);
+    }
 
-      
-        .modal-scroll-area::-webkit-scrollbar { width: 6px; }
-        .modal-scroll-area::-webkit-scrollbar-track { background: #f1f1f1; }
-        .modal-scroll-area::-webkit-scrollbar-thumb { background: #009e49; border-radius: 10px; }
-    </style>
+    /* Modals */
+    #news-modal, #data-modal { 
+        display: none; position: fixed; inset: 0; z-index: 2000; 
+        background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(8px); 
+        align-items: center; justify-content: center; padding: 12px;
+    }
+    #news-modal.active, #data-modal.active { 
+        display: flex; 
+        animation: slideIn 0.3s ease-out; 
+    }
+
+    .modal-content-container { 
+        max-height: 90vh; 
+        display: flex; 
+        flex-direction: column; 
+        background: white;
+        border-radius: 2rem;
+        overflow: hidden;
+    }
+
+    .modal-scroll-area {
+        overflow-y: auto;
+        flex: 1;
+    }
+    .modal-scroll-area::-webkit-scrollbar { width: 6px; }
+    .modal-scroll-area::-webkit-scrollbar-track { background: #f1f1f1; }
+    .modal-scroll-area::-webkit-scrollbar-thumb { background: #009e49; border-radius: 10px; }
+
+    @keyframes slideIn { 
+        from { opacity: 0; transform: scale(0.9); } 
+        to { opacity: 1; transform: scale(1); } 
+    }
+
+    /* Table & Utilities */
+    .custom-table th { 
+        background: #f8fafc; color: #1e293b; 
+        font-weight: 900; font-size: 15px; 
+        padding: 14px; border-bottom: 3px solid #cbd5e1; 
+    }
+    .custom-table td { 
+        padding: 14px; border-bottom: 1px solid #e2e8f0; 
+        font-weight: 700; font-size: 17px;
+    }
+    .line-clamp-2 { 
+        display: -webkit-box; -webkit-line-clamp: 2; 
+        -webkit-box-orient: vertical; overflow: hidden; 
+    }
+</style>
 </head>
 <body oncontextmenu="return false;"> 
     <header class="fixed-header">
@@ -157,26 +203,75 @@
             </div>
         </section>
 
-        <section class="container mx-auto px-4 -mt-16 relative z-20">
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
-                <div class="bg-white p-6 rounded-2xl shadow-xl border-t-4 border-brand-green text-center">
-                    <p class="text-3xl font-black text-brand-green">১২,৬৫৩</p>
-                    <p class="text-xs font-bold text-gray-500 uppercase mt-1">মোট ভোটার</p>
+        <main class="container mx-auto px-4 -mt-16 relative z-30 mb-20">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        
+        <div onclick="showDetails('total')" class="stat-card p-8 rounded-[2rem] cursor-pointer group border-b-4 border-brand-emerald shadow-xl">
+            <div class="flex justify-between items-start mb-6">
+                <div class="w-14 h-14 bg-emerald-50 text-brand-emerald rounded-2xl flex items-center justify-center text-2xl group-hover:bg-brand-emerald group-hover:text-white transition-all shadow-inner">
+                    <i class="fa-solid fa-users"></i>
                 </div>
-                <div class="bg-white p-6 rounded-2xl shadow-xl border-t-4 border-blue-500 text-center">
-                    <p class="text-3xl font-black text-blue-600">৬,৩৯৯</p>
-                    <p class="text-xs font-bold text-gray-500 uppercase mt-1">পুরুষ ভোটার</p>
-                </div>
-                <div class="bg-white p-6 rounded-2xl shadow-xl border-t-4 border-pink-500 text-center">
-                    <p class="text-3xl font-black text-pink-500">৬,২৫৪</p>
-                    <p class="text-xs font-bold text-gray-500 uppercase mt-1">মহিলা ভোটার</p>
-                </div>
-                <div class="bg-white p-6 rounded-2xl shadow-xl border-t-4 border-brand-gold text-center">
-                    <p class="text-3xl font-black text-brand-gold">৪ টি</p>
-                    <p class="text-xs font-bold text-gray-500 uppercase mt-1">ভোট কেন্দ্র</p>
-                </div>
+                <i class="fa-solid fa-circle-info text-slate-300 group-hover:text-brand-emerald transition-colors"></i>
             </div>
-        </section>
+            <h3 id="stat-total" class="text-4xl font-black mb-1 text-slate-900 leading-none">লোড হচ্ছে...</h3>
+            <p class="text-sm font-bold text-slate-500 uppercase tracking-wide">মোট ভোটার</p>
+            <p class="text-[10px] font-bold text-slate-400 uppercase tracking-wide">(১৭.০১.২০২৬ এ প্রকাশিত তালিকা অনুযায়ী)</p>
+        </div>
+
+        <div onclick="showDetails('male')" class="stat-card p-8 rounded-[2rem] cursor-pointer group border-b-4 border-brand-blue shadow-xl">
+            <div class="flex justify-between items-start mb-6">
+                <div class="w-14 h-14 bg-blue-50 text-brand-blue rounded-2xl flex items-center justify-center text-2xl group-hover:bg-brand-blue group-hover:text-white transition-all shadow-inner">
+                    <i class="fa-solid fa-person"></i>
+                </div>
+                <i class="fa-solid fa-circle-info text-slate-300 group-hover:text-brand-blue transition-colors"></i>
+            </div>
+            <h3 id="stat-male" class="text-4xl font-black mb-1 text-slate-900 leading-none">...</h3>
+            <p class="text-sm font-bold text-slate-500 uppercase tracking-wide">পুরুষ ভোটার</p>
+            <p class="text-[10px] font-bold text-slate-400 uppercase tracking-wide">(১৭.০১.২০২৬ এ প্রকাশিত তালিকা অনুযায়ী)</p>
+        </div>
+
+        <div onclick="showDetails('female')" class="stat-card p-8 rounded-[2rem] cursor-pointer group border-b-4 border-brand-pink shadow-xl">
+            <div class="flex justify-between items-start mb-6">
+                <div class="w-14 h-14 bg-pink-50 text-brand-pink rounded-2xl flex items-center justify-center text-2xl group-hover:bg-brand-pink group-hover:text-white transition-all shadow-inner">
+                    <i class="fa-solid fa-person-dress"></i>
+                </div>
+                <i class="fa-solid fa-circle-info text-slate-300 group-hover:text-brand-pink transition-colors"></i>
+            </div>
+            <h3 id="stat-female" class="text-4xl font-black mb-1 text-slate-900 leading-none">...</h3>
+            <p class="text-sm font-bold text-slate-500 uppercase tracking-wide">মহিলা ভোটার</p>
+            <p class="text-[10px] font-bold text-slate-400 uppercase tracking-wide">(১৭.০১.২০২৬ এ প্রকাশিত তালিকা অনুযায়ী)</p>
+        </div>
+
+        <div onclick="showDetails('center')" class="stat-card p-8 rounded-[2rem] cursor-pointer group border-b-4 border-brand-amber shadow-xl">
+            <div class="flex justify-between items-start mb-6">
+                <div class="w-14 h-14 bg-amber-50 text-brand-amber rounded-2xl flex items-center justify-center text-2xl group-hover:bg-brand-amber group-hover:text-white transition-all shadow-inner">
+                    <i class="fa-solid fa-landmark"></i>
+                </div>
+                <i class="fa-solid fa-circle-info text-slate-300 group-hover:text-brand-amber transition-colors"></i>
+            </div>
+            <h3 id="stat-center" class="text-4xl font-black mb-1 text-slate-900 leading-none">...</h3>
+            <p class="text-sm font-bold text-slate-500 uppercase tracking-wide">ভোট কেন্দ্র রিপোর্ট</p>
+            <p class="text-[10px] font-bold text-slate-400 uppercase tracking-wide">(১৭.০১.২০২৬ এ প্রকাশিত তালিকা অনুযায়ী)</p>
+        </div>
+
+    </div>
+</main>
+
+<div id="data-modal" class="fixed inset-0 z-[2000] hidden items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm" onclick="if(event.target === this) closeModal()">
+    <div class="bg-white w-full max-w-2xl max-h-[85vh] rounded-[2rem] overflow-hidden shadow-2xl flex flex-col scale-95 transition-all duration-300" id="modal-container">
+        <div class="p-6 md:p-8 border-b flex justify-between items-center bg-white sticky top-0 z-10">
+            <div>
+                <h2 id="modal-title" class="font-black text-2xl md:text-3xl text-slate-900 tracking-tight">বিস্তারিত তথ্য</h2>
+                <p id="modal-subtitle" class="text-brand-emerald font-bold text-xs uppercase mt-1 tracking-widest"></p>
+            </div>
+            <button onclick="closeModal()" class="w-10 h-10 rounded-xl bg-slate-100 flex items-center justify-center text-slate-500 hover:bg-red-500 hover:text-white transition-all shadow-sm">
+                <i class="fa-solid fa-xmark text-xl"></i>
+            </button>
+        </div>
+        <div class="overflow-y-auto flex-1 p-4 md:p-6 bg-slate-50" id="modal-content">
+            </div>
+    </div>
+</div>
 
         <section class="container mx-auto px-4 mt-12">
             <div class="info-bar-bg shadow-2xl flex flex-col md:flex-row justify-between items-center">
@@ -317,148 +412,200 @@
     </footer>
 
     <script>
-        const _s = "aHR0cHM6Ly9zY3JpcHQuZ29vZ2xlLmNvbS9tYWNyb3Mvcy9BS2Z5Y2J6cUctV0ZCdFVVeWE2MEdQd1YzT2UzQnBnTURjbEc1ZDBrdXdnYWVaQU8yTUVOajV5ZnJLTHdpYnlKLUpERnlfbmhFQS9leGVj";
-        const SCRIPT_URL = atob(_s);
-        let allNewsData = [];
-
-        // Protection
-        document.addEventListener('keydown', e => {
-            if (e.ctrlKey && ['u', 's', 'i', 'j'].includes(e.key.toLowerCase())) e.preventDefault();
-            if (e.key === 'F12') e.preventDefault();
-        });
-
-        const menuBtn = document.getElementById('menu-btn');
-        const mobileMenu = document.getElementById('mobile-menu');
-        menuBtn.addEventListener('click', () => mobileMenu.classList.toggle('active'));
-
-        const toBn = n => n.toString().replace(/\d/g, d => "০১২৩৪৫৬৭৮৯"[d]);
-
-        function updateClock() {
-            const now = new Date();
-            const time = now.toLocaleTimeString('en-GB', { hour12: false }).split(':').map(toBn).join(':');
-            document.getElementById('bn-clock').innerText = time;
-
-            const days = ['রবিবার', 'সোমবার', 'মঙ্গলবার', 'বুধবার', 'বৃহস্পতিবার', 'শুক্রবার', 'শনিবার'];
-            const months = ['জানুয়ারি', 'ফেব্রুয়ারি', 'মার্চ', 'এপ্রিল', 'মে', 'জুন', 'জুলাই', 'আগস্ট', 'সেপ্টেম্বর', 'অক্টোবর', 'নভেম্বর', 'ডিসেম্বর'];
-            const dateStr = `${days[now.getDay()]}, ${toBn(now.getDate())} ${months[now.getMonth()]} ${toBn(now.getFullYear())}`;
-            document.getElementById('current-date').innerText = dateStr;
-        }
-        setInterval(updateClock, 1000);
-        updateClock();
-
-        async function getPrayerTimes() {
-            try {
-                const res = await fetch('https://api.aladhan.com/v1/timingsByCity?city=Narail&country=Bangladesh&method=2');
-                const { data } = await res.json();
-                const convert = (t) => {
-                    let [h, m] = t.split(':');
-                    h = parseInt(h) % 12 || 12;
-                    return toBn(h) + ":" + toBn(m);
-                };
-                ['Fajr', 'Dhuhr', 'Asr', 'Maghrib', 'Isha'].forEach(p => {
-                    document.getElementById(p.toLowerCase()).innerText = convert(data.timings[p]);
-                });
-            } catch (e) { console.error("Prayer Error"); }
-        }
-
-        async function getWeather() {
-            const lat = 23.1717; const lon = 89.5033;
-            try {
-                const res = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true`);
-                const data = await res.json();
-                if (data.current_weather) {
-                    const temp = Math.round(data.current_weather.temperature);
-                    document.getElementById('temp').innerText = toBn(temp) + "°C";
-                    const code = data.current_weather.weathercode;
-                    let desc = "পরিষ্কার আকাশ";
-                    if (code > 0 && code <= 3) desc = "আংশিক মেঘলা";
-                    else if (code >= 45 && code <= 48) desc = "কুয়াশাচ্ছন্ন";
-                    else if (code >= 51) desc = "বৃষ্টির সম্ভাবনা";
-                    document.getElementById('weather-desc').innerText = desc;
-                }
-            } catch (error) { console.error("Weather Error"); }
-        }
-
-        function formatDriveLink(link) {
-            if (!link || typeof link !== 'string') return 'https://via.placeholder.com/800x600?text=No+Image';
-            const fileId = link.match(/\/d\/(.+?)\//)?.[1] || link.match(/id=([^&]+)/)?.[1];
-            return fileId ? `https://lh3.googleusercontent.com/d/${fileId}` : link;
-        }
-
-        function shareOnFB(title) {
-            const url = window.location.href;
-            const fbUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}&quote=${encodeURIComponent(title)}`;
-            window.open(fbUrl, '_blank', 'width=600,height=400');
-        }
-
-        function openNewsModal(index) {
-            const post = allNewsData[index];
-            if (!post) return;
-            document.getElementById('modal-img').src = formatDriveLink(post.image);
-            document.getElementById('modal-date').innerText = toBn(post.date);
-            document.getElementById('modal-location').innerText = "📍 " + post.location;
-            document.getElementById('modal-title').innerText = post.title;
-            document.getElementById('modal-details').innerText = post.details;
-            
-            const modal = document.getElementById('news-modal');
-            modal.classList.add('active');
-            document.body.style.overflow = 'hidden';
-            
         
-            document.querySelector('.modal-scroll-area').scrollTop = 0;
-        }
+    const _s = "aHR0cHM6Ly9zY3JpcHQuZ29vZ2xlLmNvbS9tYWNyb3Mvcy9BS2Z5Y2J6cUctV0ZCdFVVeWE2MEdQd1YzT2UzQnBnTURjbEc1ZDBrdXdnYWVaQU8yTUVOajV5ZnJLTHdpYnlKLUpERnlfbmhFQS9leGVj";
+    const SCRIPT_URL = atob(_s); 
+    const API_URL = "https://script.google.com/macros/s/AKfycbwIhEujZMPLt3NsnaRxCvDq9xCo2Kmw_0Wp5GhsBA6RAIEuFvP0j0cZ0TVom7KFbMV1/exec"; // ভোটার স্ট্যাটাস API
+    
+    let allNewsData = [];
+    let voterData = [];
 
-        function closeNewsModal() {
-            document.getElementById('news-modal').classList.remove('active');
-            document.body.style.overflow = 'auto';
-        }
+    document.addEventListener('keydown', e => {
+        if (e.ctrlKey && ['u', 's', 'i', 'j'].includes(e.key.toLowerCase())) e.preventDefault();
+        if (e.key === 'F12') e.preventDefault();
+    });
 
-  
-        document.getElementById('news-modal').addEventListener('click', function(e) {
-            if (e.target === this) closeNewsModal();
-        });
+    const toBn = n => n.toString().replace(/\d/g, d => "০১২৩৪৫৬৭৮৯"[d]);
+    const bnToEn = n => n.toString().replace(/[০-৯]/g, d => "০১২৩৪৫৬৭৮৯".indexOf(d));
 
-        async function loadLatestNews() {
-            const container = document.getElementById('latest-news-container');
-            try {
-                const res = await fetch(SCRIPT_URL);
-                const posts = await res.json();
-                if (!posts || posts.length === 0) {
-                    container.innerHTML = '<p class="text-gray-500 col-span-full text-center py-10">কোনো সাম্প্রতিক আপডেট পাওয়া যায়নি।</p>';
-                    return;
-                }
-                allNewsData = posts.reverse();
-                container.innerHTML = allNewsData.slice(0, 3).map((post, index) => `
-                    <div class="bg-white rounded-3xl shadow-sm border border-gray-100 overflow-hidden group hover:shadow-xl transition-all duration-500">
-                        <div class="relative h-56 overflow-hidden">
-                            <img src="${formatDriveLink(post.image)}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
-                            <div class="absolute bottom-4 left-4 bg-white/90 backdrop-blur px-3 py-1 text-[10px] font-bold rounded-lg shadow-sm">${toBn(post.date)}</div>
-                        </div>
-                        <div class="p-6">
-                            <h3 class="font-black text-xl text-brand-dark mb-3 leading-tight line-clamp-2">${post.title}</h3>
-                            <p class="text-gray-500 text-sm mb-6 line-clamp-2">${post.details}</p>
-                            <div class="flex justify-end items-center pt-5 border-t border-gray-50 gap-4">
-                                <div class="mr-auto">
-                                    <span class="text-[10px] text-gray-400 font-bold uppercase tracking-wider">📍 ${post.location}</span>
-                                </div>
-                                <button onclick="shareOnFB('${post.title.replace(/'/g, "\\'")}')" class="text-blue-600 hover:text-blue-800 transition flex items-center" title="ফেসবুকে শেয়ার করুন">
-                                    <i class="fab fa-facebook text-xl"></i>
-                                </button>
-                                <button onclick="openNewsModal(${index})" class="text-brand-green font-black text-xs hover:tracking-widest transition-all">বিস্তারিত ➔</button>
-                            </div>
+    function updateClock() {
+        const now = new Date();
+        const time = now.toLocaleTimeString('en-GB', { hour12: false }).split(':').map(toBn).join(':');
+        const clockEl = document.getElementById('bn-clock');
+        const dateEl = document.getElementById('current-date');
+        
+        if(clockEl) clockEl.innerText = time;
+
+        const days = ['রবিবার', 'সোমবার', 'মঙ্গলবার', 'বুধবার', 'বৃহস্পতিবার', 'শুক্রবার', 'শনিবার'];
+        const months = ['জানুয়ারি', 'ফেব্রুয়ারি', 'মার্চ', 'এপ্রিল', 'মে', 'জুন', 'জুলাই', 'আগস্ট', 'সেপ্টেম্বর', 'অক্টোবর', 'নভেম্বর', 'ডিসেম্বর'];
+        if(dateEl) dateEl.innerText = `${days[now.getDay()]}, ${toBn(now.getDate())} ${months[now.getMonth()]} ${toBn(now.getFullYear())}`;
+    }
+    setInterval(updateClock, 1000);
+
+    async function getPrayerTimes() {
+        try {
+            const res = await fetch('https://api.aladhan.com/v1/timingsByCity?city=Narail&country=Bangladesh&method=2');
+            const { data } = await res.json();
+            const convert = (t) => {
+                let [h, m] = t.split(':');
+                h = parseInt(h) % 12 || 12;
+                return toBn(h) + ":" + toBn(m);
+            };
+            ['Fajr', 'Dhuhr', 'Asr', 'Maghrib', 'Isha'].forEach(p => {
+                const el = document.getElementById(p.toLowerCase());
+                if(el) el.innerText = convert(data.timings[p]);
+            });
+        } catch (e) { console.error("Prayer Error"); }
+    }
+
+    async function getWeather() {
+        const lat = 23.1717; const lon = 89.5033;
+        try {
+            const res = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true`);
+            const data = await res.json();
+            if (data.current_weather) {
+                const temp = Math.round(data.current_weather.temperature);
+                document.getElementById('temp').innerText = toBn(temp) + "°C";
+                const code = data.current_weather.weathercode;
+                let desc = "পরিষ্কার আকাশ";
+                if (code > 0 && code <= 3) desc = "আংশিক মেঘলা";
+                else if (code >= 45 && code <= 48) desc = "কুয়াশাচ্ছন্ন";
+                else if (code >= 51) desc = "বৃষ্টির সম্ভাবনা";
+                document.getElementById('weather-desc').innerText = desc;
+            }
+        } catch (error) { console.error("Weather Error"); }
+    }
+
+    function formatDriveLink(link) {
+        if (!link || typeof link !== 'string') return 'https://via.placeholder.com/800x600?text=No+Image';
+        const fileId = link.match(/\/d\/(.+?)\//)?.[1] || link.match(/id=([^&]+)/)?.[1];
+        return fileId ? `https://lh3.googleusercontent.com/d/${fileId}` : link;
+    }
+
+    async function loadLatestNews() {
+        const container = document.getElementById('latest-news-container');
+        if(!container) return;
+        try {
+            const res = await fetch(SCRIPT_URL);
+            const posts = await res.json();
+            allNewsData = posts.reverse();
+            container.innerHTML = allNewsData.slice(0, 3).map((post, index) => `
+                <div class="bg-white rounded-3xl shadow-sm border border-gray-100 overflow-hidden group hover:shadow-xl transition-all duration-500">
+                    <div class="relative h-56 overflow-hidden">
+                        <img src="${formatDriveLink(post.image)}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                        <div class="absolute bottom-4 left-4 bg-white/90 backdrop-blur px-3 py-1 text-[10px] font-bold rounded-lg shadow-sm">${toBn(post.date)}</div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-black text-xl text-brand-dark mb-3 leading-tight line-clamp-2">${post.title}</h3>
+                        <p class="text-gray-500 text-sm mb-6 line-clamp-2">${post.details}</p>
+                        <div class="flex justify-end items-center pt-5 border-t border-gray-50 gap-4">
+                            <span class="mr-auto text-[10px] text-gray-400 font-bold uppercase tracking-wider">📍 ${post.location}</span>
+                            <button onclick="shareOnFB('${post.title.replace(/'/g, "\\'")}')" class="text-blue-600 hover:text-blue-800"><i class="fab fa-facebook text-xl"></i></button>
+                            <button onclick="openNewsModal(${index})" class="text-brand-green font-black text-xs">বিস্তারিত ➔</button>
                         </div>
                     </div>
-                `).join('');
-            } catch (e) {
-                container.innerHTML = '<p class="text-red-400 col-span-full text-center py-10">নিউজ লোড করতে সমস্যা হয়েছে।</p>';
-            }
-        }
+                </div>
+            `).join('');
+        } catch (e) { container.innerHTML = '<p class="text-center py-10">নিউজ লোড করা সম্ভব হয়নি।</p>'; }
+    }
 
-        window.addEventListener('load', () => {
-            getWeather();
-            getPrayerTimes();
-            loadLatestNews();
-        });
-    </script>
+    async function fetchStats() {
+        try {
+            const response = await fetch(API_URL + "?v=" + new Date().getTime());
+            voterData = await response.json();
+            if (voterData && voterData.length > 0) {
+                let m = 0, f = 0, centers = new Set();
+                voterData.forEach(d => {
+                    m += Number(d.male) || 0;
+                    f += Number(d.female) || 0;
+                    if(d.center) centers.add(d.center);
+                });
+                document.getElementById('stat-total').innerText = toBn(m + f);
+                document.getElementById('stat-male').innerText = toBn(m);
+                document.getElementById('stat-female').innerText = toBn(f);
+                document.getElementById('stat-center').innerText = toBn(centers.size);
+            }
+        } catch (e) { console.error("Stats Error:", e); }
+    }
+
+    function openNewsModal(index) {
+        const post = allNewsData[index];
+        if (!post) return;
+        document.getElementById('modal-img').src = formatDriveLink(post.image);
+        document.getElementById('modal-date').innerText = toBn(post.date);
+        document.getElementById('modal-location').innerText = "📍 " + post.location;
+        document.getElementById('modal-title').innerText = post.title;
+        document.getElementById('modal-details').innerText = post.details;
+        document.getElementById('news-modal').classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function showDetails(type) {
+        if (!voterData.length) return;
+        let title = "", sub = "", html = "";
+        html = `<div class="overflow-hidden rounded-2xl border border-slate-200 bg-white"><table class="custom-table w-full text-center"><thead><tr>`;
+
+        if (['male', 'female', 'total'].includes(type)) {
+            let colorClass = type === 'male' ? 'text-brand-blue' : type === 'female' ? 'text-brand-pink' : 'text-brand-green';
+            title = type === 'male' ? "পুরুষ ভোটার তালিকা" : type === 'female' ? "মহিলা ভোটার তালিকা" : "মোট ভোটার";
+            sub = "ওয়ার্ড ভিত্তিক সংখ্যা";
+            html += `<th>ওয়ার্ড নং</th><th>ভোট সংখ্যা</th></tr></thead><tbody>`;
+            let grandTotal = 0;
+            voterData.forEach(d => {
+                let mVal = parseInt(bnToEn(d.male)) || 0;
+                let fVal = parseInt(bnToEn(d.female)) || 0;
+                let val = (type === 'male') ? mVal : (type === 'female') ? fVal : (mVal + fVal);
+                grandTotal += val;
+                html += `<tr><td>${d.ward}</td><td class="font-black ${colorClass}">${toBn(val)} জন</td></tr>`;
+            });
+            html += `<tr class="bg-slate-100 font-black"><td>সর্বমোট</td><td class="${colorClass}">${toBn(grandTotal)} জন</td></tr>`;
+        } 
+        else if (type === 'center') {
+            title = "ভোট কেন্দ্র ভিত্তিক রিপোর্ট";
+            sub = "কেন্দ্রের সমন্বিত পরিসংখ্যান";
+            html += `<th class="text-left px-4">কেন্দ্রের নাম</th><th>পুরুষ</th><th>মহিলা</th><th class="bg-amber-50">মোট</th></tr></thead><tbody>`;
+            const centersMap = {};
+            let tM = 0, tF = 0;
+            voterData.forEach(d => {
+                let cName = d.center || "অনির্ধারিত";
+                let mVal = parseInt(bnToEn(d.male)) || 0;
+                let fVal = parseInt(bnToEn(d.female)) || 0;
+                if (!centersMap[cName]) centersMap[cName] = { m: 0, f: 0 };
+                centersMap[cName].m += mVal; centersMap[cName].f += fVal;
+                tM += mVal; tF += fVal;
+            });
+            for (let name in centersMap) {
+                let rowT = centersMap[name].m + centersMap[name].f;
+                html += `<tr><td class="text-left p-4">${name}</td><td class="text-brand-blue">${toBn(centersMap[name].m)}</td><td class="text-brand-pink">${toBn(centersMap[name].f)}</td><td class="bg-amber-50 font-black">${toBn(rowT)}</td></tr>`;
+            }
+            html += `<tr class="bg-slate-800 text-white"><td>সর্বমোট</td><td>${toBn(tM)}</td><td>${toBn(tF)}</td><td class="bg-brand-green">${toBn(tM + tF)}</td></tr>`;
+        }
+        
+        html += `</tbody></table></div>`;
+        document.getElementById('modal-title').innerText = title;
+        document.getElementById('modal-subtitle').innerText = sub;
+        document.getElementById('modal-content').innerHTML = html;
+        document.getElementById('data-modal').classList.add('active');
+    }
+
+    function closeModal() {
+        document.getElementById('news-modal').classList.remove('active');
+        document.getElementById('data-modal').classList.remove('active');
+        document.body.style.overflow = 'auto';
+    }
+
+    window.addEventListener('load', () => {
+        updateClock();
+        getWeather();
+        getPrayerTimes();
+        loadLatestNews();
+        fetchStats();
+    });
+
+    const menuBtn = document.getElementById('menu-btn');
+    if(menuBtn) {
+        menuBtn.addEventListener('click', () => document.getElementById('mobile-menu').classList.toggle('active'));
+    }
+</script>
 </body>
 </html>
