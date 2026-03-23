@@ -27,7 +27,6 @@
             position: absolute; bottom: -2px; right: -2px; border: 2px solid white; 
         }
 
-        /* --- Updated Premium Fixed Glass Footer (Centered) --- */
         .fixed-footer-glass {
             position: fixed;
             bottom: 0;
@@ -45,8 +44,7 @@
             text-align: center;
             overflow: hidden;
         }
-
-        /* Constant Shiny Reflection Effect */
+        
         .fixed-footer-glass::before {
             content: "";
             position: absolute;
@@ -81,14 +79,14 @@
         }
 
         .footer-content strong {
-            color: #4ade80; /* Light Green for emphasis */
+            color: #4ade80;
         }
         @keyframes shine {
         0% { transform: translateX(-100%) skewX(-15deg); }
         100% { transform: translateX(200%) skewX(-15deg); }
         }
         .animate-shine-effect {
-        animation: shine 2.5s infinite linear;
+        animation: shine 2.9s infinite linear;
         }
 
         @media print { .no-print { display: none; } body { background: white; } .fixed-footer-glass { display: none; } }
@@ -237,7 +235,6 @@
         </main>
     </div>
 
-    <!-- --- Centered Fixed Glass Footer --- -->
     <footer class="fixed-footer-glass no-print">
         <div class="footer-content">
             সৌজন্যে: ঠাকুর আবুল আজম "স্মার্ট পহরডাঙ্গার স্মার্ট সেবা আপনার দোরগোড়ায়" 
