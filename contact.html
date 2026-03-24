@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>যোগাযোগ |ঠাকুর আবুল আজম, ১০নং পহরডাঙ্গা ইউনিয়ন</title>
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-bg: #0b3d2e; 
+            --accent-color: #f7cb2d;
+            --card-bg: #1a1a1a;
+            --text-white: #ffffff;
+            --table-hover: #222;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Hind Siliguri', sans-serif; }
+        
+        body { 
+            background: linear-gradient(135deg, #0b3d2e 0%, #051a14 100%); 
+            min-height: 100vh; 
+            display: flex; 
+            flex-direction: column; 
+            color: var(--text-white);
+        }
+      
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #111; }
+        ::-webkit-scrollbar-thumb { background: var(--accent-color); border-radius: 10px; }
+
+        header {
+            background: rgba(0, 0, 0, 0.8);
+            padding: 15px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+            border-bottom: 2px solid var(--accent-color);
+        }
+        .logo-area { display: flex; align-items: center; gap: 12px; }
+        .logo-img { width: 45px; height: 45px; border-radius: 50%; border: 2px solid var(--accent-color); }
+        .logo-text { font-size: 20px; font-weight: bold; color: var(--accent-color); }
+        
+        .nav-links { display: flex; align-items: center; }
+        .nav-links a { color: white; text-decoration: none; margin-left: 20px; font-size: 16px; transition: 0.3s; }
+        .nav-links a:hover { color: var(--accent-color); }
+
+        .admin-btn {
+            background: var(--accent-color); color: black; padding: 8px 18px;
+            border-radius: 30px; font-weight: bold; font-size: 14px;
+            border: none; cursor: pointer; margin-left: 20px; transition: 0.3s;
+        }
+        .admin-btn:hover { transform: scale(1.05); box-shadow: 0 0 15px rgba(247, 203, 45, 0.4); }
+
+        .menu-icon { display: none; font-size: 24px; color: var(--accent-color); cursor: pointer; }
+
+        .main-container { flex: 1; display: flex; justify-content: center; align-items: center; padding: 40px 15px; }
+        .contact-card {
+            background-color: var(--card-bg); width: 100%; max-width: 1100px;
+            border-radius: 30px; display: grid; grid-template-columns: 1.1fr 0.9fr;
+            overflow: hidden; box-shadow: 0 25px 50px rgba(0,0,0,0.6);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .form-side { padding: 50px; }
+        .form-side h2 { color: var(--accent-color); font-size: 36px; margin-bottom: 10px; }
+        
+        .input-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .input-group { margin-bottom: 20px; }
+        .input-group label { display: block; margin-bottom: 8px; color: #bbb; font-size: 14px; }
+        .input-group input, .input-group textarea {
+            width: 100%; padding: 14px; background: #262626; border: 1px solid #3d3d3d;
+            border-radius: 12px; color: white; outline: none; transition: 0.3s;
+        }
+        .input-group input:focus, .input-group textarea:focus { border-color: var(--accent-color); background: #2d2d2d; }
+        
+        .send-btn { 
+            background: var(--accent-color); color: black; border: none; padding: 16px; 
+            border-radius: 12px; font-weight: bold; width: 100%; cursor: pointer; 
+            font-size: 16px; transition: 0.3s; margin-top: 10px;
+        }
+        .send-btn:hover { background: #e0b620; letter-spacing: 1px; }
+
+        .photo-side {
+            background: url('https://lh3.googleusercontent.com/u/0/d/1YMddYx5gEJg4IP3xkCPx32r4orM4aJQ8?q=80&w=2072&auto=format&fit=crop') center/cover no-repeat;
+            position: relative;
+            min-height: 400px;
+        }
+        .photo-side::before {
+            content: ""; position: absolute; inset: 0;
+            background: linear-gradient(to right, var(--card-bg), transparent);
+        }
+
+        .modal {
+            display: none; position: fixed; z-index: 1001; left: 0; top: 0;
+            width: 100%; height: 100%; background: rgba(0,0,0,0.95);
+            justify-content: center; align-items: center; padding: 20px;
+        }
+        .modal-content {
+            background: #111; border-radius: 25px;
+            width: 100%; max-width: 1000px; color: white; max-height: 90vh; 
+            overflow: hidden; position: relative; border: 1px solid rgba(247, 203, 45, 0.3);
+            display: flex; flex-direction: column;
+        }
+
+        .modal-header {
+            padding: 20px 40px; border-bottom: 1px solid #333;
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .modal-body {
+            flex: 1; overflow-y: auto; padding: 20px 40px 40px;
+        }
+
+        .close-btn { cursor: pointer; color: var(--accent-color); font-size: 32px; }
+
+        .admin-table { width: 100%; border-collapse: separate; border-spacing: 0; margin-top: 15px; }
+        .admin-table th { 
+            background: #1a1a1a; color: var(--accent-color); text-transform: uppercase; 
+            font-size: 13px; letter-spacing: 1px; padding: 18px 15px; text-align: left;
+            border-bottom: 2px solid #333; position: sticky; top: 0; z-index: 5;
+        }
+        .admin-table td { padding: 18px 15px; border-bottom: 1px solid #222; font-size: 14px; color: #ddd; vertical-align: top; }
+        
+        .admin-table tr:nth-child(even) td { background: #161616; }
+        .admin-table tr:hover td { background: var(--table-hover); color: white; }
+
+        .refresh-btn {
+            background: transparent; color: var(--accent-color); border: 2px solid var(--accent-color); 
+            padding: 8px 20px; border-radius: 30px; cursor: pointer; font-weight: bold; transition: 0.3s;
+        }
+        .refresh-btn:hover { background: var(--accent-color); color: black; }
+
+        .copy-icon {
+            cursor: pointer;
+            margin-left: 8px;
+            color: var(--accent-color);
+            transition: 0.2s;
+        }
+        .copy-icon:hover { color: #fff; transform: scale(1.2); }
+
+        footer {
+            background: rgba(0,0,0,0.9); color: #888; text-align: center;
+            padding: 5px; border-top: 1px solid #222;
+        }
+        .footer-credit { color: var(--accent-color); font-weight: 500; margin-top: 5px; }
+
+        @media (max-width: 850px) {
+            .contact-card { grid-template-columns: 1fr; border-radius: 20px; }
+            .photo-side { height: 300px; order: -1; background-position: center top; }
+            .photo-side::before { background: linear-gradient(to bottom, transparent, var(--card-bg)); }
+            .form-side { padding: 30px 20px; }
+            .form-side h2 { font-size: 28px; text-align: center; }
+            header { padding: 10px 5%; }
+            .logo-text { font-size: 16px; }
+            
+            .menu-icon { display: block; }
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 70px;
+                right: 5%;
+                background: rgba(0,0,0,0.95);
+                width: 200px;
+                padding: 20px;
+                border-radius: 15px;
+                border: 1px solid var(--accent-color);
+                box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            }
+            .nav-links.active { display: flex; }
+            .nav-links a { margin: 10px 0; text-align: center; width: 100%; }
+            .admin-btn { margin: 10px 0 0 0; width: 100%; }
+            
+            .input-row { grid-template-columns: 1fr; }
+            .modal-header, .modal-body { padding: 15px; }
+            
+            #tableWrapper { overflow-x: auto; display: block; width: 100%; }
+            .admin-table { min-width: 600px; }
+        }
+    </style>
+</head>
+<body oncontextmenu="return false;">
+
+<header>
+    <div class="logo-area">
+        <a href="index.html"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/Government_Seal_of_Bangladesh.svg/1200px-Government_Seal_of_Bangladesh.svg.png" alt="Gov Logo" class="logo-img">
+        <div class="logo-text">১০নং পহরডাঙ্গা ইউনিয়ন</div></a>
+    </div>
+    
+    <div class="menu-icon" onclick="toggleMenu()">
+        <i class="fas fa-bars"></i>
+    </div>
+
+    <nav class="nav-links" id="navLinks">
+        <a href="index.html" onclick="toggleMenu()">হোম</a>
+        <a href="#" onclick="toggleMenu()">সেবাসমূহ</a>
+        <button class="admin-btn" onclick="openModal(); toggleMenu()">এডমিন লগিন</button>
+    </nav>
+</header>
+
+<div class="main-container">
+    <div class="contact-card">
+        <div class="form-side">
+            <h2>সরাসরি কথা বলুন</h2>
+            <p style="margin-bottom:30px; color:#999; font-size: 15px;">আপনার সুচিন্তিত মতামত কিংবা অভিযোগ—সবকিছুই আমাদের কাছে গুরুত্বপূর্ণ।</p>
+            <form id="contactForm">
+                <div class="input-group">
+                    <label>আপনার নাম</label>
+                    <input type="text" name="Name" placeholder="পুরো নাম লিখুন" required>
+                </div>
+                <div class="input-row">
+                    <div class="input-group">
+                        <label>মোবাইল নাম্বার</label>
+                        <input type="tel" name="Phone" placeholder="01XXXXXXXXX" required>
+                    </div>
+                    <div class="input-group">
+                        <label>গ্রাম</label>
+                        <input type="text" name="Village" placeholder="গ্রামের নাম">
+                    </div>
+                </div>
+                <div class="input-group">
+                    <label>ই-মেইল</label>
+                    <input type="email" name="Email" placeholder="example@mail.com" required>
+                </div>
+                <div class="input-group">
+                    <label>বার্তা</label>
+                    <textarea name="Message" rows="4" placeholder="আপনার সমস্যার কথা বিস্তারিত লিখুন..." required></textarea>
+                </div>
+                <button type="submit" class="send-btn" id="submitBtn">বার্তা পাঠান</button>
+            </form>
+        </div>
+        <div class="photo-side"></div>
+    </div>
+</div>
+
+<div id="adminModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2 id="modalTitle" style="color:var(--accent-color); font-size: 24px;">এডমিন যাচাইকরণ</h2>
+            <div style="display:flex; align-items:center; gap:20px;">
+                <button id="modalRefresh" class="refresh-btn" style="display:none;" onclick="fetchReport()"><i class="fas fa-sync-alt"></i> রিফ্রেশ করুন</button>
+                <span class="close-btn" onclick="closeModal()">×</span>
+            </div>
+        </div>
+        
+        <div class="modal-body">
+            <div id="loginSection">
+                <div class="input-group" style="margin-top:20px;">
+                    <input type="password" id="adminPass" placeholder="পাসওয়ার্ড" style="width:100%; padding:18px; border-radius:15px; border:none; background:#222; color:white; text-align: center; font-size: 18px;">
+                </div>
+                <button class="send-btn" onclick="verifyAdmin()">এখানে লগিন করুন</button>
+            </div>
+
+            <div id="reportSection" style="display:none;">
+                <div id="tableWrapper" style="overflow-x:auto;">
+                    <p style="text-align:center; padding:40px; color: var(--accent-color);">ডাটা রিকোয়েস্ট পাঠানো হচ্ছে...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer>
+    <p>© ২০২৬ ঠাকুর আবুল আজম। সর্বস্বত্ব সংরক্ষিত।</p>
+    <p class="footer-credit">কারিগরি সহায়তায়: আল নোমান শিকদার</p>
+</footer>
+
+<script>
+    function toggleMenu() {
+        if(window.innerWidth <= 850) {
+            document.getElementById('navLinks').classList.toggle('active');
+        }
+    }
+
+    const _0x12a3 = "TnVtaTAwMjE5Mg=="; 
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbyPTEaVyHuj8P5dwi1dQ6QJKtlF8OetuJjgSQGN2JrFZJNA870u-mJnnqY2aSdY44PR6Q/exec';
+
+    function openModal() { 
+        document.getElementById('adminModal').style.display = 'flex'; 
+        document.getElementById('adminPass').focus(); 
+    }
+    function closeModal() { 
+        document.getElementById('adminModal').style.display = 'none'; 
+        document.getElementById('loginSection').style.display = 'block';
+        document.getElementById('reportSection').style.display = 'none';
+        document.getElementById('modalRefresh').style.display = 'none';
+        document.getElementById('modalTitle').innerText = "Admin Verification";
+        document.getElementById('adminPass').value = "";
+    }
+
+    document.getElementById('adminPass').addEventListener('keypress', function (e) {
+        if (e.key === 'Enter') { verifyAdmin(); }
+    });
+
+    function verifyAdmin() {
+        const pass = document.getElementById('adminPass').value;
+        if(btoa(pass) === _0x12a3) {
+            document.getElementById('loginSection').style.display = 'none';
+            document.getElementById('reportSection').style.display = 'block';
+            document.getElementById('modalRefresh').style.display = 'block';
+            document.getElementById('modalTitle').innerText = "ব্যবহারকারী তথ্য";
+            fetchReport();
+        } else {
+            alert("ভুল পাসওয়ার্ড! সঠিক পাসওয়ার্ড দিন।");
+        }
+    }
+
+    function copyToClipboard(text) {
+        navigator.clipboard.writeText(text).then(() => {
+            alert("নাম্বারটি কপি করা হয়েছে: " + text);
+        });
+    }
+    
+    function enToBn(number) {
+        const bnNums = ['০', '১', '২', '৩', '৪', '৫', '৬', '৭', '৮', '৯'];
+        return number.toString().replace(/\d/g, (d) => bnNums[d]);
+    }
+
+    function fetchReport() {
+        const tableWrapper = document.getElementById('tableWrapper');
+        tableWrapper.innerHTML = '<p style="text-align:center; padding:40px; color:#f7cb2d;"><i class="fas fa-spinner fa-spin"></i> ডাটা লোড হচ্ছে...</p>';
+        fetch(scriptURL)
+        .then(res => res.json())
+        .then(data => {
+            if (!data || data.length === 0) {
+                tableWrapper.innerHTML = "<p style='text-align:center; padding:20px;'>কোনো তথ্য পাওয়া যায়নি।</p>";
+                return;
+            }
+            let html = '<table class="admin-table"><thead><tr><th>SL No</th>';
+            data[0].forEach(h => html += `<th>${h}</th>`);
+            html += '</tr></thead><tbody>';
+            
+            data.slice(1).reverse().forEach((row, rowIndex) => {
+                html += '<tr>';
+              
+                html += `<td>${enToBn(rowIndex + 1)}</td>`;
+                
+                row.forEach((col, index) => {
+                    let val = col;
+                    
+                    if (index === 0) {
+                        val = new Date(col).toLocaleString('bn-BD');
+                    } 
+
+else if (index === 1 || index === 2) { 
+    let strVal = col.toString().trim();
+    
+    if(isNaN(strVal.replace(/[\s-]/g, ''))) {
+         if(strVal.startsWith('0')) strVal = strVal.substring(1);
+         val = strVal;
+    } else {
+
+         if (strVal.length > 0 && !strVal.startsWith('0')) strVal = '0' + strVal;
+         
+         val = `<span style="color:var(--accent-color); cursor:pointer; text-decoration:underline dotted;" 
+                onclick="copyToClipboard('${strVal}')" title="কপি করতে ক্লিক করুন">${strVal}</span>`;
+    }
+}
+                    
+                    html += `<td>${val}</td>`;
+                });
+                html += '</tr>';
+            });
+            tableWrapper.innerHTML = html + '</tbody></table>';
+        })
+        .catch(err => {
+            tableWrapper.innerHTML = "<p style='color:red; text-align:center; padding:20px;'>ডাটা পেতে সমস্যা হয়েছে।</p>";
+        });
+    }
+
+    document.onkeydown = function(e) {
+        if(e.keyCode == 123) { return false; } 
+        if(e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) { return false; } 
+        if(e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) { return false; } 
+        if(e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) { return false; } 
+    };
+
+    const form = document.getElementById('contactForm');
+    form.addEventListener('submit', e => {
+        e.preventDefault();
+        const btn = document.getElementById('submitBtn');
+        btn.disabled = true; btn.innerHTML = "<i class='fas fa-spinner fa-spin'></i> বার্তা প্রেরণ হচ্ছে...";
+        fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+        .then(res => {
+            alert("আপনার বার্তাটি সফলভাবে সংরক্ষিত হয়েছে!");
+            form.reset(); btn.disabled = false; btn.innerHTML = "বার্তা পাঠান";
+        })
+        .catch(err => {
+            alert("দুঃখিত, পুনরায় চেষ্টা করুন।");
+            btn.disabled = false; btn.innerHTML = "বার্তা পাঠান";
+        });
+    });
+</script>
+</body>
+</html>
