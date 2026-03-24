@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="description" content="ঠাকুর আবুল আজম এর অফিসিয়াল ওয়েবসাইট। নড়াইল জেলার নড়াগাতী থানার সমাজসেবা, প্রযুক্তি ও উন্নয়নমূলক কার্যক্রম।">
+    <title>ঠাকুর আবুল আজম | প্রফেশনাল পোর্টফোলিও</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Bengali:wght@400;700&family=Hind+Siliguri:wght@300;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <style>
+        body {
+            font-family: 'Hind Siliguri', sans-serif;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            margin: 0;
+            color: #1e293b;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        h1, h2, h3 { font-family: 'Noto Serif Bengali', serif; }
+
+        header {
+            position: fixed;
+            top: 0; width: 100%; height: 75px;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(20px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+            display: flex; align-items: center;
+        }
+
+        .blob {
+            position: absolute;
+            filter: blur(60px);
+            z-index: 0;
+            animation: move 20s infinite alternate;
+        }
+        @keyframes move {
+            from { transform: translate(0, 0); }
+            to { transform: translate(50px, 100px); }
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            border-radius: 2.5rem;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.08);
+        }
+
+        .profile-wrapper {
+            position: relative;
+            transition: transform 0.5s ease;
+        }
+        .profile-wrapper:hover { transform: scale(1.02); }
+        
+        .profile-img {
+            width: 100%;
+            max-width: 380px;
+            aspect-ratio: 4/5;
+            object-fit: cover;
+            border-radius: 2rem;
+            border: 8px solid white;
+        }
+
+        .btn-action {
+            background: #e61d71;
+            color: white;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 10px 25px rgba(230, 29, 113, 0.3);
+        }
+        .btn-action:hover {
+            background: #12122b;
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(18, 18, 43, 0.4);
+        }
+
+        footer {
+            background: #0f172a;
+            color: rgba(255,255,255,0.9);
+            padding: 20px 0;
+            position: relative;
+            z-index: 10;
+        }
+        
+        main { padding-top: 120px; padding-bottom: 60px; min-height: 100vh; }
+
+        /* ড্রপডাউন মেনু স্টাইল */
+        #mobile-dropdown {
+            display: none;
+            position: absolute;
+            top: 70px;
+            right: 24px;
+            background: white;
+            min-width: 180px;
+            border-radius: 1rem;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            border: 1px solid rgba(0,0,0,0.05);
+            overflow: hidden;
+            z-index: 1001;
+        }
+        #mobile-dropdown.show { display: block; animation: slideDown 0.2s ease-out; }
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body oncontextmenu="return false;"> 
+    <header>
+        <div class="max-w-7xl mx-auto w-full px-6 flex justify-between items-center relative">
+            <a href="index.html" class="flex items-center gap-4 group transition-transform hover:scale-[1.02]">
+                <div class="w-12 h-12 bg-slate-100 rounded-xl overflow-hidden shadow-sm flex items-center justify-center transform rotate-3 group-hover:rotate-0 transition-transform">
+                    <img src="https://lh3.googleusercontent.com/d/1HOkLWo1TpFYIidO9b1z_4FOimRrigg8A" alt="ঠাকুর আবুল আজম" class="w-full h-full object-cover">
+                </div>
+                <div>
+                    <h1 class="text-xl font-bold text-slate-800 leading-none group-hover:text-pink-600 transition-colors">ঠাকুর আবুল আজম</h1>
+                    <p class="text-[10px] text-pink-600 font-bold tracking-widest uppercase mt-1">১০নং পহরডাঙ্গা ইউনিয়ন</p>
+                </div>
+            </a>
+            <nav class="hidden md:flex gap-8 text-sm font-bold text-slate-600 uppercase tracking-tight">
+                <a href="#" class="hover:text-pink-600 transition">হোম</a>
+                <a href="#" class="hover:text-pink-600 transition">প্রকল্পসমূহ</a>
+                <a href="https://www.thakurabulazam.pro.bd/contact" class="hover:text-pink-600 transition">যোগাযোগ</a>
+            </nav>
+            
+            <button id="menuBtn" class="md:hidden text-slate-800 text-2xl"><i class="fa-solid fa-bars-staggered"></i></button>
+
+            <div id="mobile-dropdown" class="md:hidden">
+                <div class="flex flex-col">
+                    <a href="#" class="px-6 py-3 hover:bg-slate-50 text-slate-700 font-bold border-b border-slate-50">হোম</a>
+                    <a href="#" class="px-6 py-3 hover:bg-slate-50 text-slate-700 font-bold border-b border-slate-50">প্রকল্পসমূহ</a>
+                    <a href="https://www.thakurabulazam.pro.bd/contact" class="px-6 py-3 hover:bg-slate-50 text-pink-600 font-bold">যোগাযোগ</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="relative overflow-hidden">
+        <div class="blob w-96 h-96 bg-pink-200 top-[-10%] left-[-10%]"></div>
+        <div class="blob w-80 h-80 bg-blue-100 bottom-[-5%] right-[-5%]" style="animation-delay: -5s;"></div>
+
+        <div class="max-w-6xl mx-auto px-6 relative z-10">
+            <section class="glass-card p-8 md:p-16">
+                <div class="grid md:grid-cols-2 gap-12 items-center">
+                    
+                    <div class="order-2 md:order-1 space-y-6">
+                        <div class="inline-flex items-center gap-2 bg-pink-100 text-pink-700 px-4 py-1 rounded-full text-xs font-bold uppercase tracking-widest">
+                            <span class="relative flex h-2 w-2">
+                                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-pink-400 opacity-75"></span>
+                                <span class="relative inline-flex rounded-full h-2 w-2 bg-pink-500"></span>
+                            </span>
+                            আমার সম্পর্কে
+                        </div>
+                        
+                        <h2 class="text-3xl md:text-5xl font-bold text-slate-800 leading-[1.2]">
+                            প্রযুক্তি আর সততার মিশেলে <br>
+                            <span class="text-transparent bg-clip-text bg-gradient-to-r from-pink-600 to-indigo-600">গড়বো নতুন পহরডাঙ্গা</span>
+                        </h2>
+                        
+                        <p class="text-slate-600 text-lg leading-relaxed text-justify mb-4">
+                            আমি <strong>ঠাকুর আবুল আজম</strong>। একজন নিবেদিতপ্রাণ সমাজসেবক এবং পেশাদার আইনকর্মী হিসেবে আমি বিশ্বাস করি—উন্নয়ন এবং ন্যায়বিচার একে অপরের পরিপূরক। নড়াইল জেলার ১০ নং পহরডাঙ্গা ইউনিয়নের পহরডাঙ্গার সন্তান হিসেবে এলাকার মানুষের সুখে-দুখে পাশে থাকাই আমার জীবনের মূল লক্ষ্য।
+                        </p>
+
+                        <p class="text-slate-600 text-lg leading-relaxed text-justify mb-4">
+                            পেশাগতভাবে একটি ল-ফার্মে কর্মরত থাকলেও আমার হৃদস্পন্দন জুড়ে আছে নড়াগাতী ও পহরডাঙ্গার সাধারণ মানুষের কল্যাণ। ব্যক্তিগত ও রাজনৈতিক জীবনের প্রতিটি পদক্ষেপে আমি দরিদ্র ও অসহায় মানুষের মুখে হাসি ফোটাতে সচেষ্ট। বিশেষ করে অবহেলিত মানুষের মাঝে যাকাত বণ্টনসহ বিভিন্ন সামাজিক কর্মকাণ্ডের মাধ্যমে সমাজের ইতিবাচক পরিবর্তন আনাই আমার অঙ্গীকার।
+                        </p>
+
+                        <p class="text-slate-600 text-lg leading-relaxed text-justify">
+                            আমি মনে করি, সামাজিক সচেতনতা এবং সঠিক নেতৃত্বের মাধ্যমেই একটি আদর্শ সমাজ গড়া সম্ভব। আপনাদের দোয়া ও ভালোবাসা নিয়ে আগামীর পথে অবিচলভাবে এগিয়ে যেতে চাই।
+                        </p>
+
+                        <div class="flex flex-wrap gap-4 pt-4">
+                            <a href="https://www.thakurabulazam.pro.bd/contact" class="btn-action px-10 py-4 rounded-2xl font-bold text-center">
+                                যোগাযোগ করুন <i class="fa-solid fa-arrow-right ml-2 text-sm"></i>
+                            </a>
+                            <div class="flex gap-3">
+                                <a href="#" class="w-14 h-14 rounded-2xl bg-white border border-slate-200 flex items-center justify-center text-slate-600 hover:text-blue-600 hover:border-blue-200 transition shadow-sm"><i class="fab fa-facebook-f"></i></a>
+                                <a href="#" class="w-14 h-14 rounded-2xl bg-white border border-slate-200 flex items-center justify-center text-slate-600 hover:text-red-600 hover:border-red-200 transition shadow-sm"><i class="fab fa-youtube"></i></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="order-1 md:order-2 flex justify-center">
+                        <div class="profile-wrapper">
+                            <div class="absolute -top-6 -right-6 w-full h-full bg-pink-500/10 rounded-[2.5rem] -z-10 transform rotate-6"></div>
+                            <img src="https://lh3.googleusercontent.com/u/0/d/1YMddYx5gEJg4IP3xkCPx32r4orM4aJQ8" alt="ঠাকুর আবুল আজম" class="profile-img shadow-2xl">
+                            
+                            <div class="absolute -bottom-4 -left-8 bg-white p-5 rounded-2xl shadow-xl border border-slate-100 hidden sm:block">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-10 h-10 bg-indigo-600 rounded-lg flex items-center justify-center text-white">
+                                        <i class="fa-solid fa-microchip"></i>
+                                    </div>
+                                    <div>
+                                        <p class="text-[10px] text-slate-400 uppercase font-bold tracking-tighter">সহ-সভাপাতি, নড়াগাতী থানা বিএনপি, নড়াইল</p>
+                                        <p class="text-sm font-bold text-slate-800">ঠাকুর আবুল আজম</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-6">
+                <div class="text-center md:text-left">
+                    <p class="text-sm opacity-70">© ২০২৬ ঠাকুর আবুল আজম | সর্বস্বত্ব সংরক্ষিত</p>
+                    <p class="text-[11px] mt-1 text-slate-500 uppercase tracking-widest">নড়াগাতী থানা, নড়াইল জেলা</p>
+                </div>
+                
+                <div class="flex items-center gap-2 bg-slate-800/50 px-4 py-2 rounded-lg border border-slate-700">
+                    <span class="text-[10px] text-slate-400 uppercase font-medium">কারিগরি সহায়তায়:</span>
+                    <span class="text-pink-500 font-bold text-xs uppercase tracking-wider">আল নোমান শিকদার</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const menuBtn = document.getElementById('menuBtn');
+        const dropdown = document.getElementById('mobile-dropdown');
+
+        menuBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            dropdown.classList.toggle('show');
+        });
+
+        document.addEventListener('click', () => {
+            dropdown.classList.remove('show');
+        });
+
+        document.onkeydown = function(e) {
+            if (e.keyCode == 123) return false;
+            if (e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) return false;
+            if (e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) return false;
+        };
+    </script>
+</body>
+</html>
