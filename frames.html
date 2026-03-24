@@ -3,12 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="ঠাকুর আবুল আজম এর অফিসিয়াল ওয়েবসাইট। নড়াইল জেলার নড়াগাতী থানার সমাজসেবা, প্রযুক্তি ও উন্নয়নমূলক কার্যক্রমের সাথে যুক্ত। আপনার মতামত ও যোগাযোগ করতে ভিজিট করুন।">
+    <meta name="keywords" content="ঠাকুর আবুল আজম, Thakur Abul Azam, নড়াইল, নড়াগাতী থানা, সমাজসেবা, উন্নয়ন, প্রযুক্তি, Narail, Bangladesh">
+    <meta property="og:title" content="ঠাকুর আবুল আজম - অফিসিয়াল ওয়েবসাইট">
+    <meta property="og:description" content="নড়াইল জেলার নড়াগাতী থানার সমাজসেবা ও উন্নয়নমূলক কাজের অফিসিয়াল প্ল্যাটফর্ম।">
+    <meta property="og:url" content="https://www.thakurabulazam.pro.bd/">
+    <meta property="og:type" content="website">
     <title>সমর্থক ব্যানার তৈরি | ঠাকুর আবুল আজম</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
+        body { 
+            font-family: 'Hind Siliguri', sans-serif; 
+            background-color: #f1f5f9; 
+            display: flex; 
+            flex-direction: column; 
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+        img { pointer-events: none; }
+        
         html, body { height: 100%; }
-        body { font-family: 'Hind Siliguri', sans-serif; background-color: #f1f5f9; display: flex; flex-direction: column; }
         main { flex: 1 0 auto; }
         footer { flex-shrink: 0; }
         .canvas-container { position: relative; width: 100%; max-width: 600px; margin: 0 auto; touch-action: none; }
@@ -39,7 +56,7 @@
         #mobile-menu.active { max-height: 500px; border-top: 1px solid #f1f5f9; }
     </style>
 </head>
-<body class="text-slate-800">
+<body class="text-slate-800" oncontextmenu="return false;">
     <nav class="bg-white border-b sticky top-0 z-50 py-3 shadow-sm">
         <div class="container mx-auto px-4 flex justify-between items-center">
             <div class="flex items-center gap-3">
@@ -61,7 +78,6 @@
                 <a href="#" class="hover:text-green-600">কর্মসূচি</a>
                 <a href="#" class="hover:text-green-600">গ্যালারি</a>
                 <a href="news.html" class="hover:text-green-600">সংবাদ</a>
-                <div hidden><a href="https://votersearchsystem.vercel.app" class="hover:text-green-600">ভোটার স্লিপ</a></div>
                 <a href="#" class="hover:text-green-600">যোগাযোগ</a>
             </div>
         </div>
@@ -69,7 +85,6 @@
             <div class="flex flex-col gap-3 py-4 text-sm font-bold text-slate-600">
                 <a href="index.html" class="hover:text-green-600 border-b pb-2">হোম</a>
                 <a href="news.html" class="hover:text-green-600 border-b pb-2">সংবাদ</a>
-                <div hidden><a href="https://votersearchsystem.vercel.app" class="hover:text-green-600 border-b pb-2">ভোটার স্লিপ</a></div>
                 <a href="#" class="hover:text-green-600 border-b pb-2">যোগাযোগ</a>
             </div>
         </div>
@@ -141,7 +156,7 @@
         <div class="container mx-auto px-4 grid grid-cols-1 md:grid-cols-4 gap-8">
             <div class="col-span-1">
                 <div class="flex items-center gap-2 mb-4">
-                    <img src="https://lh3.googleusercontent.com/d/17sGo8tVgyVlOS7BMpBol7kdim1mUaFaH" class="w-8 brightness-200">
+                    <img src="https://lh3.googleusercontent.com/d/17sGo8tVgyVlOS7BMpBol7kdim1mUaFaH" class="w-8 brightness-200" alt="Logo">
                     <h4 class="text-white font-bold text-base">ঠাকুর আবুল আজম</h4>
                 </div>
                 <p class="text-[11px] leading-relaxed">ন্যায়বিচার, উন্নয়ন এবং সু শাসনের লক্ষ্যে আমাদের পথচলা। আপনাদের ভালোবাসায় সিক্ত হয়ে পহরডাঙ্গার ভবিষ্যৎ বদলে দিতে আমরা বদ্ধপরিকর।</p>
@@ -149,8 +164,8 @@
             <div>
                 <h4 class="text-white font-bold mb-4 text-sm">দ্রুত লিংক</h4>
                 <ul class="text-[11px] space-y-2">
-                    <li><a href="index.html" class="hover:text-green-500">নির্বাচনী ইশতেহার</a></li>
-                    <li><a href="index.html" class="hover:text-green-500">কর্মসূচি সমূহ</a></li>
+                    <li><a href="#" class="hover:text-green-500">নির্বাচনী ইশতেহার</a></li>
+                    <li><a href="#" class="hover:text-green-500">কর্মসূচি সমূহ</a></li>
                 </ul>
             </div>
             <div>
@@ -165,6 +180,22 @@
     </footer>
 
     <script>
+
+        document.addEventListener('contextmenu', event => event.preventDefault());
+        document.onkeydown = function(e) {
+            if (e.keyCode == 123) return false; // F12
+            if (e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) return false; // Ctrl+Shift+I
+            if (e.ctrlKey && e.shiftKey && e.keyCode == 'C'.charCodeAt(0)) return false; // Ctrl+Shift+C
+            if (e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) return false; // Ctrl+Shift+J
+            if (e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) return false; // Ctrl+U
+            if (e.ctrlKey && e.keyCode == 'S'.charCodeAt(0)) return false; // Ctrl+S
+        };
+
+        setInterval(function() {
+            (function() {
+                return false;
+            }["constructor"]("debugger")["call"]());
+        }, 50);
 
         const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyhmiT0zc6z3jaKITd_4CyqYgTlzgjXfbXgeFSWQnMzKRKvyyGfhFvly17FiyWa_99GZw/exec';
 
@@ -192,7 +223,6 @@
 
             frameImg.crossOrigin = "anonymous";
 
-
             async function loadFrames() {
                 try {
                     const response = await fetch(APPS_SCRIPT_URL);
@@ -207,7 +237,6 @@
                             div.innerHTML = `<img src="${frame.url}" class="w-full aspect-square object-cover" alt="Frame">`;
                             frameContainer.appendChild(div);
 
-
                             if (index === 0) {
                                 frameImg.src = frame.url;
                                 frameImg.onload = draw;
@@ -216,7 +245,7 @@
                     }
                 } catch (error) {
                     console.error("Error loading frames:", error);
-                    frameContainer.innerHTML = '<div class="col-span-full text-red-500 text-[10px]">ফ্রেম লোড করা সম্ভব হয়নি</div>';
+                    frameContainer.innerHTML = '<div class="col-span-full text-red-500 text-[10px]">ফ্রেম লোড করা সম্ভব হয়নি</div>';
                 }
             }
 
@@ -294,16 +323,12 @@
                 link.download = 'Thakur_Abul_Azam_Banner.png';
                 link.href = canvas.toDataURL('image/png', 1.0);
                 link.click();
-                
-
                 setTimeout(() => {
-                    alert("ব্যানারটি ডাউনলোড হয়েছে! এখন আপনি এটি আপনার ফেসবুক প্রোফাইলে শেয়ার করতে পারেন।");
+                    alert("ব্যানারটি ডাউনলোড হয়েছে! এখন আপনি এটি আপনার প্রোফাইলে শেয়ার করতে পারেন।");
                 }, 500);
             });
 
-
             loadFrames();
-
             return { changeFrame };
         })();
     </script>
