@@ -3,6 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-site-verification" content="0NzShPVLqqjP3S1fN5A1-S5mmxDO-8dPAvEqrJVa0Rk" />
+    <meta name="description" content="ঠাকুর আবুল আজম এর অফিসিয়াল ওয়েবসাইট। নড়াইল জেলার নড়াগাতী থানার সমাজসেবা, প্রযুক্তি ও উন্নয়নমূলক কার্যক্রমের সাথে যুক্ত। আপনার মতামত ও যোগাযোগ করতে ভিজিট করুন।">
+    <meta name="keywords" content="ঠাকুর আবুল আজম, Thakur Abul Azam, নড়াইল, নড়াগাতী থানা, সমাজসেবা, উন্নয়ন, প্রযুক্তি, Narail, Bangladesh">
+    <meta property="og:title" content="ঠাকুর আবুল আজম - অফিসিয়াল ওয়েবসাইট">
+    <meta property="og:description" content="নড়াইল জেলার নড়াগাতী থানার সমাজসেবা ও উন্নয়নমূলক কাজের অফিসিয়াল প্ল্যাটফর্ম।">
+    <meta property="og:url" content="https://www.thakurabulazam.pro.bd/">
+    <meta property="og:type" content="website">
+    <meta name="application-name" content="ঠাকুর আবুল আজম">
+    <meta name="apple-mobile-web-app-title" content="ঠাকুর আবুল আজম">
+    <link rel="icon" type="image/png" href="https://lh3.googleusercontent.com/u/0/d/1jq1UKGgGVd7lzK9MzArFQO9O40xKYdQJ">
+    <meta name="author" content="ঠাকুর আবুল আজম">
     <title>সংবাদ পোর্টাল | ঠাকুর আবুল আজম</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
@@ -202,7 +213,7 @@
 
         function formatImg(url) {
             const id = url.match(/\/d\/(.+?)\//) || url.match(/id=([^&]+)/);
-            return id ? `https://lh3.googleusercontent.com/d/${id[1]}=s1000` : url;
+            return id ? `https://lh3.googleusercontent.com/u/0/d/${id[1]}` : url;
         }
 
         function shareFB(title) {
@@ -212,7 +223,7 @@
 
         function render() {
             const container = document.getElementById('newsContainer');
-            const isAdmin = localStorage.getItem('isAdmin') === 'true';
+            const isAdmin = sessionStorage.getItem('isAdmin') === 'true';
             
             container.innerHTML = allPosts.map(p => {
                 const d = new Date(p.date);
@@ -319,20 +330,21 @@
         function closeView() { document.getElementById('viewModal').classList.add('hidden'); document.body.style.overflow = 'auto'; }
         function closeModal() { document.getElementById('adminModal').classList.add('hidden'); }
         
-
         function login() { 
             let key = prompt("পাসওয়ার্ড:");
             if(key && btoa(key) === "YXBhazU0NTE="){ 
-                localStorage.setItem('isAdmin','true'); 
+                // পরিবর্তন: sessionStorage ব্যবহার
+                sessionStorage.setItem('isAdmin','true'); 
                 location.reload(); 
             } else if(key) {
                 alert("ভুল পাসওয়ার্ড!");
             }
         }
 
-        function logout() { localStorage.removeItem('isAdmin'); location.reload(); }
 
-        if(localStorage.getItem('isAdmin') === 'true') {
+        function logout() { sessionStorage.removeItem('isAdmin'); location.reload(); }
+
+        if(sessionStorage.getItem('isAdmin') === 'true') {
             document.getElementById('adminAddBtn').classList.remove('hidden');
             document.getElementById('logoutBtn').classList.remove('hidden');
             document.getElementById('loginBtn').classList.add('hidden');
