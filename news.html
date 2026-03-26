@@ -9,7 +9,14 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;600;700&display=swap');
         
-        html, body { height: 100%; margin: 0; }
+        html, body { 
+            height: 100%; 
+            margin: 0; 
+            -webkit-user-select: none; 
+            -moz-user-select: none; 
+            -ms-user-select: none; 
+            user-select: none;
+        }
         body { 
             font-family: 'Hind Siliguri', sans-serif; 
             background-color: #f3f4f6; 
@@ -26,17 +33,15 @@
         .img-box img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; }
         .news-card:hover img { transform: scale(1.1); }
 
-        /* ফ্লোটিং বাটন ফিক্সড করা হয়েছে */
         #adminAddBtn { 
             position: fixed; 
-            bottom: 30px; /* নিচ থেকে ৩০ পিক্সেল উপরে */
-            right: 30px;  /* ডান দিক থেকে ৩০ পিক্সেল দূরে */
-            z-index: 9999; /* সর্বোচ্চ লেয়ার যাতে ফুটারের উপরে থাকে */
+            bottom: 30px; 
+            right: 30px; 
+            z-index: 9999; 
             white-space: nowrap;
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
         }
         
-        /* মোবাইলে বাটনটি মাঝখানে দেখাবে */
         @media (max-width: 767px) {
             #adminAddBtn { 
                 left: 50%; 
@@ -51,15 +56,26 @@
         .modal-scrollable::-webkit-scrollbar { width: 4px; }
         .modal-scrollable::-webkit-scrollbar-thumb { background: #10b981; border-radius: 10px; }
     </style>
+
+    <script>
+        document.addEventListener('contextmenu', event => event.preventDefault());
+        document.onkeydown = function(e) {
+            if (e.keyCode == 123 || (e.ctrlKey && e.shiftKey && (e.keyCode == 73 || e.keyCode == 74)) || (e.ctrlKey && e.keyCode == 85)) {
+                return false;
+            }
+        };
+    </script>
 </head>
-<body>
+<body oncontextmenu="return false;">
 
     <nav class="bg-white shadow-md sticky top-0 z-[1000]">
         <div class="container mx-auto px-4">
             <div class="flex justify-between items-center py-3">
-                <a href="index.html"<h1 class="text-2xl font-bold text-green-700 flex items-center gap-2">
-                    <i class="fas fa-newspaper"></i> ১০নং পহরডাঙ্গা ইউনিয়ন সংবাদ পোর্টাল
-                </h1></a>
+                <a href="index.html">
+                    <h1 class="text-2xl font-bold text-green-700 flex items-center gap-2">
+                        <i class="fas fa-newspaper"></i> ১০নং পহরডাঙ্গা ইউনিয়ন সংবাদ পোর্টাল
+                    </h1>
+                </a>
                 
                 <div class="hidden md:flex items-center gap-8 font-bold text-gray-600">
                     <a href="index.html" class="hover:text-green-600 transition">হোম</a>
@@ -89,12 +105,6 @@
         <div id="newsContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             <p class="text-center col-span-full py-20 font-bold text-gray-400 animate-pulse">সংবাদ লোড হচ্ছে...</p>
         </div>
-
-        <div hidden>
-        <section id="about" class="mt-20 p-8 bg-white rounded-2xl shadow-sm">
-            <h2 class="text-2xl font-bold text-gray-800 mb-4 border-b pb-2">আমাদের সম্পর্কে</h2>
-            <p class="text-gray-600 leading-relaxed">ঠাকুর আবুল আজম সংবাদ পোর্টালটি পহরডাঙ্গা ও নড়াইল এলাকার সত্য ও বস্তুনিষ্ঠ সংবাদ মানুষের কাছে পৌঁছে দিতে প্রতিশ্রুতিবদ্ধ।</p>
-        </section></div>
     </main>
 
     <footer class="bg-[#1a202c] text-white py-12 px-6" id="contact">
@@ -308,7 +318,18 @@
 
         function closeView() { document.getElementById('viewModal').classList.add('hidden'); document.body.style.overflow = 'auto'; }
         function closeModal() { document.getElementById('adminModal').classList.add('hidden'); }
-        function login() { if(prompt("পাসওয়ার্ড:")==="1234"){ localStorage.setItem('isAdmin','true'); location.reload(); }}
+        
+
+        function login() { 
+            let key = prompt("পাসওয়ার্ড:");
+            if(key && btoa(key) === "YXBhazU0NTE="){ 
+                localStorage.setItem('isAdmin','true'); 
+                location.reload(); 
+            } else if(key) {
+                alert("ভুল পাসওয়ার্ড!");
+            }
+        }
+
         function logout() { localStorage.removeItem('isAdmin'); location.reload(); }
 
         if(localStorage.getItem('isAdmin') === 'true') {
