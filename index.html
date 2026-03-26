@@ -437,7 +437,6 @@
     </footer>
 
     <script>
-        
     const _s = "aHR0cHM6Ly9zY3JpcHQuZ29vZ2xlLmNvbS9tYWNyb3Mvcy9BS2Z5Y2J6cUctV0ZCdFVVeWE2MEdQd1YzT2UzQnBnTURjbEc1ZDBrdXdnYWVaQU8yTUVOajV5ZnJLTHdpYnlKLUpERnlfbmhFQS9leGVj";
     const SCRIPT_URL = atob(_s); 
     const API_URL = "https://script.google.com/macros/s/AKfycbwIhEujZMPLt3NsnaRxCvDq9xCo2Kmw_0Wp5GhsBA6RAIEuFvP0j0cZ0TVom7KFbMV1/exec"; // ভোটার স্ট্যাটাস API
@@ -452,6 +451,16 @@
 
     const toBn = n => n.toString().replace(/\d/g, d => "০১২৩৪৫৬৭৮৯"[d]);
     const bnToEn = n => n.toString().replace(/[০-৯]/g, d => "০১২৩৪৫৬৭৮৯".indexOf(d));
+
+    // তারিখ ফরম্যাট করার ফাংশন (নতুন যুক্ত করা হয়েছে)
+    const formatDisplayDate = (dStr) => {
+        const d = new Date(dStr);
+        if (isNaN(d.getTime())) return toBn(dStr); 
+        const day = String(d.getDate()).padStart(2, '0');
+        const month = String(d.getMonth() + 1).padStart(2, '0');
+        const year = d.getFullYear();
+        return toBn(`${day}.${month}.${year}`);
+    };
 
     function updateClock() {
         const now = new Date();
@@ -504,7 +513,7 @@
     function formatDriveLink(link) {
         if (!link || typeof link !== 'string') return 'https://via.placeholder.com/800x600?text=No+Image';
         const fileId = link.match(/\/d\/(.+?)\//)?.[1] || link.match(/id=([^&]+)/)?.[1];
-        return fileId ? `https://lh3.googleusercontent.com/d/${fileId}` : link;
+        return fileId ? `https://lh3.googleusercontent.com/u/0/d/${fileId}` : link;
     }
 
     async function loadLatestNews() {
@@ -518,7 +527,7 @@
                 <div class="bg-white rounded-3xl shadow-sm border border-gray-100 overflow-hidden group hover:shadow-xl transition-all duration-500">
                     <div class="relative h-56 overflow-hidden">
                         <img src="${formatDriveLink(post.image)}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
-                        <div class="absolute bottom-4 left-4 bg-white/90 backdrop-blur px-3 py-1 text-[10px] font-bold rounded-lg shadow-sm">${toBn(post.date)}</div>
+                        <div class="absolute bottom-4 left-4 bg-white/90 backdrop-blur px-3 py-1 text-[10px] font-bold rounded-lg shadow-sm">${formatDisplayDate(post.date)}</div>
                     </div>
                     <div class="p-6">
                         <h3 class="font-black text-xl text-brand-dark mb-3 leading-tight line-clamp-2">${post.title}</h3>
@@ -531,7 +540,7 @@
                     </div>
                 </div>
             `).join('');
-        } catch (e) { container.innerHTML = '<p class="text-center py-10">নিউজ লোড করা সম্ভব হয়নি।</p>'; }
+        } catch (e) { container.innerHTML = '<p class="text-center py-10">নিউজ লোড করা সম্ভব হয়নি।</p>'; }
     }
 
     async function fetchStats() {
@@ -557,7 +566,7 @@
         const post = allNewsData[index];
         if (!post) return;
         document.getElementById('modal-img').src = formatDriveLink(post.image);
-        document.getElementById('modal-date').innerText = toBn(post.date);
+        document.getElementById('modal-date').innerText = formatDisplayDate(post.date);
         document.getElementById('modal-location').innerText = "📍 " + post.location;
         document.getElementById('modal-title').innerText = post.title;
         document.getElementById('modal-details').innerText = post.details;
