@@ -3,168 +3,206 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>সংবাদ পোর্টাল | ঠাকুর আবুল আজম</title>
+    <meta name="google-site-verification" content="0NzShPVLqqjP3S1fN5A1-S5mmxDO-8dPAvEqrJVa0Rk" />
+    <title>১০নং পহরডাঙ্গা ইউনিয়ন সংবাদ পোর্টাল | ঠাকুর আবুল আজম</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;600;700&display=swap');
-
-        html, body { height: 100%; margin: 0; user-select: none; }
-        body { font-family: 'Hind Siliguri', sans-serif; background-color: #f3f4f6; display: flex; flex-direction: column; }
-        main { flex: 1; }
-
-        /* কার্ড গ্রিড - হোমপেজ */
-        .card-media-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 12px; cursor: pointer; }
-        .grid-img-box { position: relative; width: 100%; aspect-ratio: 1 / 1; overflow: hidden; border-radius: 12px; background: #dfe3e8; }
-        .grid-img-box img { width: 100%; height: 100%; object-fit: cover; }
-        .more-overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.6); color: white; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.2rem; border-radius: 12px; }
-
-        /* স্লাইডার ফিক্স - যাতে ফটো সম্পূর্ণ দেখা যায় */
-        .slider-container { 
-            position: relative; 
-            width: 100%; 
-            background: #000; 
-            overflow: hidden; 
-            border-radius: 20px 20px 0 0;
-            display: flex;
-            align-items: center;
-            /* মোবাইল ও ডেস্কটপ উভয় ক্ষেত্রেই ফটো যাতে কেটে না যায় */
-            min-height: 250px;
-            max-height: 500px;
-            aspect-ratio: 16 / 9; 
-        }
-
-        .slides { display: flex; transition: transform 0.5s ease-in-out; height: 100%; width: 100%; }
-        
-        .slide-item { 
-            flex: 0 0 100%; 
-            height: 100%; 
+        html, body { height: 100%; margin: 0; }
+        body { 
+            font-family: 'Hind Siliguri', sans-serif; 
+            background-color: #f3f4f6; 
             display: flex; 
-            align-items: center; 
-            justify-content: center; 
-            background: #000;
+            flex-direction: column;
+            
+            -webkit-user-select: none; 
+            -moz-user-select: none; 
+            -ms-user-select: none; 
+            user-select: none;
         }
+        main { flex: 1; }
         
-        /* সম্পূর্ণ ফটো দেখার জন্য ফিক্স */
-        .slide-item img { 
-            max-width: 100%; 
-            max-height: 100%; 
-            width: auto; 
-            height: auto; 
-            object-fit: contain !important; /* এটি ফটোকে ফ্রেমের ভেতরে পূর্ণাঙ্গ আকারে রাখবে */
-        }
         
-        .slide-item iframe { width: 100%; height: 100%; border: none; }
-
-        .nav-arrow { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,0.2); color: white; width: 40px; height: 40px; border-radius: 50%; cursor: pointer; z-index: 50; display: flex; align-items: center; justify-content: center; backdrop-filter: blur(5px); }
-        .prev { left: 10px; } .next { right: 10px; }
-
-        .news-card { transition: all 0.3s ease; border-radius: 1.25rem; overflow: hidden; background: white; height: 100%; display: flex; flex-direction: column; border: 1px solid #eee; }
-        .modal-container { max-height: 98vh; display: flex; flex-direction: column; border-radius: 24px; overflow: hidden; }
-        .modal-scrollable { overflow-y: auto; flex-grow: 1; padding: 20px; }
+        .card-media-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; cursor: pointer; background: #eee; overflow: hidden; }
+        .grid-box { position: relative; width: 100%; aspect-ratio: 16 / 9; overflow: hidden; background: #ddd; }
+        .grid-box img { width: 100%; height: 100%; object-fit: cover; display: block; }
+        .video-play-icon { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; color: white; background: rgba(0,0,0,0.3); font-size: 1.5rem; }
+        .more-overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.6); color: white; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.2rem; }
+        .slider-container { position: relative; width: 100%; background: #000; min-height: 250px; max-height: 70vh; overflow: hidden; display: flex; align-items: center; }
+        .slides { display: flex; transition: transform 0.5s ease-in-out; height: 100%; width: 100%; }
+        .slide-item { flex: 0 0 100%; width: 100%; display: flex; align-items: center; justify-content: center; background: #000; }
+        .slide-item img { max-width: 100%; max-height: 70vh; object-fit: contain; display: block; }
+        .slide-item iframe { width: 100%; aspect-ratio: 16/9; border: none; }
+        .nav-arrow { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.5); color: white; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; z-index: 50; cursor: pointer; }
+        .prev-arrow { left: 10px; } .next-arrow { right: 10px; }
+        .news-card { transition: all 0.3s ease; border-radius: 1.25rem; overflow: hidden; background: white; height: 100%; display: flex; flex-direction: column; border: 1px solid #e5e7eb; }
+        .news-card:hover { transform: translateY(-8px); box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1); }
+        #mobileMenu { transition: max-height 0.3s ease-in-out; overflow: hidden; max-height: 0; }
+        #mobileMenu.active { max-height: 250px; }
+        .nav-link { font-weight: 700; color: #4b5563; font-size: 16px; display: block; padding: 12px 0; border-bottom: 1px solid #f3f4f6; }
+        @media (min-width: 768px) { #mobileMenu { max-height: none !important; display: flex !important; gap: 24px; position: static; background: transparent; padding: 0; } .nav-link { border: none; padding: 0; font-size: 14px; } }
     </style>
 </head>
 <body>
 
     <nav class="bg-white shadow-md sticky top-0 z-[1000]">
-        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
-            <a href="index.html" class="flex items-center gap-2">
-                <h1 class="text-xl md:text-2xl font-bold text-green-700">
-                    <i class="fas fa-newspaper"></i> ১০নং পহরডাঙ্গা ইউনিয়ন সংবাদ পোর্টাল
-                </h1>
-            </a>
-            <div id="authArea">
-                <button onclick="login()" class="text-sm font-bold border px-4 py-2 rounded-lg hover:bg-gray-50 transition">লগইন</button>
+        <div class="container mx-auto px-4 py-3">
+            <div class="flex justify-between items-center">
+                <a href="index.html">
+                    <h1 class="text-lg md:text-2xl font-bold text-green-700">
+                        <i class="fas fa-newspaper"></i> ১০নং পহরডাঙ্গা ইউনিয়ন সংবাদ পোর্টাল
+                    </h1>
+                </a>
+                <button onclick="toggleMenu()" class="md:hidden text-2xl text-gray-600 focus:outline-none"><i class="fas fa-bars" id="menuIcon"></i></button>
+                <div class="hidden md:flex items-center gap-6">
+                    <a href="index.html" class="nav-link">হোম</a>
+                    <a href="contact.html" class="nav-link">যোগাযোগ</a>
+                    <a href="about.html" class="nav-link">আমার সম্পর্কে</a>
+                    <div id="authAreaPC" class="ml-4">
+                        <button id="loginBtnPC" onclick="login()" class="text-xs font-bold border px-3 py-1.5 rounded bg-gray-50">লগইন</button>
+                        <button id="logoutBtnPC" onclick="logout()" class="hidden bg-red-500 text-white text-xs font-bold px-3 py-1.5 rounded">লগআউট</button>
+                    </div>
+                </div>
+            </div>
+            <div id="mobileMenu" class="md:hidden flex flex-col bg-white mt-2 px-2">
+                <a href="index.html" class="nav-link">হোম</a>
+                <a href="contact.html" class="nav-link">যোগাযোগ</a>
+                <a href="about.html" class="nav-link">আমার সম্পর্কে</a>
+                <div class="py-4">
+                    <button id="loginBtnMob" onclick="login()" class="w-full text-center font-bold border py-2 rounded bg-gray-50">লগইন</button>
+                    <button id="logoutBtnMob" onclick="logout()" class="hidden w-full bg-red-500 text-white font-bold py-2 rounded">লগআউট</button>
+                </div>
             </div>
         </div>
     </nav>
 
-    <main class="container mx-auto px-4 py-8">
-        <div id="newsContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <p class="text-center col-span-full py-10 font-bold text-gray-400 text-xl">সংবাদ লোড হচ্ছে...</p>
+    <main class="container mx-auto px-4 py-6">
+        <div id="newsContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <p class="text-center col-span-full py-20 font-bold text-gray-400">সংবাদ লোড হচ্ছে...</p>
         </div>
     </main>
 
-    <div id="viewModal" class="hidden fixed inset-0 bg-black/95 flex items-center justify-center p-2 z-[10000] backdrop-blur-sm">
-        <div class="bg-white w-full max-w-4xl modal-container relative shadow-2xl">
-            <button onclick="closeView()" class="absolute top-3 right-3 z-[110] bg-black/50 text-white w-10 h-10 rounded-full flex items-center justify-center hover:bg-red-500 transition">×</button>
-            
-            <div class="slider-container">
-                <div id="slideWrapper" class="slides"></div>
-                <button id="pBtn" class="nav-arrow prev" onclick="moveSlide(-1)"><i class="fas fa-chevron-left"></i></button>
-                <button id="nBtn" class="nav-arrow next" onclick="moveSlide(1)"><i class="fas fa-chevron-right"></i></button>
-            </div>
+    <footer class="bg-[#1a202c] text-white py-10 px-6 mt-auto">
+        <div class="container mx-auto text-center border-b border-gray-700 pb-6 mb-6">
+            <h2 class="text-xl font-bold mb-2">ঠাকুর আবুল আজম</h2>
+            <p class="text-sm text-gray-400">ন্যায়বিচার, উন্নয়ন এবং সুশাসনের লক্ষ্যে আমাদের পথচলা।</p>
+        </div>
+        <div class="container mx-auto text-center text-[11px] text-gray-500 font-bold">
+            <p>© ২০২৬ ঠাকুর আবুল আজম | কারিগরি সহায়তায়: <span class="text-[#10b981]">আল নোমান শিকদার</span></p>
+        </div>
+    </footer>
 
-            <div class="modal-scrollable">
-                <h2 id="viewTitle" class="text-xl md:text-2xl font-bold text-gray-800 mb-3 leading-tight"></h2>
-                <div class="flex justify-between items-center mb-4 pb-3 border-b">
-                    <div class="flex items-center gap-3 text-sm font-bold">
-                        <span id="viewLoc" class="text-indigo-600 italic"></span>
-                        <span id="viewDate" class="text-gray-400"></span>
-                    </div>
-                    <button id="modalShare" class="text-[#1877F2] text-2xl hover:scale-110 transition"><i class="fab fa-facebook"></i></button>
-                </div>
-                <p id="viewDetails" class="text-gray-700 leading-relaxed whitespace-pre-line text-lg text-justify"></p>
-                
-                <div id="adminActions" class="mt-6 pt-4 border-t hidden flex gap-4">
-                    <button class="text-gray-500 text-sm font-bold px-4 py-2 border rounded-lg hover:bg-gray-50"><i class="fas fa-edit"></i> এডিট</button>
-                    <button class="text-red-500 text-sm font-bold px-4 py-2 border border-red-200 rounded-lg hover:bg-red-50"><i class="fas fa-trash"></i> ডিলিট</button>
+    <button id="adminAddBtn" onclick="openModalForCreate()" class="hidden bg-green-600 text-white px-6 py-4 rounded-full flex items-center gap-3 font-bold shadow-2xl fixed bottom-8 right-8 z-[9999]">
+        <i class="fas fa-plus-circle text-xl"></i> <span>নতুন সংবাদ</span>
+    </button>
+
+    <div id="viewModal" class="hidden fixed inset-0 bg-black/95 flex items-center justify-center p-2 z-[10000] backdrop-blur-sm">
+        <div class="bg-white w-full max-w-3xl rounded-2xl relative overflow-hidden flex flex-col max-h-[95vh]">
+            <button onclick="closeView()" class="absolute top-4 right-4 z-[110] bg-black/50 text-white w-10 h-10 rounded-full flex items-center justify-center text-2xl">×</button>
+            <div class="slider-container" id="sliderBox">
+                <div id="slideWrapper" class="slides"></div>
+                <button id="pBtn" class="nav-arrow prev-arrow" onclick="moveSlide(-1)"><i class="fas fa-chevron-left"></i></button>
+                <button id="nBtn" class="nav-arrow next-arrow" onclick="moveSlide(1)"><i class="fas fa-chevron-right"></i></button>
+            </div>
+            <div class="overflow-y-auto p-6">
+                <h2 id="viewTitle" class="text-2xl font-bold text-gray-800 mb-4"></h2>
+                <p id="viewDetails" class="text-gray-600 leading-relaxed whitespace-pre-line text-lg text-justify"></p>
+                <div class="mt-8 pt-4 border-t flex justify-between items-center font-bold text-xs text-gray-400">
+                    <span id="viewLoc" class="text-indigo-600"></span>
+                    <span id="viewDate"></span>
                 </div>
             </div>
         </div>
     </div>
 
-    <footer class="bg-[#1a202c] text-white py-10 px-6 mt-auto">
-        <div class="container mx-auto grid md:grid-cols-3 gap-10 border-b border-gray-700 pb-8">
-            <div>
-                <h2 class="text-xl font-bold mb-4">ঠাকুর আবুল আজম</h2>
-                <p class="text-sm text-gray-400">ন্যায়বিচার, উন্নয়ন এবং সুশাসনের লক্ষ্যে আমাদের পথচলা।</p>
-            </div>
-            <div>
-                <h4 class="font-bold mb-4 text-[#10b981] uppercase">দ্রুত লিঙ্ক</h4>
-                <ul class="text-sm text-gray-400 space-y-2 font-bold">
-                    <li><a href="index.html" class="hover:text-white transition">হোম</a></li>
-                    <li><a href="about.html" class="hover:text-white transition">আমার সম্পর্কে</a></li>
-                </ul>
-            </div>
-            <div>
-                <h4 class="font-bold mb-4 text-[#10b981] uppercase">যোগাযোগ</h4>
-                <p class="text-sm text-gray-400 font-bold">📍 পহরডাঙ্গা, নড়াগাতী, নড়াইল</p>
-                <div class="mt-4 flex gap-4 text-xl">
-                    <a href="#" class="hover:text-blue-500 transition"><i class="fab fa-facebook"></i></a>
-                    <a href="#" class="hover:text-green-500 transition"><i class="fab fa-whatsapp"></i></a>
+    <div id="adminModal" class="hidden fixed inset-0 bg-black/60 flex items-center justify-center p-4 z-[10000]">
+        <div class="bg-white rounded-2xl shadow-2xl w-full max-w-lg p-6 max-h-[90vh] overflow-y-auto">
+            <h2 id="modalTitle" class="text-xl font-bold mb-4 border-b pb-2">নিউজ ম্যানেজমেন্ট</h2>
+            <input type="hidden" id="editId">
+            <div class="space-y-4">
+                <input type="text" id="postTitle" placeholder="শিরোনাম" class="w-full border p-3 rounded-xl outline-none">
+                <textarea id="postDetails" placeholder="বিস্তারিত..." class="w-full border p-3 rounded-xl h-32 outline-none"></textarea>
+                <input type="text" id="postImage" placeholder="ছবির ড্রাইভ লিঙ্ক (কমা দিন)" class="w-full border p-3 rounded-xl outline-none">
+                <input type="text" id="postVideo" placeholder="ইউটিউব ভিডিও লিঙ্ক (কমা দিন)" class="w-full border p-3 rounded-xl outline-none">
+                <div class="grid grid-cols-2 gap-4">
+                    <input type="text" id="postLocation" placeholder="স্থান" class="border p-3 rounded-xl outline-none">
+                    <input type="date" id="postDate" class="border p-3 rounded-xl outline-none">
+                </div>
+                <div class="flex gap-2">
+                    <button id="submitBtn" onclick="saveData()" class="flex-1 bg-green-600 text-white py-3 rounded-xl font-bold">সংরক্ষণ করুন</button>
+                    <button onclick="closeModal()" class="bg-gray-100 px-6 py-3 rounded-xl font-bold text-gray-500">বাতিল</button>
                 </div>
             </div>
         </div>
-        <div class="container mx-auto pt-6 flex flex-col md:flex-row justify-between text-[11px] text-gray-500 font-bold text-center gap-4">
-            <p>© ২০২৬ ঠাকুর আবুল আজম | সর্বস্বত্ব সংরক্ষিত</p>
-            <p>কারিগরি সহায়তায়: <span class="text-[#10b981]">আল নোমান শিকদার</span></p>
-        </div>
-    </footer>
+    </div>
 
     <script>
+      
+        document.addEventListener('contextmenu', e => e.preventDefault());
+        
+        
+        document.onkeydown = function(e) {
+            if (e.keyCode == 123 || (e.ctrlKey && e.shiftKey && (e.keyCode == 73 || e.keyCode == 74)) || (e.ctrlKey && e.keyCode == 85)) {
+                alert("নিরাপত্তার স্বার্থে সোর্স কোড দেখা নিষিদ্ধ!");
+                return false;
+            }
+        };
+
+       
+        (function() {
+            var block = function() {
+                setInterval(function() {
+                    debugger;
+                }, 50);
+            };
+            try { block(); } catch (err) {}
+        })();
+
+       
+        const _0x4f2a = ["YXBhazU0NTE="]; // Base64 for apak5451
+        function checkPass(val) {
+            return btoa(val) === _0x4f2a[0];
+        }
+
+        async function login() { 
+            let key = prompt("এডমিন পাসওয়ার্ড দিন:");
+            if(key) {
+                if(checkPass(key)) {
+                    sessionStorage.setItem('isAdmin','true');
+                    location.reload();
+                } else {
+                    alert("ভুল পাসওয়ার্ড!");
+                }
+            }
+        }
+
+       
         const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyAb27X-ISeO2QyPUNihgOV4w63JjkGUFbXRko8yvr-Zh2awQkvrvKMC-U4I4m5h65eWQ/exec";
         let allPosts = [];
         let currentSlide = 0;
 
         function toBengali(str) {
-            const digits = {'0':'০','1':'১','2':'২','3':'৩','4':'৪','5':'৫','6':'৬','7':'৭','8':'৮','9':'৯'};
-            return str.toString().replace(/[0-9]/g, s => digits[s] || s);
+            const digits = {'0':'০','1':'১','2':'২','3':'৩','4':'৪','5':'৫','6':'৬','7':'৭','8':'৮','9':'৯','-':'-','.':'.'};
+            return str.toString().replace(/[0-9.-]/g, s => digits[s] || s);
         }
 
-        function formatImg(url, isVideo = false) {
-            if (!url) return isVideo ? "https://via.placeholder.com/400x300?text=Video" : "https://via.placeholder.com/400x400?text=No+Image";
-            if (isVideo) {
-                const vidId = url.match(/(?:v=|be\/|embed\/)([\w-]+)/);
-                return vidId ? `https://img.youtube.com/vi/${vidId[1]}/hqdefault.jpg` : "https://via.placeholder.com/400x300?text=Video";
-            }
-            const id = url.match(/\/d\/(.+?)\//) || url.match(/id=([^&]+)/);
-            return id ? `https://drive.google.com/thumbnail?id=${id[1]}&sz=w1000` : url.trim();
+        function toggleMenu() {
+            document.getElementById('mobileMenu').classList.toggle('active');
+            const icon = document.getElementById('menuIcon');
+            icon.classList.toggle('fa-bars'); icon.classList.toggle('fa-times');
         }
 
-        function shareFB(title) {
-            const url = window.location.href;
-            window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}&t=${encodeURIComponent(title)}`, '_blank');
+        function formatImg(url) {
+            if(!url) return "https://via.placeholder.com/800x450?text=No+Image";
+            const idMatch = url.match(/\/d\/(.+?)\//) || url.match(/id=([^&]+)/);
+            if(idMatch) return `https://lh3.googleusercontent.com/d/${idMatch[1]}`;
+            return url.trim();
+        }
+
+        function getYTThumb(v) {
+            const yt = v.match(/(?:v=|be\/|embed\/)([\w-]+)/);
+            return yt ? `https://img.youtube.com/vi/${yt[1]}/mqdefault.jpg` : null;
         }
 
         async function loadNews() {
@@ -177,28 +215,37 @@
 
         function render() {
             const container = document.getElementById('newsContainer');
+            const isAdmin = sessionStorage.getItem('isAdmin') === 'true';
+
             container.innerHTML = allPosts.map(p => {
-                const imgList = p.image ? p.image.split(',').map(s => s.trim()).filter(s => s !== "") : [];
-                const videoUrl = p.video ? p.video.trim() : "";
+                const imgs = p.image ? p.image.split(',').filter(s => s.trim()) : [];
+                const vids = p.video ? p.video.split(',').filter(s => s.trim()) : [];
+                let thumb1 = formatImg(imgs[0]);
+                let thumb2 = vids.length > 0 ? getYTThumb(vids[0]) : formatImg(imgs[1] || imgs[0]);
+
                 return `
-                <div class="news-card p-4">
+                <div class="news-card">
                     <div class="card-media-grid" onclick="viewNews('${p.id}')">
-                        <div class="grid-img-box"><img src="${formatImg(imgList[0])}"></div>
-                        <div class="grid-img-box">
-                            ${imgList.length > 1 ? `<img src="${formatImg(imgList[1])}">` : 
-                              (videoUrl ? `<img src="${formatImg(videoUrl, true)}"><div class="absolute inset-0 flex items-center justify-center text-white bg-black/30"><i class="fas fa-play-circle text-4xl"></i></div>` : `<div class="w-full h-full bg-gray-100"></div>`)}
-                            ${imgList.length > 2 ? `<div class="more-overlay">+${imgList.length - 1}</div>` : ''}
+                        <div class="grid-box"><img src="${thumb1}" loading="lazy"></div>
+                        <div class="grid-box">
+                            <img src="${thumb2}" loading="lazy">
+                            ${vids.length > 0 ? '<div class="video-play-icon"><i class="fas fa-play-circle"></i></div>' : ''}
+                            ${(imgs.length + vids.length) > 2 ? `<div class="more-overlay">+${(imgs.length + vids.length) - 1}</div>` : ''}
                         </div>
                     </div>
-                    <div class="flex flex-col flex-grow">
-                        <h3 class="font-bold text-gray-800 text-lg mb-2 line-clamp-2 leading-tight">${p.title}</h3>
+                    <div class="p-5 flex flex-col flex-grow">
+                        <h3 class="font-bold text-gray-800 text-lg mb-2 line-clamp-2">${p.title}</h3>
                         <div class="mt-auto flex justify-between items-center pt-3 border-t">
                             <span class="text-[11px] font-bold text-indigo-600 italic"><i class="fas fa-map-marker-alt"></i> ${p.location}</span>
                             <div class="flex items-center gap-4">
-                                <button onclick="shareFB('${p.title}')" class="text-[#1877F2] text-xl transition hover:scale-110"><i class="fab fa-facebook"></i></button>
-                                <button onclick="viewNews('${p.id}')" class="text-xs font-bold text-green-700 hover:underline">বিস্তারিত</button>
+                                <button onclick="window.open('https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(location.href))" class="text-[#1877F2] text-lg"><i class="fab fa-facebook"></i></button>
+                                <button onclick="viewNews('${p.id}')" class="text-xs font-bold text-green-700">বিস্তারিত</button>
                             </div>
                         </div>
+                        ${isAdmin ? `<div class="mt-3 flex gap-4 text-[10px] pt-2 border-t border-dashed justify-end">
+                            <button onclick="editPost('${p.id}')">এডিট</button>
+                            <button onclick="deletePost('${p.id}')">ডিলিট</button>
+                        </div>` : ''}
                     </div>
                 </div>`;
             }).join('');
@@ -206,60 +253,101 @@
 
         function viewNews(id) {
             const p = allPosts.find(x => x.id == id);
-            const imgList = p.image ? p.image.split(',').map(s => s.trim()).filter(s => s !== "") : [];
-            const videoUrl = p.video ? p.video.trim() : "";
-            const slideWrapper = document.getElementById('slideWrapper');
-            slideWrapper.innerHTML = "";
-            currentSlide = 0;
-            slideWrapper.style.transform = `translateX(0)`;
+            const imgs = p.image ? p.image.split(',').filter(s => s.trim()) : [];
+            const vids = p.video ? p.video.split(',').filter(s => s.trim()) : [];
+            const wrapper = document.getElementById('slideWrapper');
+            wrapper.innerHTML = ""; currentSlide = 0;
 
-            // ভিডিও এবং ফটো স্লাইডারে যোগ করা
-            if(videoUrl) {
-                const vidId = videoUrl.match(/(?:v=|be\/|embed\/)([\w-]+)/);
-                if(vidId) slideWrapper.innerHTML += `<div class="slide-item"><iframe src="https://www.youtube.com/embed/${vidId[1]}" allowfullscreen></iframe></div>`;
-            }
-            imgList.forEach(img => {
-                slideWrapper.innerHTML += `<div class="slide-item"><img src="${formatImg(img)}"></div>`;
+            vids.forEach(v => {
+                const yt = v.match(/(?:v=|be\/|embed\/)([\w-]+)/);
+                if(yt) wrapper.innerHTML += `<div class="slide-item"><iframe src="https://www.youtube.com/embed/${yt[1]}"></iframe></div>`;
             });
-
-            const totalSlides = (videoUrl ? 1 : 0) + imgList.length;
-            document.getElementById('pBtn').style.display = totalSlides > 1 ? 'flex' : 'none';
-            document.getElementById('nBtn').style.display = totalSlides > 1 ? 'flex' : 'none';
+            imgs.forEach(i => {
+                wrapper.innerHTML += `<div class="slide-item"><img src="${formatImg(i)}"></div>`;
+            });
 
             document.getElementById('viewTitle').innerText = p.title;
             document.getElementById('viewDetails').innerText = p.details;
             document.getElementById('viewLoc').innerHTML = `<i class="fas fa-map-marker-alt"></i> ${p.location}`;
-            document.getElementById('viewDate').innerText = toBengali(new Date(p.date).toLocaleDateString('bn-BD'));
+            const d = new Date(p.date);
+            document.getElementById('viewDate').innerText = toBengali(`${d.getDate()}.${d.getMonth()+1}.${d.getFullYear()}`);
             
-            document.getElementById('modalShare').onclick = () => shareFB(p.title);
-            
-            if(sessionStorage.getItem('isAdmin')) document.getElementById('adminActions').classList.remove('hidden');
-
+            document.getElementById('pBtn').style.display = (imgs.length + vids.length) > 1 ? 'flex' : 'none';
+            document.getElementById('nBtn').style.display = (imgs.length + vids.length) > 1 ? 'flex' : 'none';
             document.getElementById('viewModal').classList.remove('hidden');
             document.body.style.overflow = 'hidden';
+            moveSlide(0);
         }
 
-        function moveSlide(step) {
-            const slides = document.querySelectorAll('.slide-item');
-            if(slides.length === 0) return;
-            currentSlide = (currentSlide + step + slides.length) % slides.length;
+        function moveSlide(n) {
+            const items = document.querySelectorAll('.slide-item');
+            if(items.length === 0) return;
+            currentSlide = (currentSlide + n + items.length) % items.length;
             document.getElementById('slideWrapper').style.transform = `translateX(-${currentSlide * 100}%)`;
         }
 
-        function closeView() { 
-            document.getElementById('viewModal').classList.add('hidden'); 
-            document.getElementById('slideWrapper').innerHTML = ""; 
-            document.body.style.overflow = 'auto'; 
+        async function saveData() {
+            const editId = document.getElementById('editId').value;
+            const action = editId ? "update" : "create";
+            const btn = document.getElementById('submitBtn');
+            const data = {
+                action: action, id: editId,
+                title: document.getElementById('postTitle').value,
+                details: document.getElementById('postDetails').value,
+                image: document.getElementById('postImage').value,
+                video: document.getElementById('postVideo').value,
+                location: document.getElementById('postLocation').value,
+                date: document.getElementById('postDate').value
+            };
+            if(!data.title) return alert("শিরোনাম দিন!");
+            btn.innerText = "সংরক্ষণ হচ্ছে..."; btn.disabled = true;
+            await fetch(SCRIPT_URL, { method: 'POST', mode: 'no-cors', body: JSON.stringify(data) });
+            setTimeout(() => { location.reload(); }, 1200);
         }
 
-        function login() {
-            const pass = prompt("পাসওয়ার্ড দিন:");
-            if(pass === "1234") { // আপনার পছন্দের পাসওয়ার্ড দিন
-                sessionStorage.setItem('isAdmin', 'true');
+        function editPost(id) {
+            const p = allPosts.find(x => x.id == id);
+            document.getElementById('editId').value = p.id;
+            document.getElementById('postTitle').value = p.title;
+            document.getElementById('postDetails').value = p.details;
+            document.getElementById('postImage').value = p.image || "";
+            document.getElementById('postVideo').value = p.video || "";
+            document.getElementById('postLocation').value = p.location;
+            document.getElementById('postDate').value = p.date.split('T')[0];
+            document.getElementById('modalTitle').innerText = "সংবাদ আপডেট";
+            document.getElementById('adminModal').classList.remove('hidden');
+        }
+
+        function openModalForCreate() {
+            document.getElementById('editId').value = "";
+            document.getElementById('postTitle').value = "";
+            document.getElementById('postDetails').value = "";
+            document.getElementById('postImage').value = "";
+            document.getElementById('postVideo').value = "";
+            document.getElementById('postLocation').value = "";
+            document.getElementById('postDate').value = "";
+            document.getElementById('modalTitle').innerText = "নতুন সংবাদ";
+            document.getElementById('adminModal').classList.remove('hidden');
+        }
+
+        async function deletePost(id) {
+            if(confirm("মুছে ফেলতে চান?")) {
+                await fetch(SCRIPT_URL, { method: 'POST', mode: 'no-cors', body: JSON.stringify({action: "delete", id: id}) });
                 location.reload();
             }
         }
 
+        function logout() { sessionStorage.removeItem('isAdmin'); location.reload(); }
+        function closeView() { document.getElementById('viewModal').classList.add('hidden'); document.body.style.overflow = 'auto'; }
+        function closeModal() { document.getElementById('adminModal').classList.add('hidden'); }
+
+        if(sessionStorage.getItem('isAdmin') === 'true') {
+            document.getElementById('adminAddBtn').classList.remove('hidden');
+            document.getElementById('logoutBtnPC').classList.remove('hidden');
+            document.getElementById('logoutBtnMob').classList.remove('hidden');
+            document.getElementById('loginBtnPC').classList.add('hidden');
+            document.getElementById('loginBtnMob').classList.add('hidden');
+        }
         loadNews();
     </script>
 </body>
