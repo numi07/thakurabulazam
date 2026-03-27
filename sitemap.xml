@@ -3,28 +3,28 @@
   
   <url>
     <loc>https://www.thakurabulazam.pro.bd/</loc>
-    <lastmod>2026-03-26</lastmod>
+    <lastmod>2026-03-27</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
 
   <url>
-    <loc>https://www.thakurabulazam.pro.bd/about.html</loc>
-    <lastmod>2026-03-26</lastmod>
+    <loc>https://www.thakurabulazam.pro.bd/about</loc>
+    <lastmod>2026-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
 
   <url>
-    <loc>https://www.thakurabulazam.pro.bd/news.html</loc>
-    <lastmod>2026-03-26</lastmod>
+    <loc>https://www.thakurabulazam.pro.bd/news</loc>
+    <lastmod>2026-03-27</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
   
   <url>
-    <loc>https://www.thakurabulazam.pro.bd/contact.html</loc>
-    <lastmod>2026-03-26</lastmod>
+    <loc>https://www.thakurabulazam.pro.bd/contact</loc>
+    <lastmod>2026-03-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
