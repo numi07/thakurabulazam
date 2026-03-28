@@ -382,39 +382,56 @@
             document.getElementById('zoomCtrl').style.display = nextItem.querySelector('img') ? 'flex' : 'none';
         }
 
-        function applyZoom(amt) {
-            const img = document.querySelectorAll('.slide-item img')[currentSlide];
-            if(!img) return;
-            zoomScale = Math.max(1, Math.min(zoomScale + amt, 4));
-            updateImgTransform();
-        }
+        
 
-        function resetZoom() {
-            zoomScale = 1; offset = { x: 0, y: 0 };
-            updateImgTransform();
-        }
+function applyZoom(amt) {
+    const img = document.querySelectorAll('.slide-item img')[currentSlide];
+    if(!img) return;
+    zoomScale = Math.max(1, Math.min(zoomScale + amt, 4));
+    
+    
+    if (zoomScale <= 1) {
+        resetZoom();
+    } else {
+        updateImgTransform();
+    }
+}
 
-        function updateImgTransform() {
-            const img = document.querySelectorAll('.slide-item img')[currentSlide];
-            if(img) img.style.transform = `translate(${offset.x}px, ${offset.y}px) scale(${zoomScale})`;
-        }
+function resetZoom() {
+    zoomScale = 1; 
+    offset = { x: 0, y: 0 }; 
+    updateImgTransform();
+}
 
-        function startDrag(e) {
-            if(zoomScale === 1) return;
-            isDragging = true;
-            const event = e.type.includes('touch') ? e.touches[0] : e;
-            startPos = { x: event.clientX - offset.x, y: event.clientY - offset.y };
-        }
+function updateImgTransform() {
+    const img = document.querySelectorAll('.slide-item img')[currentSlide];
+    if(img) {
+        
+        img.style.transition = zoomScale === 1 ? "transform 0.3s ease-out" : "none";
+        img.style.transform = `translate(${offset.x}px, ${offset.y}px) scale(${zoomScale})`;
+    }
+}
 
-        function drag(e) {
-            if(!isDragging) return;
-            e.preventDefault();
-            const event = e.type.includes('touch') ? e.touches[0] : e;
-            offset = { x: event.clientX - startPos.x, y: event.clientY - startPos.y };
-            updateImgTransform();
-        }
+function startDrag(e) {
+    
+    if(zoomScale <= 1) return;
+    isDragging = true;
+    const event = e.type.includes('touch') ? e.touches[0] : e;
+    startPos = { x: event.clientX - offset.x, y: event.clientY - offset.y };
+}
 
-        function endDrag() { isDragging = false; }
+function drag(e) {
+    if(!isDragging || zoomScale <= 1) return;
+    e.preventDefault();
+    const event = e.type.includes('touch') ? e.touches[0] : e;
+    offset = { x: event.clientX - startPos.x, y: event.clientY - startPos.y };
+    updateImgTransform();
+}
+
+function endDrag() { 
+    isDragging = false; 
+    if(zoomScale <= 1) resetZoom();
+}
 
         function login() { 
             let key = prompt("এডমিন পাসওয়ার্ড দিন:");
