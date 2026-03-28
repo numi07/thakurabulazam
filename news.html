@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="google-site-verification" content="0NzShPVLqqjP3S1fN5A1-S5mmxDO-8dPAvEqrJVa0Rk" />
-    <meta name="google-site-verification" content="0NzShPVLqqjP3S1fN5A1-S5mmxDO-8dPAvEqrJVa0Rk" />
     <meta name="description" content="ঠাকুর আবুল আজম এর অফিসিয়াল ওয়েবসাইট। নড়াইল জেলার নড়াগাতী থানার সমাজসেবা, প্রযুক্তি ও উন্নয়নমূলক কার্যক্রমের সাথে যুক্ত। আপনার মতামত ও যোগাযোগ করতে ভিজিট করুন।">
     <meta name="keywords" content="ঠাকুর আবুল আজম, Thakur Abul Azam, নড়াইল, নড়াগাতী থানা, সমাজসেবা, উন্নয়ন, প্রযুক্তি, Narail, Bangladesh">
     <meta property="og:title" content="ঠাকুর আবুল আজম - অফিসিয়াল ওয়েবসাইট">
@@ -40,7 +39,7 @@
         .grid-box { position: relative; width: 100%; height: 100%; overflow: hidden; }
         .grid-box img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
         .grid-box:hover img { transform: scale(1.08); }
-        
+
         .loc-badge {
             position: absolute; top: 12px; left: 12px;
             background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(8px);
@@ -59,7 +58,7 @@
             box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.08); 
             border-color: #10b981; 
         }
-        
+
         .fb-share-premium {
             background: #f0f2f5; color: #1877F2;
             padding: 7px 16px; border-radius: 14px; font-size: 12px; font-weight: 700;
@@ -76,18 +75,18 @@
         .slider-container { position: relative; width: 100%; background: #000; min-height: 250px; max-height: 70vh; overflow: hidden; display: flex; align-items: center; }
         .slides { display: flex; transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1); height: 100%; width: 100%; }
         .slide-item { flex: 0 0 100%; width: 100%; display: flex; align-items: center; justify-content: center; background: #000; position: relative; overflow: hidden; }
-        
+
         .img-container { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; overflow: hidden; cursor: grab; }
         .img-container:active { cursor: grabbing; }
         .slide-item img { max-width: 100%; max-height: 70vh; object-fit: contain; transform-origin: center; transition: transform 0.2s ease-out; pointer-events: none; }
-        
+
         .zoom-controls { position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); display: flex; gap: 10px; z-index: 100; }
         .zoom-btn { background: rgba(0,0,0,0.6); color: white; width: 35px; height: 35px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.2); display: flex; align-items: center; justify-content: center; backdrop-filter: blur(5px); }
 
         .slide-item iframe, .slide-item video { width: 100%; height: 100%; max-height: 70vh; aspect-ratio: 16/9; border: none; }
         .nav-arrow { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,0.15); color: white; width: 42px; height: 42px; border-radius: 50%; display: flex; align-items: center; justify-content: center; z-index: 50; cursor: pointer; backdrop-filter: blur(5px); }
         .prev-arrow { left: 15px; } .next-arrow { right: 15px; }
-        
+
         .unique-footer { background: #0f172a; color: #94a3b8; padding: 60px 20px 30px; border-radius: 40px 40px 0 0; text-align: center; margin-top: 50px; }
         #mobileMenu { transition: max-height 0.4s ease; overflow: hidden; max-height: 0; }
         #mobileMenu.active { max-height: 400px; }
@@ -219,9 +218,10 @@
                     <input type="text" id="postLocation" placeholder="স্থান" class="bg-slate-50 border-0 p-4 rounded-2xl outline-none">
                     <input type="date" id="postDate" class="bg-slate-50 border-0 p-4 rounded-2xl outline-none text-sm">
                 </div>
-                <div class="flex gap-3">
-                    <button id="submitBtn" onclick="saveData()" class="flex-1 bg-green-600 text-white py-4 rounded-2xl font-bold hover:bg-green-700 transition shadow-lg">সংরক্ষণ করুন</button>
-                    <button onclick="closeModal()" class="bg-slate-100 px-8 py-4 rounded-2xl font-bold text-slate-500 hover:bg-slate-200 transition">বাতিল</button>
+                <div class="flex gap-2">
+                    <button id="submitBtn" onclick="saveData()" class="flex-[2] bg-green-600 text-white py-4 rounded-2xl font-bold hover:bg-green-700 transition shadow-lg">সংরক্ষণ করুন</button>
+                    <button onclick="clearFields()" class="flex-1 bg-amber-100 text-amber-700 py-4 rounded-2xl font-bold hover:bg-amber-200 transition">ক্লিয়ার</button>
+                    <button onclick="closeModal()" class="flex-1 bg-slate-100 py-4 rounded-2xl font-bold text-slate-500 hover:bg-slate-200 transition">বাতিল</button>
                 </div>
             </div>
         </div>
@@ -279,7 +279,7 @@
 
             const ytMatch = url.match(/(?:v=|be\/|embed\/)([\w-]+)/);
             if(ytMatch) return `https://img.youtube.com/vi/${ytMatch[1]}/hqdefault.jpg`;
-            
+
             const driveMatch = url.match(/\/d\/(.+?)\//) || url.match(/id=([^&]+)/);
             if(driveMatch) return `https://drive.google.com/thumbnail?id=${driveMatch[1]}&sz=s1600`;
 
@@ -320,7 +320,7 @@
                 const imgs = p.image ? p.image.split(',').filter(s => s.trim()) : [];
                 const vids = p.video ? p.video.split(',').filter(s => s.trim()) : [];
                 const totalMedia = [...imgs.map(i => ({type:'img', src:i})), ...vids.map(v => ({type:'vid', src:v}))];
-                
+
                 let mediaHtml = "";
                 let gridClass = totalMedia.length === 1 ? "grid-1" : "grid-2";
 
@@ -337,7 +337,7 @@
                     const m2 = totalMedia[1];
                     const thumb1 = m1.type === 'vid' ? getMediaThumb(m1.src) : formatImg(m1.src);
                     const thumb2 = m2.type === 'vid' ? getMediaThumb(m2.src) : formatImg(m2.src);
-                    
+
                     mediaHtml = `
                         <div class="grid-box" onclick="viewNews('${p.id}', 0)">
                             <img src="${thumb1}" loading="lazy">
@@ -390,11 +390,11 @@
                         </div>
                     </div>`;
             });
-            
+
             vids.forEach(v => {
                 let videoHtml = "";
                 const url = v.trim();
-                
+
                 if (url.includes("youtube.com") || url.includes("youtu.be")) {
                     const yt = url.match(/(?:v=|be\/|embed\/)([\w-]+)/);
                     videoHtml = `<iframe src="https://www.youtube.com/embed/${yt[1]}?enablejsapi=1&rel=0&controls=1" allowfullscreen></iframe>`;
@@ -406,7 +406,7 @@
                 } else {
                     videoHtml = `<video controls class="w-full h-full"><source src="${url}" type="video/mp4">আপনার ব্রাউজার ভিডিও সাপোর্ট করে না।</video>`;
                 }
-                
+
                 wrapper.innerHTML += `<div class="slide-item">${videoHtml}</div>`;
             });
 
@@ -420,7 +420,7 @@
             document.getElementById('viewDate').innerText = toBengaliDate(p.date);
             document.getElementById('viewModal').classList.remove('hidden');
             document.body.style.overflow = 'hidden';
-            
+
             currentSlide = startIndex;
             moveSlide(0);
         }
@@ -497,6 +497,12 @@
         function logout() { sessionStorage.removeItem('isAdmin'); location.reload(); }
 
         function openModalForCreate() {
+            clearFields();
+            document.getElementById('modalTitle').innerText = "নতুন সংবাদ যোগ করুন";
+            document.getElementById('adminModal').classList.remove('hidden');
+        }
+
+        function clearFields() {
             document.getElementById('editId').value = "";
             document.getElementById('postTitle').value = "";
             document.getElementById('postDetails').value = "";
@@ -504,8 +510,6 @@
             document.getElementById('postVideo').value = "";
             document.getElementById('postLocation').value = "";
             document.getElementById('postDate').value = "";
-            document.getElementById('modalTitle').innerText = "নতুন সংবাদ যোগ করুন";
-            document.getElementById('adminModal').classList.remove('hidden');
         }
 
         function editPost(id) {
@@ -556,26 +560,22 @@
             document.getElementById('menuIcon').classList.toggle('fa-times');
         }
         function closeView() { 
-    document.getElementById('viewModal').classList.add('hidden'); 
-    document.body.style.overflow = 'auto'; 
-
-    const wrapper = document.getElementById('slideWrapper');
-    
-    const iframes = wrapper.querySelectorAll('iframe');
-    const videos = wrapper.querySelectorAll('video');
-
-    iframes.forEach(iframe => {
-        const src = iframe.src;
-        iframe.src = "";
-        iframe.src = src;
-    });
-
-    videos.forEach(video => {
-        video.pause();
-        video.currentTime = 0;
-    });
-    wrapper.innerHTML = ""; 
-}
+            document.getElementById('viewModal').classList.add('hidden'); 
+            document.body.style.overflow = 'auto'; 
+            const wrapper = document.getElementById('slideWrapper');
+            const iframes =  wrapper.querySelectorAll('iframe');
+            const videos = wrapper.querySelectorAll('video');
+            iframes.forEach(iframe => {
+                const src = iframe.src;
+                iframe.src = "";
+                iframe.src = src;
+            });
+            videos.forEach(video => {
+                video.pause();
+                video.currentTime = 0;
+            });
+            wrapper.innerHTML = ""; 
+        }
         function closeModal() { document.getElementById('adminModal').classList.add('hidden'); }
         if(sessionStorage.getItem('isAdmin') === 'true') {
             document.getElementById('adminAddBtn').classList.remove('hidden');
