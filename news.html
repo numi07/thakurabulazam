@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="google-site-verification" content="0NzShPVLqqjP3S1fN5A1-S5mmxDO-8dPAvEqrJVa0Rk" />
     <meta name="google-site-verification" content="0NzShPVLqqjP3S1fN5A1-S5mmxDO-8dPAvEqrJVa0Rk" />
-    <meta name="description" content="ঠাকুর আবুল আজম এর অফিসিয়াল ওয়েবসাইট। নড়াইল জেলার নড়াগাতী থানার সমাজসেবা, প্রযুক্তি ও উন্নয়নমূলক কার্যক্রমের সাথে যুক্ত। আপনার মতামত ও যোগাযোগ করতে ভিজিট করুন।">
-    <meta name="keywords" content="ঠাকুর আবুল আজম, Thakur Abul Azam, নড়াইল, নড়াগাতী থানা, সমাজসেবা, উন্নয়ন, প্রযুক্তি, Narail, Bangladesh">
-    <meta property="og:title" content="ঠাকুর আবুল আজম - অফিসিয়াল ওয়েবসাইট">
-    <meta property="og:description" content="নড়াইল জেলার নড়াগাতী থানার সমাজসেবা ও উন্নয়নমূলক কাজের অফিসিয়াল প্ল্যাটফর্ম।">
+    <meta name="description" content="ঠাকুর আবুল আজম এর অফিসিয়াল ওয়েবসাইট। নড়াইল জেলার নড়াগাতী থানার সমাজসেবা, প্রযুক্তি ও উন্নয়নমূলক কার্যক্রমের সাথে যুক্ত। আপনার মতামত ও যোগাযোগ করতে ভিজিট করুন।">
+    <meta name="keywords" content="ঠাকুর আবুল আজম, Thakur Abul Azam, নড়াইল, নড়াগাতী থানা, সমাজসেবা, উন্নয়ন, প্রযুক্তি, Narail, Bangladesh">
+    <meta property="og:title" content="ঠাকুর আবুল আজম - অফিসিয়াল ওয়েবসাইট">
+    <meta property="og:description" content="নড়াইল জেলার নড়াগাতী থানার সমাজসেবা ও উন্নয়নমূলক কাজের অফিসিয়াল প্ল্যাটফর্ম।">
     <meta property="og:url" content="https://www.thakurabulazam.pro.bd/">
     <link rel="canonical" href="https://www.thakurabulazam.pro.bd/news" />
     <meta property="og:type" content="website">
@@ -73,7 +73,7 @@
         }
         .details-btn-minimal:hover { color: #059669; gap: 8px; }
 
-        .slider-container { position: relative; width: 100%; background: #000; min-height: 250px; max-height: 70vh; overflow: hidden; }
+        .slider-container { position: relative; width: 100%; background: #000; min-height: 250px; max-height: 70vh; overflow: hidden; display: flex; align-items: center; }
         .slides { display: flex; transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1); height: 100%; width: 100%; }
         .slide-item { flex: 0 0 100%; width: 100%; display: flex; align-items: center; justify-content: center; background: #000; position: relative; overflow: hidden; }
         
@@ -84,7 +84,7 @@
         .zoom-controls { position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); display: flex; gap: 10px; z-index: 100; }
         .zoom-btn { background: rgba(0,0,0,0.6); color: white; width: 35px; height: 35px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.2); display: flex; align-items: center; justify-content: center; backdrop-filter: blur(5px); }
 
-        .slide-item iframe { width: 100%; aspect-ratio: 16/9; border: none; }
+        .slide-item iframe, .slide-item video { width: 100%; height: 100%; max-height: 70vh; aspect-ratio: 16/9; border: none; }
         .nav-arrow { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,0.15); color: white; width: 42px; height: 42px; border-radius: 50%; display: flex; align-items: center; justify-content: center; z-index: 50; cursor: pointer; backdrop-filter: blur(5px); }
         .prev-arrow { left: 15px; } .next-arrow { right: 15px; }
         
@@ -127,7 +127,7 @@
             <div class="flex justify-between items-center">
                 <a href="index.html" class="flex items-center gap-2">
                     <span class="bg-green-600 text-white p-1.5 rounded-lg rotate-3"><i class="fas fa-newspaper"></i></span>
-                    <h1 class="text-lg md:text-xl font-bold text-slate-800 tracking-tight">১০নং পহরডাঙ্গা ইউনিয়ন সংবাদ পোর্টাল</h1>
+                    <h1 class="text-lg md:text-xl font-bold text-slate-800 tracking-tight">১০নং পহরডাঙ্গা ইউনিয়ন সংবাদ পোর্টাল</h1>
                 </a>
                 <button onclick="toggleMenu()" class="md:hidden text-2xl text-slate-600"><i class="fas fa-bars-staggered" id="menuIcon"></i></button>
                 <div class="hidden md:flex items-center gap-8 font-bold text-slate-600">
@@ -214,7 +214,7 @@
                 <input type="text" id="postTitle" placeholder="শিরোনাম" class="w-full bg-slate-50 border-0 p-4 rounded-2xl focus:ring-2 focus:ring-green-500 outline-none">
                 <textarea id="postDetails" placeholder="বিস্তারিত..." class="w-full bg-slate-50 border-0 p-4 rounded-2xl h-40 focus:ring-2 focus:ring-green-500 outline-none"></textarea>
                 <input type="text" id="postImage" placeholder="ছবির ড্রাইভ লিঙ্ক (কমা দিন)" class="w-full bg-slate-50 border-0 p-4 rounded-2xl outline-none">
-                <input type="text" id="postVideo" placeholder="ইউটিউব ভিডিও লিঙ্ক (কমা দিন)" class="w-full bg-slate-50 border-0 p-4 rounded-2xl outline-none">
+                <input type="text" id="postVideo" placeholder="ইউটিউব/ড্রাইভ/ফেসবুক ভিডিও লিঙ্ক (কমা দিন)" class="w-full bg-slate-50 border-0 p-4 rounded-2xl outline-none">
                 <div class="grid grid-cols-2 gap-4">
                     <input type="text" id="postLocation" placeholder="স্থান" class="bg-slate-50 border-0 p-4 rounded-2xl outline-none">
                     <input type="date" id="postDate" class="bg-slate-50 border-0 p-4 rounded-2xl outline-none text-sm">
@@ -228,6 +228,32 @@
     </div>
 
     <script>
+        document.addEventListener('contextmenu', function (e) {
+        e.preventDefault();
+    }, false);
+
+    document.onkeydown = function (e) {
+        if (e.keyCode == 123) {
+            return false;
+        }
+
+        if (e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) {
+            return false;
+        }
+        if (e.ctrlKey && e.shiftKey && e.keyCode == 'C'.charCodeAt(0)) {
+            return false;
+        }
+
+        if (e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) {
+            return false;
+        }
+
+        if (e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) {
+            return false;
+        }
+    };
+
+
         const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyAb27X-ISeO2QyPUNihgOV4w63JjkGUFbXRko8yvr-Zh2awQkvrvKMC-U4I4m5h65eWQ/exec";
         let allPosts = [];
         let filteredPosts = []; 
@@ -249,9 +275,17 @@
             return d.toLocaleDateString('bn-BD', { year: 'numeric', month: 'long', day: 'numeric' });
         }
 
-        function getYTThumb(v) {
-            const yt = v.match(/(?:v=|be\/|embed\/)([\w-]+)/);
-            return yt ? `https://img.youtube.com/vi/${yt[1]}/hqdefault.jpg` : null;
+        function getMediaThumb(url) {
+
+            const ytMatch = url.match(/(?:v=|be\/|embed\/)([\w-]+)/);
+            if(ytMatch) return `https://img.youtube.com/vi/${ytMatch[1]}/hqdefault.jpg`;
+            
+            const driveMatch = url.match(/\/d\/(.+?)\//) || url.match(/id=([^&]+)/);
+            if(driveMatch) return `https://drive.google.com/thumbnail?id=${driveMatch[1]}&sz=s1600`;
+
+            if(url.includes("facebook.com")) return "https://cdn-icons-png.flaticon.com/512/124/124010.png";
+
+            return "https://via.placeholder.com/800x450?text=Video";
         }
 
         async function loadNews() {
@@ -278,7 +312,7 @@
             const isAdmin = sessionStorage.getItem('isAdmin') === 'true';
 
             if(filteredPosts.length === 0) {
-                container.innerHTML = `<p class="text-center col-span-full py-20 font-bold text-gray-400">দুঃখিত, কোনো সংবাদ পাওয়া যায়নি।</p>`;
+                container.innerHTML = `<p class="text-center col-span-full py-20 font-bold text-gray-400">দুঃখিত, কোনো সংবাদ পাওয়া যায়নি।</p>`;
                 return;
             }
 
@@ -292,7 +326,7 @@
 
                 if (totalMedia.length === 1) {
                     const m = totalMedia[0];
-                    const thumb = m.type === 'vid' ? getYTThumb(m.src) : formatImg(m.src);
+                    const thumb = m.type === 'vid' ? getMediaThumb(m.src) : formatImg(m.src);
                     mediaHtml = `
                         <div class="grid-box" onclick="viewNews('${p.id}', 0)">
                             <img src="${thumb}" loading="lazy">
@@ -301,8 +335,8 @@
                 } else if (totalMedia.length >= 2) {
                     const m1 = totalMedia[0];
                     const m2 = totalMedia[1];
-                    const thumb1 = m1.type === 'vid' ? getYTThumb(m1.src) : formatImg(m1.src);
-                    const thumb2 = m2.type === 'vid' ? getYTThumb(m2.src) : formatImg(m2.src);
+                    const thumb1 = m1.type === 'vid' ? getMediaThumb(m1.src) : formatImg(m1.src);
+                    const thumb2 = m2.type === 'vid' ? getMediaThumb(m2.src) : formatImg(m2.src);
                     
                     mediaHtml = `
                         <div class="grid-box" onclick="viewNews('${p.id}', 0)">
@@ -358,8 +392,22 @@
             });
             
             vids.forEach(v => {
-                const yt = v.match(/(?:v=|be\/|embed\/)([\w-]+)/);
-                if(yt) wrapper.innerHTML += `<div class="slide-item"><iframe id="yt-${yt[1]}" src="https://www.youtube.com/embed/${yt[1]}?enablejsapi=1&rel=0" allowfullscreen></iframe></div>`;
+                let videoHtml = "";
+                const url = v.trim();
+                
+                if (url.includes("youtube.com") || url.includes("youtu.be")) {
+                    const yt = url.match(/(?:v=|be\/|embed\/)([\w-]+)/);
+                    videoHtml = `<iframe src="https://www.youtube.com/embed/${yt[1]}?enablejsapi=1&rel=0&controls=1" allowfullscreen></iframe>`;
+                } else if (url.includes("drive.google.com")) {
+                    const dv = url.match(/\/d\/(.+?)\//) || url.match(/id=([^&]+)/);
+                    videoHtml = `<iframe src="https://drive.google.com/file/d/${dv[1]}/preview" allow="autoplay"></iframe>`;
+                } else if (url.includes("facebook.com")) {
+                    videoHtml = `<iframe src="https://www.facebook.com/plugins/video.php?href=${encodeURIComponent(url)}&show_text=0" allowfullscreen></iframe>`;
+                } else {
+                    videoHtml = `<video controls class="w-full h-full"><source src="${url}" type="video/mp4">আপনার ব্রাউজার ভিডিও সাপোর্ট করে না।</video>`;
+                }
+                
+                wrapper.innerHTML += `<div class="slide-item">${videoHtml}</div>`;
             });
 
             const totalSlides = imgs.length + vids.length;
@@ -384,6 +432,8 @@
             if(currentItem) {
                 const iframe = currentItem.querySelector('iframe');
                 if(iframe) iframe.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*');
+                const video = currentItem.querySelector('video');
+                if(video) video.pause();
             }
             currentSlide = (currentSlide + n + items.length) % items.length;
             document.getElementById('slideWrapper').style.transform = `translateX(-${currentSlide * 100}%)`;
@@ -392,56 +442,50 @@
             document.getElementById('zoomCtrl').style.display = nextItem.querySelector('img') ? 'flex' : 'none';
         }
 
-        
+        function applyZoom(amt) {
+            const img = document.querySelectorAll('.slide-item img')[currentSlide];
+            if(!img) return;
+            zoomScale = Math.max(1, Math.min(zoomScale + amt, 4));
+            if (zoomScale <= 1) {
+                resetZoom();
+            } else {
+                updateImgTransform();
+            }
+        }
 
-function applyZoom(amt) {
-    const img = document.querySelectorAll('.slide-item img')[currentSlide];
-    if(!img) return;
-    zoomScale = Math.max(1, Math.min(zoomScale + amt, 4));
-    
-    
-    if (zoomScale <= 1) {
-        resetZoom();
-    } else {
-        updateImgTransform();
-    }
-}
+        function resetZoom() {
+            zoomScale = 1; 
+            offset = { x: 0, y: 0 }; 
+            updateImgTransform();
+        }
 
-function resetZoom() {
-    zoomScale = 1; 
-    offset = { x: 0, y: 0 }; 
-    updateImgTransform();
-}
+        function updateImgTransform() {
+            const img = document.querySelectorAll('.slide-item img')[currentSlide];
+            if(img) {
+                img.style.transition = zoomScale === 1 ? "transform 0.3s ease-out" : "none";
+                img.style.transform = `translate(${offset.x}px, ${offset.y}px) scale(${zoomScale})`;
+            }
+        }
 
-function updateImgTransform() {
-    const img = document.querySelectorAll('.slide-item img')[currentSlide];
-    if(img) {
-        
-        img.style.transition = zoomScale === 1 ? "transform 0.3s ease-out" : "none";
-        img.style.transform = `translate(${offset.x}px, ${offset.y}px) scale(${zoomScale})`;
-    }
-}
+        function startDrag(e) {
+            if(zoomScale <= 1) return;
+            isDragging = true;
+            const event = e.type.includes('touch') ? e.touches[0] : e;
+            startPos = { x: event.clientX - offset.x, y: event.clientY - offset.y };
+        }
 
-function startDrag(e) {
-    
-    if(zoomScale <= 1) return;
-    isDragging = true;
-    const event = e.type.includes('touch') ? e.touches[0] : e;
-    startPos = { x: event.clientX - offset.x, y: event.clientY - offset.y };
-}
+        function drag(e) {
+            if(!isDragging || zoomScale <= 1) return;
+            e.preventDefault();
+            const event = e.type.includes('touch') ? e.touches[0] : e;
+            offset = { x: event.clientX - startPos.x, y: event.clientY - startPos.y };
+            updateImgTransform();
+        }
 
-function drag(e) {
-    if(!isDragging || zoomScale <= 1) return;
-    e.preventDefault();
-    const event = e.type.includes('touch') ? e.touches[0] : e;
-    offset = { x: event.clientX - startPos.x, y: event.clientY - startPos.y };
-    updateImgTransform();
-}
-
-function endDrag() { 
-    isDragging = false; 
-    if(zoomScale <= 1) resetZoom();
-}
+        function endDrag() { 
+            isDragging = false; 
+            if(zoomScale <= 1) resetZoom();
+        }
 
         function login() { 
             let key = prompt("এডমিন পাসওয়ার্ড দিন:");
@@ -501,12 +545,10 @@ function endDrag() {
                 location.reload();
             }
         }
-
         function shareFB(id, title) {
             const shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}&quote=${encodeURIComponent(title)}`;
             window.open(shareUrl, '_blank', 'width=600,height=400');
         }
-
         function toggleMenu() {
             const menu = document.getElementById('mobileMenu');
             menu.classList.toggle('active');
@@ -515,7 +557,6 @@ function endDrag() {
         }
         function closeView() { document.getElementById('viewModal').classList.add('hidden'); document.body.style.overflow = 'auto'; }
         function closeModal() { document.getElementById('adminModal').classList.add('hidden'); }
-
         if(sessionStorage.getItem('isAdmin') === 'true') {
             document.getElementById('adminAddBtn').classList.remove('hidden');
             document.getElementById('logoutBtnPC').classList.remove('hidden');
@@ -523,7 +564,6 @@ function endDrag() {
             document.getElementById('loginBtnPC').classList.add('hidden');
             document.getElementById('loginBtnMob').classList.add('hidden');
         }
-
         loadNews();
     </script>
 </body>
