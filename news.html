@@ -555,7 +555,27 @@
             document.getElementById('menuIcon').classList.toggle('fa-bars-staggered');
             document.getElementById('menuIcon').classList.toggle('fa-times');
         }
-        function closeView() { document.getElementById('viewModal').classList.add('hidden'); document.body.style.overflow = 'auto'; }
+        function closeView() { 
+    document.getElementById('viewModal').classList.add('hidden'); 
+    document.body.style.overflow = 'auto'; 
+
+    const wrapper = document.getElementById('slideWrapper');
+    
+    const iframes = wrapper.querySelectorAll('iframe');
+    const videos = wrapper.querySelectorAll('video');
+
+    iframes.forEach(iframe => {
+        const src = iframe.src;
+        iframe.src = "";
+        iframe.src = src;
+    });
+
+    videos.forEach(video => {
+        video.pause();
+        video.currentTime = 0;
+    });
+    wrapper.innerHTML = ""; 
+}
         function closeModal() { document.getElementById('adminModal').classList.add('hidden'); }
         if(sessionStorage.getItem('isAdmin') === 'true') {
             document.getElementById('adminAddBtn').classList.remove('hidden');
