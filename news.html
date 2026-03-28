@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="google-site-verification" content="0NzShPVLqqjP3S1fN5A1-S5mmxDO-8dPAvEqrJVa0Rk" />
-    <title>১০নং পহরডাঙ্গা ইউনিয়ন সংবাদ পোর্টাল | ঠাকুর আবুল আজম</title>
+    <title>১০নং পহরডাঙ্গা ইউনিয়ন সংবাদ পোর্টাল | ঠাকুর আবুল আজম</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <style>
@@ -19,17 +19,18 @@
         }
         main { flex: 1; }
 
-       
         .card-media-grid { 
-            display: grid; grid-template-columns: 1fr 1fr; gap: 2px; 
+            display: grid; gap: 2px; 
             cursor: pointer; background: #f1f5f9; overflow: hidden; height: 210px; 
             position: relative;
         }
+        .grid-1 { grid-template-columns: 1fr; }
+        .grid-2 { grid-template-columns: 1fr 1fr; }
+
         .grid-box { position: relative; width: 100%; height: 100%; overflow: hidden; }
         .grid-box img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
         .grid-box:hover img { transform: scale(1.08); }
         
-     
         .loc-badge {
             position: absolute; top: 12px; left: 12px;
             background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(8px);
@@ -37,7 +38,6 @@
             color: #059669; z-index: 10; border: 1px solid rgba(255,255,255,0.4);
         }
 
-    
         .news-card { 
             transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1); 
             border-radius: 28px; overflow: hidden; background: white; 
@@ -50,7 +50,6 @@
             border-color: #10b981; 
         }
         
-       
         .fb-share-premium {
             background: #f0f2f5; color: #1877F2;
             padding: 7px 16px; border-radius: 14px; font-size: 12px; font-weight: 700;
@@ -64,11 +63,17 @@
         }
         .details-btn-minimal:hover { color: #059669; gap: 8px; }
 
-     
-        .slider-container { position: relative; width: 100%; background: #000; min-height: 250px; max-height: 70vh; overflow: hidden; display: flex; align-items: center; }
+        .slider-container { position: relative; width: 100%; background: #000; min-height: 250px; max-height: 70vh; overflow: hidden; }
         .slides { display: flex; transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1); height: 100%; width: 100%; }
-        .slide-item { flex: 0 0 100%; width: 100%; display: flex; align-items: center; justify-content: center; background: #000; }
-        .slide-item img { max-width: 100%; max-height: 70vh; object-fit: contain; }
+        .slide-item { flex: 0 0 100%; width: 100%; display: flex; align-items: center; justify-content: center; background: #000; position: relative; overflow: hidden; }
+        
+        .img-container { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; overflow: hidden; cursor: grab; }
+        .img-container:active { cursor: grabbing; }
+        .slide-item img { max-width: 100%; max-height: 70vh; object-fit: contain; transform-origin: center; transition: transform 0.2s ease-out; pointer-events: none; }
+        
+        .zoom-controls { position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); display: flex; gap: 10px; z-index: 100; }
+        .zoom-btn { background: rgba(0,0,0,0.6); color: white; width: 35px; height: 35px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.2); display: flex; align-items: center; justify-content: center; backdrop-filter: blur(5px); }
+
         .slide-item iframe { width: 100%; aspect-ratio: 16/9; border: none; }
         .nav-arrow { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,0.15); color: white; width: 42px; height: 42px; border-radius: 50%; display: flex; align-items: center; justify-content: center; z-index: 50; cursor: pointer; backdrop-filter: blur(5px); }
         .prev-arrow { left: 15px; } .next-arrow { right: 15px; }
@@ -76,6 +81,34 @@
         .unique-footer { background: #0f172a; color: #94a3b8; padding: 60px 20px 30px; border-radius: 40px 40px 0 0; text-align: center; margin-top: 50px; }
         #mobileMenu { transition: max-height 0.4s ease; overflow: hidden; max-height: 0; }
         #mobileMenu.active { max-height: 400px; }
+
+        /* সার্চ বার স্টাইল */
+        .search-wrapper {
+            max-width: 600px;
+            margin: 0 auto 40px;
+            position: relative;
+        }
+        .search-input {
+            width: 100%;
+            padding: 16px 24px 16px 50px;
+            border-radius: 20px;
+            border: 2px solid #e2e8f0;
+            outline: none;
+            font-weight: 500;
+            transition: 0.3s;
+            background: white;
+        }
+        .search-input:focus {
+            border-color: #10b981;
+            box-shadow: 0 10px 25px -5px rgba(16, 185, 129, 0.1);
+        }
+        .search-icon {
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #94a3b8;
+        }
     </style>
 </head>
 <body>
@@ -85,7 +118,7 @@
             <div class="flex justify-between items-center">
                 <a href="index.html" class="flex items-center gap-2">
                     <span class="bg-green-600 text-white p-1.5 rounded-lg rotate-3"><i class="fas fa-newspaper"></i></span>
-                    <h1 class="text-lg md:text-xl font-bold text-slate-800 tracking-tight">১০নং পহরডাঙ্গা সংবাদ</h1>
+                    <h1 class="text-lg md:text-xl font-bold text-slate-800 tracking-tight">১০নং পহরডাঙ্গা ইউনিয়ন সংবাদ পোর্টাল | ঠাকুর আবুল আজম</h1>
                 </a>
                 <button onclick="toggleMenu()" class="md:hidden text-2xl text-slate-600"><i class="fas fa-bars-staggered" id="menuIcon"></i></button>
                 <div class="hidden md:flex items-center gap-8 font-bold text-slate-600">
@@ -111,6 +144,11 @@
     </nav>
 
     <main class="container mx-auto px-4 py-10">
+        <div class="search-wrapper">
+            <i class="fas fa-search search-icon"></i>
+            <input type="text" id="searchInput" onkeyup="filterNews()" placeholder="সংবাদ খুঁজুন (শিরোনাম বা স্থান)..." class="search-input">
+        </div>
+
         <div id="newsContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             <p class="text-center col-span-full py-20 font-bold text-gray-400 text-lg">সংবাদ লোড হচ্ছে...</p>
         </div>
@@ -119,7 +157,7 @@
     <footer class="unique-footer">
         <div class="container mx-auto">
             <h2 class="text-2xl font-bold text-white mb-2">ঠাকুর আবুল আজম</h2>
-            <p class="text-green-500 font-bold text-[10px] uppercase tracking-[5px] mb-8">১০নং পহরডাঙ্গা ইউনিয়ন, নড়াগাতী, নড়াইল</p>
+            <p class="text-green-500 font-bold text-[10px] uppercase tracking-[5px] mb-8">১০নং পহরডাঙ্গা ইউনিয়ন, নড়াগাতী, নড়াইল</p>
             <div class="flex justify-center gap-8 mb-10 text-xl text-white">
                 <a href="#" class="hover:text-green-500 transition hover:scale-125"><i class="fab fa-facebook-f"></i></a>
                 <a href="#" class="hover:text-green-500 transition hover:scale-125"><i class="fab fa-whatsapp"></i></a>
@@ -127,7 +165,7 @@
             </div>
             <div class="border-t border-slate-800 pt-8 flex flex-col md:flex-row justify-between items-center text-[10px] font-bold uppercase text-slate-500 tracking-widest">
                 <p>© ২০২৬ ঠাকুর আবুল আজম | সর্বস্বত্ব সংরক্ষিত</p>
-                <p class="mt-4 md:mt-0">কারিগরি সহায়তায়: <span class="text-green-600">আল নোমান শিকদার</span></p>
+                <p class="mt-4 md:mt-0">কারিগরি সহায়তায়: <span class="text-green-600">আল নোমান শিকদার</span></p>
             </div>
         </div>
     </footer>
@@ -143,6 +181,10 @@
                 <div id="slideWrapper" class="slides"></div>
                 <button id="pBtn" class="nav-arrow prev-arrow" onclick="moveSlide(-1)"><i class="fas fa-chevron-left"></i></button>
                 <button id="nBtn" class="nav-arrow next-arrow" onclick="moveSlide(1)"><i class="fas fa-chevron-right"></i></button>
+                <div class="zoom-controls" id="zoomCtrl">
+                    <button class="zoom-btn" onclick="applyZoom(0.2)"><i class="fas fa-search-plus"></i></button>
+                    <button class="zoom-btn" onclick="applyZoom(-0.2)"><i class="fas fa-search-minus"></i></button>
+                </div>
             </div>
             <div class="overflow-y-auto p-8">
                 <div class="flex justify-between items-center mb-6">
@@ -179,7 +221,12 @@
     <script>
         const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyAb27X-ISeO2QyPUNihgOV4w63JjkGUFbXRko8yvr-Zh2awQkvrvKMC-U4I4m5h65eWQ/exec";
         let allPosts = [];
+        let filteredPosts = []; 
         let currentSlide = 0;
+        let zoomScale = 1;
+        let isDragging = false;
+        let startPos = { x: 0, y: 0 };
+        let offset = { x: 0, y: 0 };
 
         function formatImg(url) {
             if(!url) return "https://via.placeholder.com/800x450?text=No+Image";
@@ -202,40 +249,79 @@
             try {
                 const res = await fetch(SCRIPT_URL);
                 allPosts = await res.json();
+                filteredPosts = allPosts; 
                 render();
             } catch (e) { document.getElementById('newsContainer').innerHTML = "ডেটা লোড ব্যর্থ!"; }
+        }
+
+
+        function filterNews() {
+            const query = document.getElementById('searchInput').value.toLowerCase();
+            filteredPosts = allPosts.filter(p => 
+                p.title.toLowerCase().includes(query) || 
+                p.location.toLowerCase().includes(query)
+            );
+            render();
         }
 
         function render() {
             const container = document.getElementById('newsContainer');
             const isAdmin = sessionStorage.getItem('isAdmin') === 'true';
 
-            container.innerHTML = allPosts.map(p => {
+            if(filteredPosts.length === 0) {
+                container.innerHTML = `<p class="text-center col-span-full py-20 font-bold text-gray-400">দুঃখিত, কোনো সংবাদ পাওয়া যায়নি।</p>`;
+                return;
+            }
+
+            container.innerHTML = filteredPosts.map(p => {
                 const imgs = p.image ? p.image.split(',').filter(s => s.trim()) : [];
                 const vids = p.video ? p.video.split(',').filter(s => s.trim()) : [];
-                let thumb1 = formatImg(imgs[0]);
-                let thumb2 = vids.length > 0 ? getYTThumb(vids[0]) : formatImg(imgs[1] || imgs[0]);
+                const totalMedia = [...imgs.map(i => ({type:'img', src:i})), ...vids.map(v => ({type:'vid', src:v}))];
+                
+                let mediaHtml = "";
+                let gridClass = totalMedia.length === 1 ? "grid-1" : "grid-2";
+
+                if (totalMedia.length === 1) {
+                    const m = totalMedia[0];
+                    const thumb = m.type === 'vid' ? getYTThumb(m.src) : formatImg(m.src);
+                    mediaHtml = `
+                        <div class="grid-box" onclick="viewNews('${p.id}', 0)">
+                            <img src="${thumb}" loading="lazy">
+                            ${m.type === 'vid' ? '<div class="absolute inset-0 flex items-center justify-center bg-black/20 text-white text-3xl"><i class="fas fa-play-circle"></i></div>' : ''}
+                        </div>`;
+                } else if (totalMedia.length >= 2) {
+                    const m1 = totalMedia[0];
+                    const m2 = totalMedia[1];
+                    const thumb1 = m1.type === 'vid' ? getYTThumb(m1.src) : formatImg(m1.src);
+                    const thumb2 = m2.type === 'vid' ? getYTThumb(m2.src) : formatImg(m2.src);
+                    
+                    mediaHtml = `
+                        <div class="grid-box" onclick="viewNews('${p.id}', 0)">
+                            <img src="${thumb1}" loading="lazy">
+                            ${m1.type === 'vid' ? '<div class="absolute inset-0 flex items-center justify-center bg-black/20 text-white text-3xl"><i class="fas fa-play-circle"></i></div>' : ''}
+                        </div>
+                        <div class="grid-box" onclick="viewNews('${p.id}', 1)">
+                            <img src="${thumb2}" loading="lazy">
+                            ${m2.type === 'vid' ? '<div class="absolute inset-0 flex items-center justify-center bg-black/20 text-white text-3xl"><i class="fas fa-play-circle"></i></div>' : ''}
+                            ${totalMedia.length > 2 ? `<div class="absolute inset-0 flex items-center justify-center bg-black/50 text-white font-bold text-sm">+${totalMedia.length - 2} আরও</div>` : ''}
+                        </div>`;
+                }
 
                 return `
                 <div class="news-card group">
-                    <div class="card-media-grid" onclick="viewNews('${p.id}')">
+                    <div class="card-media-grid ${gridClass}">
                         <div class="loc-badge"><i class="fas fa-map-marker-alt"></i> ${p.location}</div>
-                        <div class="grid-box"><img src="${thumb1}" loading="lazy"></div>
-                        <div class="grid-box">
-                            <img src="${thumb2}" loading="lazy">
-                            ${vids.length > 0 ? '<div class="absolute inset-0 flex items-center justify-center bg-black/20 text-white text-3xl"><i class="fas fa-play-circle animate-pulse"></i></div>' : ''}
-                            ${(imgs.length + vids.length) > 2 ? `<div class="absolute inset-0 flex items-center justify-center bg-black/50 text-white font-bold text-sm">+${(imgs.length + vids.length) - 1} আরও</div>` : ''}
-                        </div>
+                        ${mediaHtml}
                     </div>
                     <div class="p-6 flex flex-col flex-grow">
                         <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-3">${toBengaliDate(p.date)}</span>
-                        <h3 class="font-bold text-slate-800 text-lg mb-6 line-clamp-2 leading-snug group-hover:text-green-600 transition-colors cursor-pointer" onclick="viewNews('${p.id}')">${p.title}</h3>
+                        <h3 class="font-bold text-slate-800 text-lg mb-6 line-clamp-2 leading-snug group-hover:text-green-600 transition-colors cursor-pointer" onclick="viewNews('${p.id}', 0)">${p.title}</h3>
                         <div class="mt-auto flex justify-between items-center pt-5 border-t border-slate-50">
                             <button onclick="shareFB('${p.id}', '${p.title}')" class="fb-share-premium">
                                 <i class="fab fa-facebook-f"></i>
-                                <span>শেয়ার</span>
+                                <span>শেয়ার</span>
                             </button>
-                            <button onclick="viewNews('${p.id}')" class="details-btn-minimal">বিস্তারিত খবর <i class="fas fa-arrow-right"></i></button>
+                            <button onclick="viewNews('${p.id}', 0)" class="details-btn-minimal">বিস্তারিত খবর <i class="fas fa-arrow-right"></i></button>
                         </div>
                         ${isAdmin ? `<div class="mt-4 flex gap-4 text-[10px] pt-3 border-t border-dashed justify-end font-bold text-slate-400 uppercase">
                             <button class="hover:text-blue-600" onclick="editPost('${p.id}')">এডিট</button>
@@ -246,23 +332,30 @@
             }).join('');
         }
 
-       
-        function viewNews(id) {
+        function viewNews(id, startIndex = 0) {
             const p = allPosts.find(x => x.id == id);
             const imgs = p.image ? p.image.split(',').filter(s => s.trim()) : [];
             const vids = p.video ? p.video.split(',').filter(s => s.trim()) : [];
             const wrapper = document.getElementById('slideWrapper');
             wrapper.innerHTML = ""; 
 
-         
             imgs.forEach(i => {
-                wrapper.innerHTML += `<div class="slide-item"><img src="${formatImg(i)}"></div>`;
+                wrapper.innerHTML += `
+                    <div class="slide-item">
+                        <div class="img-container" onmousedown="startDrag(event)" onmousemove="drag(event)" onmouseup="endDrag()" onmouseleave="endDrag()" ontouchstart="startDrag(event)" ontouchmove="drag(event)" ontouchend="endDrag()">
+                            <img src="${formatImg(i)}" class="zoomable-img">
+                        </div>
+                    </div>`;
             });
-           
+            
             vids.forEach(v => {
                 const yt = v.match(/(?:v=|be\/|embed\/)([\w-]+)/);
-                if(yt) wrapper.innerHTML += `<div class="slide-item"><iframe src="https://www.youtube.com/embed/${yt[1]}?autoplay=1&rel=0" allowfullscreen></iframe></div>`;
+                if(yt) wrapper.innerHTML += `<div class="slide-item"><iframe id="yt-${yt[1]}" src="https://www.youtube.com/embed/${yt[1]}?enablejsapi=1&rel=0" allowfullscreen></iframe></div>`;
             });
+
+            const totalSlides = imgs.length + vids.length;
+            document.getElementById('pBtn').style.display = totalSlides <= 1 ? 'none' : 'flex';
+            document.getElementById('nBtn').style.display = totalSlides <= 1 ? 'none' : 'flex';
 
             document.getElementById('viewTitle').innerText = p.title;
             document.getElementById('viewDetails').innerText = p.details;
@@ -270,18 +363,60 @@
             document.getElementById('viewDate').innerText = toBengaliDate(p.date);
             document.getElementById('viewModal').classList.remove('hidden');
             document.body.style.overflow = 'hidden';
-            currentSlide = 0;
+            
+            currentSlide = startIndex;
             moveSlide(0);
         }
 
         function moveSlide(n) {
             const items = document.querySelectorAll('.slide-item');
             if(items.length === 0) return;
+            const currentItem = items[currentSlide];
+            if(currentItem) {
+                const iframe = currentItem.querySelector('iframe');
+                if(iframe) iframe.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*');
+            }
             currentSlide = (currentSlide + n + items.length) % items.length;
             document.getElementById('slideWrapper').style.transform = `translateX(-${currentSlide * 100}%)`;
+            resetZoom();
+            const nextItem = items[currentSlide];
+            document.getElementById('zoomCtrl').style.display = nextItem.querySelector('img') ? 'flex' : 'none';
         }
 
-        // অ্যাডমিন ফাংশনসমূহ পুনরুদ্ধার
+        function applyZoom(amt) {
+            const img = document.querySelectorAll('.slide-item img')[currentSlide];
+            if(!img) return;
+            zoomScale = Math.max(1, Math.min(zoomScale + amt, 4));
+            updateImgTransform();
+        }
+
+        function resetZoom() {
+            zoomScale = 1; offset = { x: 0, y: 0 };
+            updateImgTransform();
+        }
+
+        function updateImgTransform() {
+            const img = document.querySelectorAll('.slide-item img')[currentSlide];
+            if(img) img.style.transform = `translate(${offset.x}px, ${offset.y}px) scale(${zoomScale})`;
+        }
+
+        function startDrag(e) {
+            if(zoomScale === 1) return;
+            isDragging = true;
+            const event = e.type.includes('touch') ? e.touches[0] : e;
+            startPos = { x: event.clientX - offset.x, y: event.clientY - offset.y };
+        }
+
+        function drag(e) {
+            if(!isDragging) return;
+            e.preventDefault();
+            const event = e.type.includes('touch') ? e.touches[0] : e;
+            offset = { x: event.clientX - startPos.x, y: event.clientY - startPos.y };
+            updateImgTransform();
+        }
+
+        function endDrag() { isDragging = false; }
+
         function login() { 
             let key = prompt("এডমিন পাসওয়ার্ড দিন:");
             if(key && btoa(key) === "YXBhazU0NTE=") { 
