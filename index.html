@@ -574,10 +574,15 @@
     };
     function updateClock() {
         const now = new Date();
+            let hours = now.getHours();
+            let minutes = now.getMinutes();
+            let seconds = now.getSeconds();
+            let ampm = hours >= 12 ? 'পিএম' : 'এএম';
+            hours = hours % 12 || 12;
+            const timeStr = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')} ${ampm}`;
+
         const clockEl = document.getElementById('bn-clock');
         const dateEl = document.getElementById('current-date');
-        
-        if(clockEl) clockEl.innerText = now.toLocaleTimeString('en-GB', { hour12: false }).split(':').map(toBn).join(':');
 
         const days = ['রবিবার', 'সোমবার', 'মঙ্গলবার', 'বুধবার', 'বৃহস্পতিবার', 'শুক্রবার', 'শনিবার'];
         const months = ['জানুয়ারি', 'ফেব্রুয়ারি', 'মার্চ', 'এপ্রিল', 'মে', 'জুন', 'জুলাই', 'আগস্ট', 'সেপ্টেম্বর', 'অক্টোবর', 'নভেম্বর', 'ডিসেম্বর'];
