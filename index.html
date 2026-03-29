@@ -578,17 +578,14 @@
     const dateEl = document.getElementById('current-date');
 
     if (clockEl) {
-        // hour12: true ব্যবহার করে ১২ ঘণ্টার ফরম্যাট আনা হয়েছে
         let timeString = now.toLocaleTimeString('en-GB', { 
             hour: '2-digit', 
             minute: '2-digit', 
             second: '2-digit', 
             hour12: true 
         });
-
-        // AM/PM অংশটুকু আলাদা করে বাংলায় রূপান্তর
         const amPm = now.getHours() >= 12 ? 'অপরাহ্ণ' : 'পূর্বাহ্ণ';
-        const cleanTime = timeString.replace(/\s?[APM]{2}/i, ''); // ইংরেজি AM/PM মুছে ফেলা
+        const cleanTime = timeString.replace(/\s?[APM]{2}/i, '');
         
         clockEl.innerText = cleanTime.split(':').map(toBn).join(':') + ' ' + amPm;
     }
@@ -850,8 +847,7 @@ setInterval(updateClock, 1000);
         if(dataModal) dataModal.classList.remove('active');
         document.body.style.overflow = 'auto';
     }
-
-    // মোবাইল মেনু টগল
+        
     const menuBtn = document.getElementById('menu-btn');
     if(menuBtn) {
         menuBtn.addEventListener('click', () => {
