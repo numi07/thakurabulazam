@@ -390,12 +390,42 @@
             window.addEventListener('touchend', () => isDragging = false);
 
             downloadBtn.addEventListener('click', () => {
-                if(!isUserLoaded) return alert("দয়া করে ছবি আপলোড করুন");
-                const link = document.createElement('a');
-                link.download = 'thakur_abul_azam_banner.png';
-                link.href = canvas.toDataURL('image/png', 1.0);
-                link.click();
-            });
+    if (!isUserLoaded) {
+        showCustomAlert("দয়া করে ছবি আপলোড করুন");
+        return;
+    }
+    
+    const link = document.createElement('a');
+    link.download = 'thakur_abul_azam_banner.png';
+    link.href = canvas.toDataURL('image/png', 1.0);
+    link.click();
+});
+
+function showCustomAlert(message) {
+    const alertBox = document.createElement('div');
+    alertBox.textContent = message;
+    
+    Object.assign(alertBox.style, {
+        position: 'fixed',
+        top: '20%',
+        left: '50%',
+        transform: 'translateX(-50%)',
+        backgroundColor: '#ff4d4d',
+        color: 'white',
+        padding: '15px 30px',
+        borderRadius: '8px',
+        boxShadow: '0 4px 10px rgba(0,0,0,0.3)',
+        zIndex: '1000',
+        fontWeight: 'bold',
+        fontSize: '18px'
+    });
+
+    document.body.appendChild(alertBox);
+
+    setTimeout(() => {
+        alertBox.remove();
+    }, 2000);
+}
 
             loadFrames();
             window.addEventListener('pageshow', () => {
