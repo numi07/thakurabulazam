@@ -217,7 +217,7 @@
             let isDragging = false;
             let startX, startY;
             
-            // Pinch Zoom এর জন্য ভেরিয়েবল
+
             let initialPinchDistance = null;
 
             frameImg.crossOrigin = "anonymous";
@@ -329,7 +329,7 @@
                 element.classList.add('active-frame');
             }
 
-            // Touch Distance Calculation for Pinch Zoom
+
             function getDistance(touches) {
                 return Math.hypot(touches[0].pageX - touches[1].pageX, touches[0].pageY - touches[1].pageY);
             }
@@ -341,7 +341,7 @@
                 return { x: (clientX - rect.left) * (1000 / rect.width), y: (clientY - rect.top) * (canvas.height / rect.height) };
             }
 
-            // Events
+
             canvas.addEventListener('mousedown', e => { if(!isUserLoaded) return; isDragging = true; const pos = getPos(e); startX = pos.x - currentX; startY = pos.y - currentY; });
             window.addEventListener('mousemove', e => { if(!isDragging) return; const pos = getPos(e); currentX = pos.x - startX; currentY = pos.y - startY; draw(); });
             window.addEventListener('mouseup', () => isDragging = false);
