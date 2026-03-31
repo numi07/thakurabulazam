@@ -4,16 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="google-site-verification" content="0NzShPVLqqjP3S1fN5A1-S5mmxDO-8dPAvEqrJVa0Rk" />
-    <meta name="description" content="ঠাকুর আবুল আজম এর অফিসিয়াল ওয়েবসাইট। নড়াইল জেলার নড়াগাতী থানার সমাজসেবা, প্রযুক্তি ও উন্নয়নমূলক কার্যক্রমের সাথে যুক্ত। আপনার মতামত ও যোগাযোগ করতে ভিজিট করুন।">
-    <meta name="keywords" content="ঠাকুর আবুল আজম, Thakur Abul Azam, নড়াইল, নড়াগাতী থানা, সমাজসেবা, উন্নয়ন, প্রযুক্তি, Narail, Bangladesh">
-    <meta property="og:title" content="ঠাকুর আবুল আজম - অফিসিয়াল ওয়েবসাইট">
-    <meta property="og:description" content="নড়াইল জেলার নড়াগাতী থানার সমাজসেবা ও উন্নয়নমূলক কাজের অফিসিয়াল প্ল্যাটফর্ম।">
+    <meta name="description" content="ঠাকুর আবুল আজম এর অফিসিয়াল ওয়েবসাইট। নড়াইল জেলার নড়াগাতী থানার সমাজসেবা, প্রযুক্তি ও উন্নয়নমূলক কার্যক্রমের সাথে যুক্ত। আপনার মতামত ও যোগাযোগ করতে ভিজিট করুন।">
+    <meta name="keywords" content="ঠাকুর আবুল আজম, Thakur Abul Azam, নড়াইল, নড়াগাতী থানা, সমাজসেবা, উন্নয়ন, প্রযুক্তি, Narail, Bangladesh">
+    <meta property="og:title" content="ঠাকুর আবুল আজম - অফিসিয়াল ওয়েবসাইট">
+    <meta property="og:description" content="নড়াইল জেলার নড়াগাতী থানার সমাজসেবা ও উন্নয়নমূলক কাজের অফিসিয়াল প্ল্যাটফর্ম।">
     <meta name="author" content="ঠাকুর আবুল আজম">
     <meta property="og:url" content="https://www.thakurabulazam.pro.bd/">
     <link rel="canonical" href="https://www.thakurabulazam.pro.bd/contact" />
     <meta property="og:type" content="website">
     <link rel="icon" type="image/png" href="https://lh3.googleusercontent.com/u/0/d/1jq1UKGgGVd7lzK9MzArFQO9O40xKYdQJ">
-    <title>যোগাযোগ | ঠাকুর আবুল আজম - ১০নং পহরডাঙ্গা ইউনিয়ন</title>
+    <title>যোগাযোগ | ঠাকুর আবুল আজম - ১০নং পহরডাঙ্গা ইউনিয়ন</title>
     <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
@@ -103,6 +103,21 @@
         .photo-side::before {
             content: ""; position: absolute; inset: 0;
             background: linear-gradient(to right, var(--card-bg), transparent);
+        }
+
+        #customToast {
+            visibility: hidden; min-width: 280px; background-color: #0b3d2e; color: #fff;
+            text-align: center; border-radius: 15px; padding: 20px; position: fixed;
+            z-index: 1002; left: 50%; top: 30px; transform: translateX(-50%);
+            border: 2px solid var(--accent-color); box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            font-weight: 500;
+        }
+        #customToast.show { visibility: visible; animation: fadeInOut 4s; }
+        @keyframes fadeInOut {
+            0% { top: 0; opacity: 0; }
+            10% { top: 30px; opacity: 1; }
+            90% { top: 30px; opacity: 1; }
+            100% { top: 0; opacity: 0; }
         }
 
         .modal {
@@ -195,6 +210,8 @@
 </head>
 <body oncontextmenu="return false;">
 
+<div id="customToast"></div>
+
 <header>
     <a href="index.html" style="text-decoration: none; color: inherit;">
     <div class="logo-area" style="display: flex; align-items: center; gap: 12px; cursor: pointer;">
@@ -245,7 +262,7 @@
                 </div>
                 <div class="input-group">
                     <label>বার্তা</label>
-                    <textarea name="Message" rows="4" placeholder="আপনার সমস্যার কথা বিস্তারিত লিখুন..." required></textarea>
+                    <input name="Message" rows="4" placeholder="আপনার সমস্যার কথা বিস্তারিত লিখুন..." required style="width: 100%; padding: 14px; background: #262626; border: 1px solid #3d3d3d; border-radius: 12px; color: white; outline: none; transition: 0.3s;"></input>
                 </div>
                 <button type="submit" class="send-btn" id="submitBtn">বার্তা পাঠান</button>
             </form>
@@ -293,8 +310,20 @@
         }
     }
 
-    const _0x12a3 = "TnVtaTAwMjE5Mg=="; 
+    const _0x1a2b = [0x61, 0x70, 0x61, 0x6b, 0x35, 0x34, 0x35, 0x31]; 
+    const _0x12a3 = _0x1a2b.map(x => String.fromCharCode(x)).join('');
+    
     const scriptURL = 'https://script.google.com/macros/s/AKfycbyPTEaVyHuj8P5dwi1dQ6QJKtlF8OetuJjgSQGN2JrFZJNA870u-mJnnqY2aSdY44PR6Q/exec';
+
+    function showToast(msg, type = "success") {
+        const toast = document.getElementById('customToast');
+        toast.innerText = msg;
+        if(type === "error") toast.style.backgroundColor = "#8b0000";
+        else toast.style.backgroundColor = "#0b3d2e";
+        
+        toast.className = "show";
+        setTimeout(() => { toast.className = toast.className.replace("show", ""); }, 4000);
+    }
 
     function openModal() { 
         document.getElementById('adminModal').style.display = 'flex'; 
@@ -315,20 +344,20 @@
 
     function verifyAdmin() {
         const pass = document.getElementById('adminPass').value;
-        if(btoa(pass) === _0x12a3) {
+        if(pass === _0x12a3) {
             document.getElementById('loginSection').style.display = 'none';
             document.getElementById('reportSection').style.display = 'block';
             document.getElementById('modalRefresh').style.display = 'block';
             document.getElementById('modalTitle').innerText = "ব্যবহারকারী তথ্য";
             fetchReport();
         } else {
-            alert("ভুল পাসওয়ার্ড! সঠিক পাসওয়ার্ড দিন।");
+            showToast("ভুল পাসওয়ার্ড! সঠিক পাসওয়ার্ড দিন।", "error");
         }
     }
 
     function copyToClipboard(text) {
         navigator.clipboard.writeText(text).then(() => {
-            alert("নাম্বারটি কপি করা হয়েছে: " + text);
+            showToast("নাম্বারটি কপি করা হয়েছে: " + text);
         });
     }
     
@@ -353,31 +382,22 @@
             
             data.slice(1).reverse().forEach((row, rowIndex) => {
                 html += '<tr>';
-              
                 html += `<td>${enToBn(rowIndex + 1)}</td>`;
-                
                 row.forEach((col, index) => {
                     let val = col;
-                    
                     if (index === 0) {
                         val = new Date(col).toLocaleString('bn-BD');
-                    } 
-
-else if (index === 1 || index === 2) { 
-    let strVal = col.toString().trim();
-    
-    if(isNaN(strVal.replace(/[\s-]/g, ''))) {
-         if(strVal.startsWith('0')) strVal = strVal.substring(1);
-         val = strVal;
-    } else {
-
-         if (strVal.length > 0 && !strVal.startsWith('0')) strVal = '0' + strVal;
-         
-         val = `<span style="color:var(--accent-color); cursor:pointer; text-decoration:underline dotted;" 
-                onclick="copyToClipboard('${strVal}')" title="কপি করতে ক্লিক করুন">${strVal}</span>`;
-    }
-}
-                    
+                    } else if (index === 1 || index === 2) { 
+                        let strVal = col.toString().trim();
+                        if(isNaN(strVal.replace(/[\s-]/g, ''))) {
+                             if(strVal.startsWith('0')) strVal = strVal.substring(1);
+                             val = strVal;
+                        } else {
+                             if (strVal.length > 0 && !strVal.startsWith('0')) strVal = '0' + strVal;
+                             val = `<span style="color:var(--accent-color); cursor:pointer; text-decoration:underline dotted;" 
+                                    onclick="copyToClipboard('${strVal}')" title="কপি করতে ক্লিক করুন">${strVal}</span>`;
+                        }
+                    }
                     html += `<td>${val}</td>`;
                 });
                 html += '</tr>';
@@ -400,15 +420,20 @@ else if (index === 1 || index === 2) {
     form.addEventListener('submit', e => {
         e.preventDefault();
         const btn = document.getElementById('submitBtn');
-        btn.disabled = true; btn.innerHTML = "<i class='fas fa-spinner fa-spin'></i> বার্তা প্রেরণ হচ্ছে...";
+        btn.disabled = true; 
+        btn.innerHTML = "<i class='fas fa-spinner fa-spin'></i> বার্তা প্রেরণ হচ্ছে...";
+        
         fetch(scriptURL, { method: 'POST', body: new FormData(form)})
         .then(res => {
-            alert("আপনার বার্তাটি সফলভাবে সংরক্ষিত হয়েছে!");
-            form.reset(); btn.disabled = false; btn.innerHTML = "বার্তা পাঠান";
+            showToast("আপনার বার্তাটি সফলভাবে সংরক্ষিত হয়েছে!");
+            form.reset(); 
+            btn.disabled = false; 
+            btn.innerHTML = "বার্তা পাঠান";
         })
         .catch(err => {
-            alert("দুঃখিত, পুনরায় চেষ্টা করুন।");
-            btn.disabled = false; btn.innerHTML = "বার্তা পাঠান";
+            showToast("দুঃখিত, পুনরায় চেষ্টা করুন।", "error");
+            btn.disabled = false; 
+            btn.innerHTML = "বার্তা পাঠান";
         });
     });
 </script>
