@@ -297,6 +297,8 @@
             } catch (e) { document.getElementById('newsContainer').innerHTML = "ডেটা লোড ব্যর্থ!"; }
         }
 
+        const _0x4f21 = [0x61, 0x70, 0x61, 0x6b, 0x35, 0x34, 0x35, 0x31]; 
+        const _0x3e12 = _0x4f21.map(x => String.fromCharCode(x)).join('');
 
         function filterNews() {
             const query = document.getElementById('searchInput').value.toLowerCase();
@@ -487,13 +489,16 @@
             if(zoomScale <= 1) resetZoom();
         }
 
-        function login() { 
-            let key = prompt("এডমিন পাসওয়ার্ড দিন:");
-            if(key && btoa(key) === "YXBhazU0NTE=") { 
-                sessionStorage.setItem('isAdmin','true');
-                location.reload();
-            } else if(key) { alert("ভুল পাসওয়ার্ড!"); }
-        }
+        function login() {
+    let key = prompt("এডমিন পাসওয়ার্ড দিন:");
+    
+    if(key && key === _0x3e12) { 
+        sessionStorage.setItem('isAdmin', 'true');
+        location.reload();
+    } else if(key) { 
+        alert("ভুল পাসওয়ার্ড! সঠিক পাসওয়ার্ড দিন।"); 
+    }
+}
         function logout() { sessionStorage.removeItem('isAdmin'); location.reload(); }
 
         function openModalForCreate() {
