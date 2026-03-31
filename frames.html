@@ -375,19 +375,89 @@
             });
 
             const getPos = (e) => {
+            let initialPinchDistance = null;
+
+            const getDistance = (touches) => {
+                return Math.hypot(
+                    touches[0].clientX - touches[1].clientX,
+                    touches[0].clientY - touches[1].clientY
+                );
+            };
+
+            const getPos = (e) => {
                 const rect = canvas.getBoundingClientRect();
                 const clientX = e.touches ? e.touches[0].clientX : e.clientX;
                 const clientY = e.touches ? e.touches[0].clientY : e.clientY;
-                return { x: (clientX - rect.left) * (1000 / rect.width), y: (clientY - rect.top) * (canvas.height / rect.height) };
+                return { 
+                    x: (clientX - rect.left) * (1000 / rect.width), 
+                    y: (clientY - rect.top) * (canvas.height / rect.height) 
+                };
             };
 
-            canvas.addEventListener('mousedown', e => { if(!isUserLoaded) return; isDragging = true; const pos = getPos(e); startX = pos.x - currentX; startY = pos.y - currentY; });
-            window.addEventListener('mousemove', e => { if(!isDragging) return; const pos = getPos(e); currentX = pos.x - startX; currentY = pos.y - startY; draw(); });
+            canvas.addEventListener('mousedown', e => { 
+                if(!isUserLoaded) return; 
+                isDragging = true; 
+                const pos = getPos(e); 
+                startX = pos.x - currentX; 
+                startY = pos.y - currentY; 
+            });
+
+            window.addEventListener('mousemove', e => { 
+                if(!isDragging) return; 
+                const pos = getPos(e); 
+                currentX = pos.x - startX; 
+                currentY = pos.y - startY; 
+                draw(); 
+            });
+
             window.addEventListener('mouseup', () => isDragging = false);
-            
-            canvas.addEventListener('touchstart', e => { if(!isUserLoaded) return; isDragging = true; const pos = getPos(e); startX = pos.x - currentX; startY = pos.y - currentY; }, {passive: false});
-            window.addEventListener('touchmove', e => { if(isDragging) { e.preventDefault(); const pos = getPos(e); currentX = pos.x - startX; currentY = pos.y - startY; draw(); } }, {passive: false});
-            window.addEventListener('touchend', () => isDragging = false);
+
+            canvas.addEventListener('touchstart', e => { 
+                if(!isUserLoaded) return;
+                
+                if (e.touches.length === 1) {
+
+                    isDragging = true; 
+                    const pos = getPos(e); 
+                    startX = pos.x - currentX; 
+                    startY = pos.y - currentY;
+                } else if (e.touches.length === 2) {
+
+                    isDragging = false; 
+                    initialPinchDistance = getDistance(e.touches);
+                }
+            }, {passive: false});
+
+            window.addEventListener('touchmove', e => { 
+                if(!isUserLoaded) return;
+
+                if (e.touches.length === 1 && isDragging) {
+                    e.preventDefault(); 
+                    const pos = getPos(e); 
+                    currentX = pos.x - startX; 
+                    currentY = pos.y - startY; 
+                    draw(); 
+                } else if (e.touches.length === 2 && initialPinchDistance) {
+                    e.preventDefault();
+                    const currentDistance = getDistance(e.touches);
+                    const pinchScale = currentDistance / initialPinchDistance;
+                    
+                 
+                    let newScale = scale * pinchScale;
+                    if (newScale >= zoomSlider.min && newScale <= zoomSlider.max) {
+                        scale = newScale;
+                        zoomSlider.value = scale;
+                        zoomVal.innerText = Math.round((scale / zoomSlider.min) * 100) + "%";
+                        draw();
+                    }
+                    initialPinchDistance = currentDistance;
+                }
+            }, {passive: false});
+
+            window.addEventListener('touchend', () => {
+                isDragging = false;
+                initialPinchDistance = null;
+            });
 
             downloadBtn.addEventListener('click', () => {
     if (!isUserLoaded) {
