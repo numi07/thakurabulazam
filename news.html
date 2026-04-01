@@ -563,12 +563,13 @@
     }
 
     function shareOnFacebook(newsId) {
-    // আপনার নতুন এপিআই লিঙ্ক এখানে বসানো হয়েছে
+    // আপনার নতুন এপিআই লিঙ্ক
     const scriptUrl = "https://script.google.com/macros/s/AKfycbw5nrCySVIIOTuWkQEe5nm1bBDLIDzB0vtddT9dVCfAeljKn9ACwA-HeAA2eiaGYC6wwg/exec";
     
-    // এই লিঙ্কটিই ফেসবুক কার্ড জেনারেট করবে
+    // newsId (Index 7) দিয়ে তৈরি লিঙ্ক
     const shareUrl = `${scriptUrl}?id=${newsId}`;
     
+    // ফেসবুক শেয়ার উইন্ডো
     const fbShareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}`;
     
     window.open(fbShareUrl, '_blank', 'width=600,height=400');
