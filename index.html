@@ -699,7 +699,7 @@ setInterval(updateClock, 1000);
         try {
             const res = await fetch(SCRIPT_URL);
             const posts = await res.json();
-            allNewsData = posts.slice().reverse(); 
+            allNewsData = posts.sort((a, b) => new Date(b.date) - new Date(a.date)); 
             
             container.innerHTML = allNewsData.slice(0, 3).map((post, idx) => {
                 const imgs = post.image ? post.image.split(',').filter(s => s.trim()) : [];
