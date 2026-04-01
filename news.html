@@ -228,15 +228,29 @@
     </div>
 
     <script>
-    // রাইট ক্লিক এবং শর্টকাট কি বন্ধ রাখা (আগের মতই)
-    document.addEventListener('contextmenu', function (e) { e.preventDefault(); }, false);
+    document.addEventListener('contextmenu', function (e) {
+        e.preventDefault();
+    }, false);
+
     document.onkeydown = function (e) {
-        if (e.keyCode == 123 || (e.ctrlKey && e.shiftKey && (e.keyCode == 73 || e.keyCode == 67 || e.keyCode == 74)) || (e.ctrlKey && e.keyCode == 85)) {
+        if (e.keyCode == 123) {
+            return false;
+        }
+        if (e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) {
+            return false;
+        }
+        if (e.ctrlKey && e.shiftKey && e.keyCode == 'C'.charCodeAt(0)) {
+            return false;
+        }
+        if (e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) {
+            return false;
+        }
+        if (e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) {
             return false;
         }
     };
 
-    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxAxoYK9uTHmH0rK1PUN36SOO68pXnlxLf1dzvRjMKCmHfwfliiLnVT0rsrJ_uRnU5J0A/exec";
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyElIy9fLJE_VLM9zJTBVrEIuAzdqFZqUZQLB-Qut1KYkjhzPu59P5WBHRUhDmb-po0cg/exec";
     let allPosts = [];
     let filteredPosts = []; 
     let currentSlide = 0;
@@ -245,7 +259,6 @@
     let startPos = { x: 0, y: 0 };
     let offset = { x: 0, y: 0 };
 
-    // ইমেজ ফরম্যাট ফাংশন
     function formatImg(url) {
         if(!url) return "https://via.placeholder.com/800x450?text=No+Image";
         const idMatch = url.match(/\/d\/(.+?)\//) || url.match(/id=([^&]+)/);
@@ -267,14 +280,22 @@
         return "https://via.placeholder.com/800x450?text=Video";
     }
 
-    // নিউজ লোড করা
     async function loadNews() {
         try {
             const res = await fetch(SCRIPT_URL);
             allPosts = await res.json();
             filteredPosts = allPosts; 
             render();
-            checkAutoOpen(); // ডেটা লোড হওয়ার পর অটো ওপেন চেক করবে
+
+            // অটো-ওপেন লজিক (নিউজ আইডি অনুযায়ী মডাল ওপেন)
+            const urlParams = new URLSearchParams(window.location.search);
+            const newsIdFromUrl = urlParams.get('id');
+            if (newsIdFromUrl) {
+                const targetPost = allPosts.find(p => p.newsId === newsIdFromUrl || p.id == newsIdFromUrl);
+                if (targetPost) {
+                    setTimeout(() => { viewNews(targetPost.id, 0); }, 800);
+                }
+            }
         } catch (e) { document.getElementById('newsContainer').innerHTML = "ডেটা লোড ব্যর্থ!"; }
     }
 
@@ -310,42 +331,75 @@
             if (totalMedia.length === 1) {
                 const m = totalMedia[0];
                 const thumb = m.type === 'vid' ? getMediaThumb(m.src) : formatImg(m.src);
-                mediaHtml = `<div class="grid-box" onclick="viewNews('${p.id}', 0)"><img src="${thumb}" loading="lazy">${m.type === 'vid' ? '<div class="absolute inset-0 flex items-center justify-center bg-black/20 text-white text-3xl"><i class="fas fa-play-circle"></i></div>' : ''}</div>`;
+                mediaHtml = `
+                    <div class="grid-box" onclick="viewNews('${p.id}', 0)">
+                        <img src="${thumb}" loading="lazy">
+                        ${m.type === 'vid' ? '<div class="absolute inset-0 flex items-center justify-center bg-black/20 text-white text-3xl"><i class="fas fa-play-circle"></i></div>' : ''}
+                    </div>`;
             } else if (totalMedia.length >= 2) {
                 const m1 = totalMedia[0];
                 const m2 = totalMedia[1];
-                mediaHtml = `<div class="grid-box" onclick="viewNews('${p.id}', 0)"><img src="${m1.type === 'vid' ? getMediaThumb(m1.src) : formatImg(m1.src)}" loading="lazy"></div>
-                             <div class="grid-box" onclick="viewNews('${p.id}', 1)"><img src="${m2.type === 'vid' ? getMediaThumb(m2.src) : formatImg(m2.src)}" loading="lazy">${totalMedia.length > 2 ? `<div class="absolute inset-0 flex items-center justify-center bg-black/50 text-white font-bold text-sm">+${totalMedia.length - 2} আরও</div>` : ''}</div>`;
+                const thumb1 = m1.type === 'vid' ? getMediaThumb(m1.src) : formatImg(m1.src);
+                const thumb2 = m2.type === 'vid' ? getMediaThumb(m2.src) : formatImg(m2.src);
+
+                mediaHtml = `
+                    <div class="grid-box" onclick="viewNews('${p.id}', 0)">
+                        <img src="${thumb1}" loading="lazy">
+                        ${m1.type === 'vid' ? '<div class="absolute inset-0 flex items-center justify-center bg-black/20 text-white text-3xl"><i class="fas fa-play-circle"></i></div>' : ''}
+                    </div>
+                    <div class="grid-box" onclick="viewNews('${p.id}', 1)">
+                        <img src="${thumb2}" loading="lazy">
+                        ${m2.type === 'vid' ? '<div class="absolute inset-0 flex items-center justify-center bg-black/20 text-white text-3xl"><i class="fas fa-play-circle"></i></div>' : ''}
+                        ${totalMedia.length > 2 ? `<div class="absolute inset-0 flex items-center justify-center bg-black/50 text-white font-bold text-sm">+${totalMedia.length - 2} আরও</div>` : ''}
+                    </div>`;
             }
+
+            const shortContent = p.details || "";
 
             return `
             <div class="news-card group flex flex-col h-full">
-                <div class="card-media-grid ${gridClass}"><div class="loc-badge"><i class="fas fa-map-marker-alt"></i> ${p.location}</div>${mediaHtml}</div>
+                <div class="card-media-grid ${gridClass}">
+                    <div class="loc-badge"><i class="fas fa-map-marker-alt"></i> ${p.location}</div>
+                    ${mediaHtml}
+                </div>
                 <div class="p-6 flex flex-col flex-grow">
                     <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-3">${toBengaliDate(p.date)}</span>
-                    <h3 class="font-bold text-slate-800 text-lg mb-2 line-clamp-1 group-hover:text-green-600 transition-colors cursor-pointer" onclick="viewNews('${p.id}', 0)">${p.title}</h3>
-                    <p class="text-xs text-slate-500 mb-4 line-clamp-2 leading-relaxed cursor-pointer flex-grow" onclick="viewNews('${p.id}', 0)">${p.details}</p>
+                    <h3 class="font-bold text-slate-800 text-lg mb-2 line-clamp-1 leading-snug group-hover:text-green-600 transition-colors cursor-pointer" onclick="viewNews('${p.id}', 0)">
+                        ${p.title}
+                    </h3>
+                    <p class="text-xs text-slate-500 mb-4 line-clamp-2 leading-relaxed cursor-pointer flex-grow" onclick="viewNews('${p.id}', 0)">
+                        ${shortContent}
+                    </p>
                     <div class="mt-auto flex justify-between items-center pt-5 border-t border-slate-50">
-                        <button onclick="shareFB('${p.id}', '${p.title}')" class="fb-share-premium"><i class="fab fa-facebook-f"></i> <span>শেয়ার</span></button>
+                        <button onclick="shareFB('${p.newsId}', '${p.title}')" class="fb-share-premium">
+                            <i class="fab fa-facebook-f"></i>
+                            <span>শেয়ার</span>
+                        </button>
                         <button onclick="viewNews('${p.id}', 0)" class="details-btn-minimal">বিস্তারিত খবর <i class="fas fa-arrow-right"></i></button>
                     </div>
-                    ${isAdmin ? `<div class="mt-4 flex gap-4 text-[10px] pt-3 border-t border-dashed justify-end font-bold text-slate-400 uppercase"><button onclick="editPost('${p.id}')">এডিট</button><button onclick="deletePost('${p.id}')">ডিলিট</button></div>` : ''}
+                    ${isAdmin ? `<div class="mt-4 flex gap-4 text-[10px] pt-3 border-t border-dashed justify-end font-bold text-slate-400 uppercase">
+                        <button class="hover:text-blue-600" onclick="editPost('${p.id}')">এডিট</button>
+                        <button class="hover:text-red-600" onclick="deletePost('${p.id}')">ডিলিট</button>
+                    </div>` : ''}
                 </div>
             </div>`;
         }).join('');
     }
 
-    // নিউজ দেখার মডাল ফাংশন
     function viewNews(id, startIndex = 0) {
         const p = allPosts.find(x => x.id == id);
-        if(!p) return;
         const imgs = p.image ? p.image.split(',').filter(s => s.trim()) : [];
         const vids = p.video ? p.video.split(',').filter(s => s.trim()) : [];
         const wrapper = document.getElementById('slideWrapper');
         wrapper.innerHTML = ""; 
 
         imgs.forEach(i => {
-            wrapper.innerHTML += `<div class="slide-item"><div class="img-container" onmousedown="startDrag(event)" onmousemove="drag(event)" onmouseup="endDrag()" onmouseleave="endDrag()" ontouchstart="startDrag(event)" ontouchmove="drag(event)" ontouchend="endDrag()"><img src="${formatImg(i)}" class="zoomable-img"></div></div>`;
+            wrapper.innerHTML += `
+                <div class="slide-item">
+                    <div class="img-container" onmousedown="startDrag(event)" onmousemove="drag(event)" onmouseup="endDrag()" onmouseleave="endDrag()" ontouchstart="startDrag(event)" ontouchmove="drag(event)" ontouchend="endDrag()">
+                        <img src="${formatImg(i)}" class="zoomable-img">
+                    </div>
+                </div>`;
         });
 
         vids.forEach(v => {
@@ -360,7 +414,7 @@
             } else if (url.includes("facebook.com")) {
                 videoHtml = `<iframe src="https://www.facebook.com/plugins/video.php?href=${encodeURIComponent(url)}&show_text=0" allowfullscreen></iframe>`;
             } else {
-                videoHtml = `<video controls class="w-full h-full"><source src="${url}" type="video/mp4"></video>`;
+                videoHtml = `<video controls class="w-full h-full"><source src="${url}" type="video/mp4">আপনার ব্রাউজার ভিডিও সাপোর্ট করে না।</video>`;
             }
             wrapper.innerHTML += `<div class="slide-item">${videoHtml}</div>`;
         });
@@ -380,10 +434,16 @@
         moveSlide(0);
     }
 
-    // স্লাইডার মুভ
     function moveSlide(n) {
         const items = document.querySelectorAll('.slide-item');
         if(items.length === 0) return;
+        const currentItem = items[currentSlide];
+        if(currentItem) {
+            const iframe = currentItem.querySelector('iframe');
+            if(iframe) iframe.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*');
+            const video = currentItem.querySelector('video');
+            if(video) video.pause();
+        }
         currentSlide = (currentSlide + n + items.length) % items.length;
         document.getElementById('slideWrapper').style.transform = `translateX(-${currentSlide * 100}%)`;
         resetZoom();
@@ -391,57 +451,161 @@
         document.getElementById('zoomCtrl').style.display = nextItem.querySelector('img') ? 'flex' : 'none';
     }
 
-    // জুম ফাংশনসমূহ (আগের মতই)
     function applyZoom(amt) {
-        zoomScale = Math.max(1, Math.min(zoomScale + amt, 4));
-        updateImgTransform();
-    }
-    function resetZoom() { zoomScale = 1; offset = { x: 0, y: 0 }; updateImgTransform(); }
-    function updateImgTransform() {
         const img = document.querySelectorAll('.slide-item img')[currentSlide];
-        if(img) img.style.transform = `translate(${offset.x}px, ${offset.y}px) scale(${zoomScale})`;
+        if(!img) return;
+        zoomScale = Math.max(1, Math.min(zoomScale + amt, 4));
+        if (zoomScale <= 1) {
+            resetZoom();
+        } else {
+            updateImgTransform();
+        }
     }
 
-    // ফেসবুক শেয়ার ফাংশন (সংশোধিত)
+    function resetZoom() {
+        zoomScale = 1; 
+        offset = { x: 0, y: 0 }; 
+        updateImgTransform();
+    }
+
+    function updateImgTransform() {
+        const img = document.querySelectorAll('.slide-item img')[currentSlide];
+        if(img) {
+            img.style.transition = zoomScale === 1 ? "transform 0.3s ease-out" : "none";
+            img.style.transform = `translate(${offset.x}px, ${offset.y}px) scale(${zoomScale})`;
+        }
+    }
+
+    function startDrag(e) {
+        if(zoomScale <= 1) return;
+        isDragging = true;
+        const event = e.type.includes('touch') ? e.touches[0] : e;
+        startPos = { x: event.clientX - offset.x, y: event.clientY - offset.y };
+    }
+
+    function drag(e) {
+        if(!isDragging || zoomScale <= 1) return;
+        e.preventDefault();
+        const event = e.type.includes('touch') ? e.touches[0] : e;
+        offset = { x: event.clientX - startPos.x, y: event.clientY - startPos.y };
+        updateImgTransform();
+    }
+
+    function endDrag() { 
+        isDragging = false; 
+        if(zoomScale <= 1) resetZoom();
+    }
+
+    function login() {
+        let key = prompt("এডমিন পাসওয়ার্ড দিন:");
+        if(key && key === _0x3e12) { 
+            sessionStorage.setItem('isAdmin', 'true');
+            location.reload();
+        } else if(key) { 
+            alert("ভুল পাসওয়ার্ড! সঠিক পাসওয়ার্ড দিন।"); 
+        }
+    }
+
+    function logout() { sessionStorage.removeItem('isAdmin'); location.reload(); }
+
+    function openModalForCreate() {
+        clearFields();
+        document.getElementById('modalTitle').innerText = "নতুন সংবাদ যোগ করুন";
+        document.getElementById('adminModal').classList.remove('hidden');
+    }
+
+    function clearFields() {
+        document.getElementById('editId').value = "";
+        document.getElementById('postTitle').value = "";
+        document.getElementById('postDetails').value = "";
+        document.getElementById('postImage').value = "";
+        document.getElementById('postVideo').value = "";
+        document.getElementById('postLocation').value = "";
+        document.getElementById('postDate').value = "";
+    }
+
+    function editPost(id) {
+        const p = allPosts.find(x => x.id == id);
+        document.getElementById('editId').value = p.id;
+        document.getElementById('postTitle').value = p.title;
+        document.getElementById('postDetails').value = p.details;
+        document.getElementById('postImage').value = p.image || "";
+        document.getElementById('postVideo').value = p.video || "";
+        document.getElementById('postLocation').value = p.location;
+        document.getElementById('postDate').value = p.date.split('T')[0];
+        document.getElementById('modalTitle').innerText = "সংবাদ আপডেট করুন";
+        document.getElementById('adminModal').classList.remove('hidden');
+    }
+
+    async function saveData() {
+        const editId = document.getElementById('editId').value;
+        const btn = document.getElementById('submitBtn');
+        const data = {
+            action: editId ? "update" : "create", id: editId,
+            title: document.getElementById('postTitle').value,
+            details: document.getElementById('postDetails').value,
+            image: document.getElementById('postImage').value,
+            video: document.getElementById('postVideo').value,
+            location: document.getElementById('postLocation').value,
+            date: document.getElementById('postDate').value
+        };
+        if(!data.title) return alert("শিরোনাম দিন!");
+        btn.innerText = "সংরক্ষণ হচ্ছে..."; btn.disabled = true;
+        await fetch(SCRIPT_URL, { method: 'POST', mode: 'no-cors', body: JSON.stringify(data) });
+        setTimeout(() => { location.reload(); }, 1200);
+    }
+
+    async function deletePost(id) {
+        if(confirm("মুছে ফেলতে চান?")) {
+            await fetch(SCRIPT_URL, { method: 'POST', mode: 'no-cors', body: JSON.stringify({action: "delete", id: id}) });
+            location.reload();
+        }
+    }
+
     function shareFB(newsId, title) {
-        // Apps Script এর Deployment URL
-        const shareLink = `${SCRIPT_URL}?id=${newsId}`;
+        // এখানে আপনার ওয়েবসাইটের ডোমেইন আপডেট করা হয়েছে
+        const myWebsite = window.location.origin + window.location.pathname; 
+        const shareLink = `${myWebsite}?id=${newsId}`;
         const fbUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareLink)}`;
         window.open(fbUrl, '_blank', 'width=600,height=400');
     }
 
-    // অটো-ওপেন লজিক (সংশোধিত)
-    function checkAutoOpen() {
-        const urlParams = new URLSearchParams(window.location.search);
-        const idFromUrl = urlParams.get('id');
-        if (idFromUrl) {
-            const target = allPosts.find(p => p.id.toString() === idFromUrl.toString());
-            if (target) {
-                setTimeout(() => viewNews(target.id, 0), 500);
-            }
-        }
+    function toggleMenu() {
+        const menu = document.getElementById('mobileMenu');
+        menu.classList.toggle('active');
+        document.getElementById('menuIcon').classList.toggle('fa-bars-staggered');
+        document.getElementById('menuIcon').classList.toggle('fa-times');
     }
 
-    // এডমিন লগিন/লগআউট (আগের মতই)
-    function login() {
-        let key = prompt("এডমিন পাসওয়ার্ড দিন:");
-        if(key === _0x3e12) { sessionStorage.setItem('isAdmin', 'true'); location.reload(); }
-        else if(key) alert("ভুল পাসওয়ার্ড!");
-    }
-    function logout() { sessionStorage.removeItem('isAdmin'); location.reload(); }
-
-    // মডাল ক্লোজ
     function closeView() { 
         document.getElementById('viewModal').classList.add('hidden'); 
         document.body.style.overflow = 'auto'; 
-        document.getElementById('slideWrapper').innerHTML = ""; 
+        const wrapper = document.getElementById('slideWrapper');
+        const iframes =  wrapper.querySelectorAll('iframe');
+        const videos = wrapper.querySelectorAll('video');
+        iframes.forEach(iframe => {
+            const src = iframe.src;
+            iframe.src = "";
+            iframe.src = src;
+        });
+        videos.forEach(video => {
+            video.pause();
+            video.currentTime = 0;
+        });
+        wrapper.innerHTML = ""; 
     }
 
-    // ইনিশিয়াল লোড
+    function closeModal() { document.getElementById('adminModal').classList.add('hidden'); }
+
     if(sessionStorage.getItem('isAdmin') === 'true') {
-        document.getElementById('adminAddBtn')?.classList.remove('hidden');
-        document.getElementById('logoutBtnPC')?.classList.remove('hidden');
+        document.getElementById('adminAddBtn').classList.remove('hidden');
+        document.getElementById('logoutBtnPC').classList.remove('hidden');
+        document.getElementById('logoutBtnMob').classList.remove('hidden');
+        document.getElementById('loginBtnPC').classList.add('hidden');
+        document.getElementById('loginBtnMob').classList.add('hidden');
     }
+
+    // নিউজ লোড শুরু
     loadNews();
 
 </script>
