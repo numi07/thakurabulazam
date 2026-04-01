@@ -254,7 +254,7 @@
     };
 
 
-        const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwE1Yhpsbf3Y_xvrxqvRT1I4LYAmpoLlVOjH7Ft05UhkuGWoqE8PeDv7yyttGduyRH7Wg/exec";
+        const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyElIy9fLJE_VLM9zJTBVrEIuAzdqFZqUZQLB-Qut1KYkjhzPu59P5WBHRUhDmb-po0cg/exec";
         let allPosts = [];
         let filteredPosts = []; 
         let currentSlide = 0;
@@ -372,7 +372,7 @@
                 </p>
 
                 <div class="mt-auto flex justify-between items-center pt-5 border-t border-slate-50">
-                    <button onclick="shareFB('${p.id}', '${p.title}')" class="fb-share-premium">
+                    <button onclick="shareFB('${p.newsId}', '${p.title}')" class="fb-share-premium">
                         <i class="fab fa-facebook-f"></i>
                         <span>শেয়ার</span>
                     </button>
@@ -565,7 +565,7 @@
             }
         }
         function shareFB(newsId, title) {
-    const scriptUrl = "https://script.google.com/macros/s/AKfycbwE1Yhpsbf3Y_xvrxqvRT1I4LYAmpoLlVOjH7Ft05UhkuGWoqE8PeDv7yyttGduyRH7Wg/exec";
+    const scriptUrl = "https://script.google.com/macros/s/AKfycbyElIy9fLJE_VLM9zJTBVrEIuAzdqFZqUZQLB-Qut1KYkjhzPu59P5WBHRUhDmb-po0cg/exec";
 
     const shareLink = `${scriptUrl}?id=${newsId}`;
     
