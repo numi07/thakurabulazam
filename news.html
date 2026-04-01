@@ -310,72 +310,82 @@
         }
 
         function render() {
-            const container = document.getElementById('newsContainer');
-            const isAdmin = sessionStorage.getItem('isAdmin') === 'true';
+    const container = document.getElementById('newsContainer');
+    const isAdmin = sessionStorage.getItem('isAdmin') === 'true';
 
-            if(filteredPosts.length === 0) {
-                container.innerHTML = `<p class="text-center col-span-full py-20 font-bold text-gray-400">দুঃখিত, কোনো সংবাদ পাওয়া যায়নি।</p>`;
-                return;
-            }
+    if(filteredPosts.length === 0) {
+        container.innerHTML = `<p class="text-center col-span-full py-20 font-bold text-gray-400">দুঃখিত, কোনো সংবাদ পাওয়া যায়নি।</p>`;
+        return;
+    }
 
-            container.innerHTML = filteredPosts.map(p => {
-                const imgs = p.image ? p.image.split(',').filter(s => s.trim()) : [];
-                const vids = p.video ? p.video.split(',').filter(s => s.trim()) : [];
-                const totalMedia = [...imgs.map(i => ({type:'img', src:i})), ...vids.map(v => ({type:'vid', src:v}))];
+    container.innerHTML = filteredPosts.map(p => {
+        const imgs = p.image ? p.image.split(',').filter(s => s.trim()) : [];
+        const vids = p.video ? p.video.split(',').filter(s => s.trim()) : [];
+        const totalMedia = [...imgs.map(i => ({type:'img', src:i})), ...vids.map(v => ({type:'vid', src:v}))];
 
-                let mediaHtml = "";
-                let gridClass = totalMedia.length === 1 ? "grid-1" : "grid-2";
+        let mediaHtml = "";
+        let gridClass = totalMedia.length === 1 ? "grid-1" : "grid-2";
 
-                if (totalMedia.length === 1) {
-                    const m = totalMedia[0];
-                    const thumb = m.type === 'vid' ? getMediaThumb(m.src) : formatImg(m.src);
-                    mediaHtml = `
-                        <div class="grid-box" onclick="viewNews('${p.id}', 0)">
-                            <img src="${thumb}" loading="lazy">
-                            ${m.type === 'vid' ? '<div class="absolute inset-0 flex items-center justify-center bg-black/20 text-white text-3xl"><i class="fas fa-play-circle"></i></div>' : ''}
-                        </div>`;
-                } else if (totalMedia.length >= 2) {
-                    const m1 = totalMedia[0];
-                    const m2 = totalMedia[1];
-                    const thumb1 = m1.type === 'vid' ? getMediaThumb(m1.src) : formatImg(m1.src);
-                    const thumb2 = m2.type === 'vid' ? getMediaThumb(m2.src) : formatImg(m2.src);
-
-                    mediaHtml = `
-                        <div class="grid-box" onclick="viewNews('${p.id}', 0)">
-                            <img src="${thumb1}" loading="lazy">
-                            ${m1.type === 'vid' ? '<div class="absolute inset-0 flex items-center justify-center bg-black/20 text-white text-3xl"><i class="fas fa-play-circle"></i></div>' : ''}
-                        </div>
-                        <div class="grid-box" onclick="viewNews('${p.id}', 1)">
-                            <img src="${thumb2}" loading="lazy">
-                            ${m2.type === 'vid' ? '<div class="absolute inset-0 flex items-center justify-center bg-black/20 text-white text-3xl"><i class="fas fa-play-circle"></i></div>' : ''}
-                            ${totalMedia.length > 2 ? `<div class="absolute inset-0 flex items-center justify-center bg-black/50 text-white font-bold text-sm">+${totalMedia.length - 2} আরও</div>` : ''}
-                        </div>`;
-                }
-
-                return `
-                <div class="news-card group">
-                    <div class="card-media-grid ${gridClass}">
-                        <div class="loc-badge"><i class="fas fa-map-marker-alt"></i> ${p.location}</div>
-                        ${mediaHtml}
-                    </div>
-                    <div class="p-6 flex flex-col flex-grow">
-                        <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-3">${toBengaliDate(p.date)}</span>
-                        <h3 class="font-bold text-slate-800 text-lg mb-6 line-clamp-2 leading-snug group-hover:text-green-600 transition-colors cursor-pointer" onclick="viewNews('${p.id}', 0)">${p.title}</h3>
-                        <div class="mt-auto flex justify-between items-center pt-5 border-t border-slate-50">
-                            <button onclick="shareFB('${p.id}', '${p.title}')" class="fb-share-premium">
-                                <i class="fab fa-facebook-f"></i>
-                                <span>শেয়ার</span>
-                            </button>
-                            <button onclick="viewNews('${p.id}', 0)" class="details-btn-minimal">বিস্তারিত খবর <i class="fas fa-arrow-right"></i></button>
-                        </div>
-                        ${isAdmin ? `<div class="mt-4 flex gap-4 text-[10px] pt-3 border-t border-dashed justify-end font-bold text-slate-400 uppercase">
-                            <button class="hover:text-blue-600" onclick="editPost('${p.id}')">এডিট</button>
-                            <button class="hover:text-red-600" onclick="deletePost('${p.id}')">ডিলিট</button>
-                        </div>` : ''}
-                    </div>
+        if (totalMedia.length === 1) {
+            const m = totalMedia[0];
+            const thumb = m.type === 'vid' ? getMediaThumb(m.src) : formatImg(m.src);
+            mediaHtml = `
+                <div class="grid-box" onclick="viewNews('${p.id}', 0)">
+                    <img src="${thumb}" loading="lazy">
+                    ${m.type === 'vid' ? '<div class="absolute inset-0 flex items-center justify-center bg-black/20 text-white text-3xl"><i class="fas fa-play-circle"></i></div>' : ''}
                 </div>`;
-            }).join('');
+        } else if (totalMedia.length >= 2) {
+            const m1 = totalMedia[0];
+            const m2 = totalMedia[1];
+            const thumb1 = m1.type === 'vid' ? getMediaThumb(m1.src) : formatImg(m1.src);
+            const thumb2 = m2.type === 'vid' ? getMediaThumb(m2.src) : formatImg(m2.src);
+
+            mediaHtml = `
+                <div class="grid-box" onclick="viewNews('${p.id}', 0)">
+                    <img src="${thumb1}" loading="lazy">
+                    ${m1.type === 'vid' ? '<div class="absolute inset-0 flex items-center justify-center bg-black/20 text-white text-3xl"><i class="fas fa-play-circle"></i></div>' : ''}
+                </div>
+                <div class="grid-box" onclick="viewNews('${p.id}', 1)">
+                    <img src="${thumb2}" loading="lazy">
+                    ${m2.type === 'vid' ? '<div class="absolute inset-0 flex items-center justify-center bg-black/20 text-white text-3xl"><i class="fas fa-play-circle"></i></div>' : ''}
+                    ${totalMedia.length > 2 ? `<div class="absolute inset-0 flex items-center justify-center bg-black/50 text-white font-bold text-sm">+${totalMedia.length - 2} আরও</div>` : ''}
+                </div>`;
         }
+
+        const shortContent = p.details || "";
+
+        return `
+        <div class="news-card group flex flex-col h-full">
+            <div class="card-media-grid ${gridClass}">
+                <div class="loc-badge"><i class="fas fa-map-marker-alt"></i> ${p.location}</div>
+                ${mediaHtml}
+            </div>
+            <div class="p-6 flex flex-col flex-grow">
+                <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-3">${toBengaliDate(p.date)}</span>
+                
+                <h3 class="font-bold text-slate-800 text-lg mb-2 line-clamp-1 leading-snug group-hover:text-green-600 transition-colors cursor-pointer" onclick="viewNews('${p.id}', 0)">
+                    ${p.title}
+                </h3>
+
+                <p class="text-xs text-slate-500 mb-4 line-clamp-2 leading-relaxed cursor-pointer flex-grow" onclick="viewNews('${p.id}', 0)">
+                    ${shortContent}
+                </p>
+
+                <div class="mt-auto flex justify-between items-center pt-5 border-t border-slate-50">
+                    <button onclick="shareFB('${p.id}', '${p.title}')" class="fb-share-premium">
+                        <i class="fab fa-facebook-f"></i>
+                        <span>শেয়ার</span>
+                    </button>
+                    <button onclick="viewNews('${p.id}', 0)" class="details-btn-minimal">বিস্তারিত খবর <i class="fas fa-arrow-right"></i></button>
+                </div>
+                ${isAdmin ? `<div class="mt-4 flex gap-4 text-[10px] pt-3 border-t border-dashed justify-end font-bold text-slate-400 uppercase">
+                    <button class="hover:text-blue-600" onclick="editPost('${p.id}')">এডিট</button>
+                    <button class="hover:text-red-600" onclick="deletePost('${p.id}')">ডিলিট</button>
+                </div>` : ''}
+            </div>
+        </div>`;
+    }).join('');
+}
 
         function viewNews(id, startIndex = 0) {
             const p = allPosts.find(x => x.id == id);
