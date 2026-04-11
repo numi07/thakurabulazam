@@ -53,7 +53,6 @@
 </script>
 
 <style>
-    /* Premium UI Enhancements */
     html { scroll-behavior: smooth; overflow-x: hidden; }
     body { 
         font-family: 'Noto Serif Bengali', serif;
@@ -237,7 +236,6 @@
             </div>
         </section>
 
-        <!-- Stats Section Enhanced -->
         <section class="container mx-auto px-4 -mt-20 relative z-30 mb-24">
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
                 <div onclick="showDetails('total')" class="stat-card p-10 rounded-[2.5rem] cursor-pointer group shadow-2xl border-b-4 border-brand-green">
@@ -290,7 +288,6 @@
             </div>
         </section>
 
-        <!-- Dynamic Info Bar -->
         <section class="container mx-auto px-4 mb-24">
             <div class="info-bar-bg flex flex-col lg:flex-row items-center gap-10">
                 <div class="flex-1 text-center lg:text-left space-y-2">
@@ -320,7 +317,6 @@
             </div>
         </section>
 
-        <!-- Manifesto Section Enhanced -->
         <section class="container mx-auto py-12 px-4" id="manifesto">
             <div class="text-center max-w-3xl mx-auto mb-20">
                 <span class="text-brand-green font-black uppercase tracking-widest text-sm bg-brand-green/10 px-4 py-2 rounded-full mb-4 inline-block">আমাদের অঙ্গীকার</span>
@@ -351,7 +347,6 @@
             </div>
         </section>
 
-        <!-- News Section Enhanced -->
         <section class="py-24 bg-slate-900 text-white overflow-hidden">
             <div class="container mx-auto px-4">
                 <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
@@ -362,13 +357,11 @@
                     <a href="news.html" class="bg-brand-gold text-brand-dark font-black px-8 py-4 rounded-2xl hover:bg-white transition-all flex items-center gap-3">সকল খবর দেখুন <i class="fas fa-arrow-right"></i></a>
                 </div>
                 <div id="latest-news-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-                    <!-- Dynamic News Inject Here -->
                 </div>
             </div>
         </section>
     </main>
 
-    <!-- Modals (Logic & Characters Unchanged) -->
     <div id="data-modal" class="fixed inset-0 z-[2000] hidden items-center justify-center p-4 bg-slate-900/90 backdrop-blur-xl">
         <div class="bg-white w-full max-w-3xl max-h-[90vh] rounded-[3rem] overflow-hidden shadow-2xl flex flex-col">
             <div class="p-8 md:p-10 border-b flex justify-between items-center bg-white sticky top-0 z-10">
@@ -391,7 +384,6 @@
             </button>
             <div class="overflow-y-auto">
                 <div id="modal-media-grid" class="w-full bg-slate-900">
-                    <!-- Slide wrapper injected by script -->
                 </div>
                 <div class="p-8 md:p-16">
                     <div class="flex items-center gap-4 mb-8">
@@ -444,7 +436,6 @@
         </div>
     </footer>
 
-    <!-- All Original Scripts Kept Intact -->
     <script>
     const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyAb27X-ISeO2QyPUNihgOV4w63JjkGUFbXRko8yvr-Zh2awQkvrvKMC-U4I4m5h65eWQ/exec";
     const API_URL = "https://script.google.com/macros/s/AKfycbwIhEujZMPLt3NsnaRxCvDq9xCo2Kmw_0Wp5GhsBA6RAIEuFvP0j0cZ0TVom7KFbMV1/exec"; 
@@ -658,7 +649,6 @@
             let vidUrl = v.trim();
             let frame = "";
             if(vidUrl.includes('facebook.com') || vidUrl.includes('fb.watch')) {
-                // Facebook Video Embed Logic
                 frame = `<iframe src="https://www.facebook.com/plugins/video.php?href=${encodeURIComponent(vidUrl)}&show_text=0&width=560" class="w-full h-full" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>`;
             } else if(vidUrl.includes('youtube.com') || vidUrl.includes('youtu.be')) {
                 let vidId = vidUrl.match(/(?:v=|be\/|embed\/)([\w-]+)/);
@@ -690,7 +680,7 @@
     }
     function closeNewsModal() {
         const mediaGrid = document.getElementById('modal-media-grid');
-        if (mediaGrid) mediaGrid.innerHTML = ""; // Stop video playback
+        if (mediaGrid) mediaGrid.innerHTML = "";
         document.getElementById('news-detail-modal').classList.add('hidden');
         document.getElementById('news-detail-modal').classList.remove('flex');
         document.body.style.overflow = 'auto';
