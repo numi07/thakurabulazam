@@ -437,8 +437,9 @@
     </footer>
 
     <script>
-    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyAb27X-ISeO2QyPUNihgOV4w63JjkGUFbXRko8yvr-Zh2awQkvrvKMC-U4I4m5h65eWQ/exec";
-    const API_URL = "https://script.google.com/macros/s/AKfycbwIhEujZMPLt3NsnaRxCvDq9xCo2Kmw_0Wp5GhsBA6RAIEuFvP0j0cZ0TVom7KFbMV1/exec"; 
+    // Vercel API Routes with Type
+    const SCRIPT_URL = "/api?type=news";
+    const API_URL = "/api?type=voter"; 
     
     let allNewsData = [];
     let currentSlideIndex = 0;
@@ -572,7 +573,8 @@
 
     async function fetchStats() {
         try {
-            const response = await fetch(API_URL + "?v=" + new Date().getTime());
+            // Backend handles the fetch, query param added for 'voter' type
+            const response = await fetch(API_URL);
             voterData = await response.json();
             if (voterData && voterData.length > 0) {
                 let m = 0, f = 0, centers = new Set();
@@ -695,10 +697,6 @@
     window.addEventListener('load', () => {
         updateClock(); getWeather(); getPrayerTimes(); loadLatestNews(); fetchStats();
     });
-    window.onclick = function(event) {
-        if (event.target == document.getElementById('news-detail-modal')) closeNewsModal();
-        if (event.target == document.getElementById('data-modal')) closeModal();
-    }
 </script>
 </body>
 </html>
