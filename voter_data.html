@@ -247,7 +247,7 @@
     </footer>
 
     <script>
-        const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyKeavzB3qQSQuacz57ysrUtLYYliUw6w-bRLPhK8-YE7XkYtzRyvw3WBCDVHImP86Dlg/exec";
+        const BACKEND_API = "/api/voter_data";
 
         function toBN(n) { return n ? n.toString().replace(/\d/g, d => "০১২৩৪৫৬৭৮৯"[d]) : "---"; }
 
@@ -281,8 +281,9 @@
             document.getElementById('loader').classList.remove('hidden');
             document.getElementById('btnText').innerText = "খোঁজা হচ্ছে...";
             try {
-                const response = await fetch(`${APPS_SCRIPT_URL}?ward=${w}&gender=${g}`);
+                const response = await fetch(`${BACKEND_API}?ward=${w}&gender=${g}`);
                 const data = await response.json();
+                
                 const searchKey = universalNormalize(rawQuery);
                 const filtered = data.filter(v => {
                     const dbName = universalNormalize(v.name);
