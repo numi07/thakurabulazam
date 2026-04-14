@@ -87,6 +87,8 @@
         transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         max-height: 0; overflow: hidden;
         background: white;
+         position: relative;
+        z-index: 999; 
     }
     #mobile-menu.active { max-height: 600px; padding: 1.5rem 0; border-bottom: 2px solid #006a4e; }
 
@@ -689,7 +691,22 @@
         document.getElementById('data-modal').classList.remove('active');
         document.body.style.overflow = 'auto';
     }
+        
+    const menuBtn = document.getElementById('menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
     
+    if (menuBtn && mobileMenu) {
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('active');
+        });
+        const mobileLinks = mobileMenu.querySelectorAll('a');
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('active');
+            });
+        });
+    }
+        
     window.addEventListener('load', () => {
         updateClock(); getWeather(); getPrayerTimes(); loadLatestNews(); fetchStats();
     });
