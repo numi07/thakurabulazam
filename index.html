@@ -437,8 +437,8 @@
     </footer>
 
     <script>
-    const SCRIPT_URL = "/api?type=news";
-    const API_URL = "/api?type=voter"; 
+    const SCRIPT_URL = "/api/news";
+    const API_URL = "/api";
     
     let allNewsData = [];
     let currentSlideIndex = 0;
@@ -689,9 +689,7 @@
         document.getElementById('data-modal').classList.remove('active');
         document.body.style.overflow = 'auto';
     }
-    const menuBtn = document.getElementById('menu-btn');
-    if(menuBtn) menuBtn.addEventListener('click', () => document.getElementById('mobile-menu').classList.toggle('active'));
-
+    
     window.addEventListener('load', () => {
         updateClock(); getWeather(); getPrayerTimes(); loadLatestNews(); fetchStats();
     });
