@@ -309,8 +309,6 @@
             document.getElementById('navLinks').classList.toggle('active');
         }
     }
-
-    // ব্যাকএন্ড এন্ডপয়েন্ট (Vercel-এর জন্য)
     const backendAPI = '/api/contact';
 
     function showToast(msg, type = "success") {
@@ -339,8 +337,6 @@
     document.getElementById('adminPass').addEventListener('keypress', function (e) {
         if (e.key === 'Enter') { verifyAdmin(); }
     });
-
-    // পাসওয়ার্ড ভেরিফিকেশন এখন ব্যাকএন্ডের মাধ্যমে হবে
     function verifyAdmin() {
         const pass = document.getElementById('adminPass').value;
         if(!pass) return showToast("পাসওয়ার্ড দিন", "error");
@@ -363,14 +359,12 @@
         const tableWrapper = document.getElementById('tableWrapper');
         tableWrapper.innerHTML = '<p style="text-align:center; padding:40px; color:#f7cb2d;"><i class="fas fa-spinner fa-spin"></i> ডাটা লোড হচ্ছে...</p>';
         
-        // ব্যাকএন্ডে পাসওয়ার্ড পাঠিয়ে ডাটা রিকোয়েস্ট
         fetch(`${backendAPI}?pass=${encodeURIComponent(pass || document.getElementById('adminPass').value)}`)
         .then(res => {
             if(!res.ok) throw new Error("Unauthorized");
             return res.json();
         })
         .then(data => {
-            // সফল হলে সেকশন পরিবর্তন
             document.getElementById('loginSection').style.display = 'none';
             document.getElementById('reportSection').style.display = 'block';
             document.getElementById('modalRefresh').style.display = 'block';
@@ -414,7 +408,6 @@
         });
     }
 
-    // রাইট ক্লিক বা ইন্সপেক্ট লক বজায় রাখা হয়েছে
     document.onkeydown = function(e) {
         if(e.keyCode == 123) { return false; } 
         if(e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) { return false; } 
