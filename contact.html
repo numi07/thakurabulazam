@@ -310,10 +310,8 @@
         }
     }
 
-    const _0x1a2b = [0x61, 0x70, 0x61, 0x6b, 0x35, 0x34, 0x35, 0x31]; 
-    const _0x12a3 = _0x1a2b.map(x => String.fromCharCode(x)).join('');
-    
-    const scriptURL = 'https://script.google.com/macros/s/AKfycbyPTEaVyHuj8P5dwi1dQ6QJKtlF8OetuJjgSQGN2JrFZJNA870u-mJnnqY2aSdY44PR6Q/exec';
+    // ব্যাকএন্ড এন্ডপয়েন্ট (Vercel-এর জন্য)
+    const backendAPI = '/api/contact';
 
     function showToast(msg, type = "success") {
         const toast = document.getElementById('customToast');
@@ -342,17 +340,12 @@
         if (e.key === 'Enter') { verifyAdmin(); }
     });
 
+    // পাসওয়ার্ড ভেরিফিকেশন এখন ব্যাকএন্ডের মাধ্যমে হবে
     function verifyAdmin() {
         const pass = document.getElementById('adminPass').value;
-        if(pass === _0x12a3) {
-            document.getElementById('loginSection').style.display = 'none';
-            document.getElementById('reportSection').style.display = 'block';
-            document.getElementById('modalRefresh').style.display = 'block';
-            document.getElementById('modalTitle').innerText = "ব্যবহারকারী তথ্য";
-            fetchReport();
-        } else {
-            showToast("ভুল পাসওয়ার্ড! সঠিক পাসওয়ার্ড দিন।", "error");
-        }
+        if(!pass) return showToast("পাসওয়ার্ড দিন", "error");
+        
+        fetchReport(pass);
     }
 
     function copyToClipboard(text) {
@@ -366,12 +359,23 @@
         return number.toString().replace(/\d/g, (d) => bnNums[d]);
     }
 
-    function fetchReport() {
+    function fetchReport(pass = "") {
         const tableWrapper = document.getElementById('tableWrapper');
         tableWrapper.innerHTML = '<p style="text-align:center; padding:40px; color:#f7cb2d;"><i class="fas fa-spinner fa-spin"></i> ডাটা লোড হচ্ছে...</p>';
-        fetch(scriptURL)
-        .then(res => res.json())
+        
+        // ব্যাকএন্ডে পাসওয়ার্ড পাঠিয়ে ডাটা রিকোয়েস্ট
+        fetch(`${backendAPI}?pass=${encodeURIComponent(pass || document.getElementById('adminPass').value)}`)
+        .then(res => {
+            if(!res.ok) throw new Error("Unauthorized");
+            return res.json();
+        })
         .then(data => {
+            // সফল হলে সেকশন পরিবর্তন
+            document.getElementById('loginSection').style.display = 'none';
+            document.getElementById('reportSection').style.display = 'block';
+            document.getElementById('modalRefresh').style.display = 'block';
+            document.getElementById('modalTitle').innerText = "ব্যবহারকারী তথ্য";
+
             if (!data || data.length === 0) {
                 tableWrapper.innerHTML = "<p style='text-align:center; padding:20px;'>কোনো তথ্য পাওয়া যায়নি।</p>";
                 return;
@@ -405,10 +409,12 @@
             tableWrapper.innerHTML = html + '</tbody></table>';
         })
         .catch(err => {
-            tableWrapper.innerHTML = "<p style='color:red; text-align:center; padding:20px;'>ডাটা পেতে সমস্যা হয়েছে।</p>";
+            tableWrapper.innerHTML = "";
+            showToast("ভুল পাসওয়ার্ড! সঠিক পাসওয়ার্ড দিন।", "error");
         });
     }
 
+    // রাইট ক্লিক বা ইন্সপেক্ট লক বজায় রাখা হয়েছে
     document.onkeydown = function(e) {
         if(e.keyCode == 123) { return false; } 
         if(e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) { return false; } 
@@ -423,15 +429,23 @@
         btn.disabled = true; 
         btn.innerHTML = "<i class='fas fa-spinner fa-spin'></i> বার্তা প্রেরণ হচ্ছে...";
         
-        fetch(scriptURL, { method: 'POST', body: new FormData(form)})
-        .then(res => {
+        const formData = new FormData(form);
+        const payload = new URLSearchParams(formData);
+
+        fetch(backendAPI, { 
+            method: 'POST', 
+            body: payload,
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+        })
+        .then(res => res.json())
+        .then(data => {
             showToast("আপনার বার্তাটি সফলভাবে সংরক্ষিত হয়েছে!");
             form.reset(); 
             btn.disabled = false; 
             btn.innerHTML = "বার্তা পাঠান";
         })
         .catch(err => {
-            showToast("দুঃখিত, পুনরায় চেষ্টা করুন।", "error");
+            showToast("দুঃখিত, পুনরায় চেষ্টা করুন।", "error");
             btn.disabled = false; 
             btn.innerHTML = "বার্তা পাঠান";
         });
