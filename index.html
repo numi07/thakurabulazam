@@ -437,7 +437,6 @@
     </footer>
 
     <script>
-    // Vercel API Routes with Type
     const SCRIPT_URL = "/api?type=news";
     const API_URL = "/api?type=voter"; 
     
@@ -573,7 +572,6 @@
 
     async function fetchStats() {
         try {
-            // Backend handles the fetch, query param added for 'voter' type
             const response = await fetch(API_URL);
             voterData = await response.json();
             if (voterData && voterData.length > 0) {
