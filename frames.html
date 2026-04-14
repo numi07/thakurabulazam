@@ -191,252 +191,247 @@
     </footer>
 
     <script>
-        const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyhmiT0zc6z3jaKITd_4CyqYgTlzgjXfbXgeFSWQnMzKRKvyyGfhFvly17FiyWa_99GZw/exec';
+    const APPS_SCRIPT_URL = '/api/frames';
 
-        const menuToggle = document.getElementById('menu-toggle');
-        const mobileMenu = document.getElementById('mobile-menu');
-        menuToggle.addEventListener('click', () => mobileMenu.classList.toggle('active'));
+    const menuToggle = document.getElementById('menu-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+    if(menuToggle) menuToggle.addEventListener('click', () => mobileMenu.classList.toggle('active'));
 
-        const BannerApp = (function() {
-            const canvas = document.getElementById('bannerCanvas');
-            const ctx = canvas.getContext('2d');
-            const imageInput = document.getElementById('imageInput');
-            const nameInput = document.getElementById('nameInput');
-            const titleInput = document.getElementById('titleInput');
-            const zoomSlider = document.getElementById('zoomSlider');
-            const controls = document.getElementById('controls');
-            const downloadBtn = document.getElementById('downloadBtn');
-            const zoomVal = document.getElementById('zoomVal');
-            const frameContainer = document.getElementById('frameContainer');
+    const BannerApp = (function() {
+        const canvas = document.getElementById('bannerCanvas');
+        const ctx = canvas.getContext('2d');
+        const imageInput = document.getElementById('imageInput');
+        const nameInput = document.getElementById('nameInput');
+        const titleInput = document.getElementById('titleInput');
+        const zoomSlider = document.getElementById('zoomSlider');
+        const controls = document.getElementById('controls');
+        const downloadBtn = document.getElementById('downloadBtn');
+        const zoomVal = document.getElementById('zoomVal');
+        const frameContainer = document.getElementById('frameContainer');
 
-            let frameImg = new Image();
-            let userImg = new Image();
-            let isUserLoaded = false;
-            let scale = 1;
-            let currentX = 500, currentY = 500;
-            let isDragging = false;
-            let startX, startY;
-            
+        let frameImg = new Image();
+        let userImg = new Image();
+        let isUserLoaded = false;
+        let scale = 1;
+        let currentX = 500, currentY = 500;
+        let isDragging = false;
+        let startX, startY;
+        let initialPinchDistance = null;
 
-            let initialPinchDistance = null;
+        frameImg.crossOrigin = "anonymous";
 
-            frameImg.crossOrigin = "anonymous";
-
-            async function loadFrames() {
-                try {
-                    const response = await fetch(APPS_SCRIPT_URL + '?t=' + new Date().getTime(), {
-                        method: 'GET',
-                        cache: 'no-cache'
-                    });
-                    
-                    let frames = await response.json();
-                    
-                    if (frames && frames.length > 0) {
-                        frames.reverse(); 
-
-                        frameContainer.innerHTML = ''; 
-                        frames.forEach((frame, index) => {
-                            const div = document.createElement('div');
-                            div.className = `frame-option cursor-pointer ${index === 0 ? 'active-frame' : ''}`;
-                            div.onclick = () => changeFrame(frame.url, div);
-                            div.innerHTML = `<img src="${frame.url}" class="w-full aspect-square object-cover" alt="Frame" crossorigin="anonymous">`;
-                            frameContainer.appendChild(div);
-                            
-                            if (index === 0) {
-                                frameImg.src = frame.url;
-                                frameImg.onload = draw;
-                            }
-                        });
-                    }
-                } catch (error) {
-                    console.error("Frame loading failed:", error);
-                    frameContainer.innerHTML = '<div class="col-span-full text-red-500 text-[10px] text-center">সার্ভার সংযোগে সমস্যা</div>';
-                }
-            }
-
-            function draw() {
-                const name = nameInput.value.trim();
-                canvas.height = (name !== "") ? 1100 : 1000;
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
-                
-                if (isUserLoaded) {
-                    const w = userImg.width * scale;
-                    const h = userImg.height * scale;
-                    ctx.drawImage(userImg, currentX - w/2, currentY - h/2, w, h);
-                } else {
-                    ctx.fillStyle = "#f8fafc";
-                    ctx.fillRect(0,0, 1000, 1000);
-                    ctx.fillStyle = "#cbd5e1";
-                    ctx.font = "bold 32px 'Hind Siliguri'";
-                    ctx.textAlign = "center";
-                    ctx.fillText("📷 এখানে ছবি দেখা যাবে", 500, 500);
-                }
-
-                if (frameImg.src) {
-                    try { ctx.drawImage(frameImg, 0, 0, 1000, 1000); } catch(e) {}
-                }
-
-                if (name !== "") {
-                    ctx.fillStyle = "#01421c"; ctx.fillRect(0, 1000, 1000, 100); 
-                    ctx.fillStyle = "#fbbf24"; ctx.fillRect(0, 1000, 1000, 4); 
-
-                    const title = titleInput.value.trim();
-                    const prefix = "প্রচারে: ";
-                    const formattedTitle = title !== "" ? `(${title})` : "";
-                    
-                    const maxAllowedWidth = 920;
-                    ctx.font = "40px 'Hind Siliguri'";
-                    const pW = ctx.measureText(prefix).width;
-                    ctx.font = "bold 46px 'Hind Siliguri'";
-                    const nW = ctx.measureText(name).width;
-                    ctx.font = "italic 300 30px 'Hind Siliguri'";
-                    const tW = ctx.measureText(formattedTitle).width;
-
-                    const totalWidth = pW + nW + (title !== "" ? tW + 15 : 0);
-
-                    if (totalWidth <= maxAllowedWidth) {
-                        const startXLabel = (1000 - totalWidth) / 2;
-                        ctx.textAlign = "left";
-                        ctx.font = "40px 'Hind Siliguri'"; ctx.fillStyle = "#e2e8f0";
-                        ctx.fillText(prefix, startXLabel, 1065);
-                        ctx.font = "bold 46px 'Hind Siliguri'"; ctx.fillStyle = "#FFFFFF";
-                        ctx.fillText(name, startXLabel + pW, 1065);
-                        if (title !== "") {
-                            ctx.font = "italic 300 30px 'Hind Siliguri'"; ctx.fillStyle = "#cbd5e1";
-                            ctx.fillText(formattedTitle, startXLabel + pW + nW + 15, 1065);
-                        }
-                    } else {
-                        ctx.textAlign = "center";
-                        ctx.font = "40px 'Hind Siliguri'"; ctx.fillStyle = "#e2e8f0";
-                        const firstLineW = pW + nW;
-                        const startX1 = (1000 - firstLineW) / 2;
-                        ctx.textAlign = "left";
-                        ctx.fillText(prefix, startX1, 1055);
-                        ctx.font = "bold 46px 'Hind Siliguri'"; ctx.fillStyle = "#FFFFFF";
-                        ctx.fillText(name, startX1 + pW, 1055);
-                        if (title !== "") {
-                            ctx.font = "italic 300 30px 'Hind Siliguri'"; ctx.fillStyle = "#cbd5e1";
-                            ctx.textAlign = "center"; ctx.fillText(formattedTitle, 500, 1085);
-                        }
-                    }
-                }
-            }
-
-            function changeFrame(src, element) {
-                frameImg.src = src;
-                frameImg.onload = draw;
-                document.querySelectorAll('.frame-option').forEach(el => el.classList.remove('active-frame'));
-                element.classList.add('active-frame');
-            }
-
-
-            function getDistance(touches) {
-                return Math.hypot(touches[0].pageX - touches[1].pageX, touches[0].pageY - touches[1].pageY);
-            }
-
-            function getPos(e) {
-                const rect = canvas.getBoundingClientRect();
-                const clientX = e.touches ? e.touches[0].clientX : e.clientX;
-                const clientY = e.touches ? e.touches[0].clientY : e.clientY;
-                return { x: (clientX - rect.left) * (1000 / rect.width), y: (clientY - rect.top) * (canvas.height / rect.height) };
-            }
-
-
-            canvas.addEventListener('mousedown', e => { if(!isUserLoaded) return; isDragging = true; const pos = getPos(e); startX = pos.x - currentX; startY = pos.y - currentY; });
-            window.addEventListener('mousemove', e => { if(!isDragging) return; const pos = getPos(e); currentX = pos.x - startX; currentY = pos.y - startY; draw(); });
-            window.addEventListener('mouseup', () => isDragging = false);
-            
-            canvas.addEventListener('touchstart', e => { 
-                if(!isUserLoaded) return; 
-                if (e.touches.length === 2) {
-                    isDragging = false;
-                    initialPinchDistance = getDistance(e.touches);
-                } else {
-                    isDragging = true; 
-                    const pos = getPos(e); 
-                    startX = pos.x - currentX; 
-                    startY = pos.y - currentY; 
-                }
-            }, {passive: false});
-
-            window.addEventListener('touchmove', e => { 
-                if(!isUserLoaded) return;
-                if (e.touches.length === 2 && initialPinchDistance) {
-                    e.preventDefault();
-                    const newDist = getDistance(e.touches);
-                    const zoomFactor = newDist / initialPinchDistance;
-                    scale = Math.min(Math.max(zoomSlider.min, scale * zoomFactor), zoomSlider.max);
-                    zoomSlider.value = scale;
-                    zoomVal.innerText = Math.round((scale / zoomSlider.min) * 100) + "%";
-                    initialPinchDistance = newDist;
-                    draw();
-                } else if(isDragging) { 
-                    e.preventDefault(); 
-                    const pos = getPos(e); 
-                    currentX = pos.x - startX; 
-                    currentY = pos.y - startY; 
-                    draw(); 
-                } 
-            }, {passive: false});
-
-            window.addEventListener('touchend', () => { isDragging = false; initialPinchDistance = null; });
-
-            imageInput.addEventListener('change', (e) => {
-                const file = e.target.files[0];
-                if (!file) return;
-                const reader = new FileReader();
-                reader.onload = (f) => {
-                    userImg.src = f.target.result;
-                    userImg.onload = () => {
-                        isUserLoaded = true;
-                        controls.classList.remove('hidden');
-                        const minScale = Math.max(1000 / userImg.width, 1000 / userImg.height);
-                        scale = minScale;
-                        zoomSlider.min = minScale * 0.5;
-                        zoomSlider.max = minScale * 4;
-                        zoomSlider.value = scale;
-                        zoomVal.innerText = "100%";
-                        draw();
-                    };
-                };
-                reader.readAsDataURL(file);
-            });
-
-            zoomSlider.addEventListener('input', (e) => {
-                scale = parseFloat(e.target.value);
-                zoomVal.innerText = Math.round((scale / zoomSlider.min) * 100) + "%";
-                draw();
-            });
-
-            nameInput.addEventListener('input', draw);
-            titleInput.addEventListener('input', draw);
-
-            downloadBtn.addEventListener('click', () => {
-                if (!isUserLoaded) { showCustomAlert("দয়া করে ছবি আপলোড করুন"); return; }
-                const link = document.createElement('a');
-                link.download = 'thakur_abul_azam_banner.png';
-                try {
-                    link.href = canvas.toDataURL('image/png', 1.0);
-                    link.click();
-                } catch(e) { showCustomAlert("ডাউনলোড সম্ভব হচ্ছে না (CORS সমস্যা)"); }
-            });
-
-            function showCustomAlert(message) {
-                const alertBox = document.createElement('div');
-                alertBox.textContent = message;
-                Object.assign(alertBox.style, {
-                    position: 'fixed', top: '20%', left: '50%', transform: 'translateX(-50%)',
-                    backgroundColor: '#ff4d4d', color: 'white', padding: '15px 30px',
-                    borderRadius: '8px', boxShadow: '0 4px 10px rgba(0,0,0,0.3)',
-                    zIndex: '1000', fontWeight: 'bold', fontSize: '18px'
+        async function loadFrames() {
+            try {
+                const response = await fetch(APPS_SCRIPT_URL, {
+                    method: 'GET'
                 });
-                document.body.appendChild(alertBox);
-                setTimeout(() => alertBox.remove(), 2000);
+                
+                let frames = await response.json();
+                
+                if (frames && frames.length > 0) {
+                    frames.reverse(); 
+
+                    frameContainer.innerHTML = ''; 
+                    frames.forEach((frame, index) => {
+                        const div = document.createElement('div');
+                        div.className = `frame-option cursor-pointer ${index === 0 ? 'active-frame' : ''}`;
+                        div.onclick = () => changeFrame(frame.url, div);
+                        div.innerHTML = `<img src="${frame.url}" class="w-full aspect-square object-cover" alt="Frame" crossorigin="anonymous">`;
+                        frameContainer.appendChild(div);
+                        
+                        if (index === 0) {
+                            frameImg.src = frame.url;
+                            frameImg.onload = draw;
+                        }
+                    });
+                }
+            } catch (error) {
+                console.error("Frame loading failed:", error);
+                if(frameContainer) frameContainer.innerHTML = '<div class="col-span-full text-red-500 text-[10px] text-center">সার্ভার সংযোগে সমস্যা</div>';
+            }
+        }
+
+        function draw() {
+            const name = nameInput.value.trim();
+            canvas.height = (name !== "") ? 1100 : 1000;
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            if (isUserLoaded) {
+                const w = userImg.width * scale;
+                const h = userImg.height * scale;
+                ctx.drawImage(userImg, currentX - w/2, currentY - h/2, w, h);
+            } else {
+                ctx.fillStyle = "#f8fafc";
+                ctx.fillRect(0,0, 1000, 1000);
+                ctx.fillStyle = "#cbd5e1";
+                ctx.font = "bold 32px 'Hind Siliguri'";
+                ctx.textAlign = "center";
+                ctx.fillText("📷 এখানে ছবি দেখা যাবে", 500, 500);
             }
 
-            loadFrames();
-            window.addEventListener('pageshow', () => { nameInput.value = ""; titleInput.value = ""; });
-        })();
-    </script>
+            if (frameImg.src) {
+                try { ctx.drawImage(frameImg, 0, 0, 1000, 1000); } catch(e) {}
+            }
+
+            if (name !== "") {
+                ctx.fillStyle = "#01421c"; ctx.fillRect(0, 1000, 1000, 100); 
+                ctx.fillStyle = "#fbbf24"; ctx.fillRect(0, 1000, 1000, 4); 
+
+                const title = titleInput.value.trim();
+                const prefix = "প্রচারে: ";
+                const formattedTitle = title !== "" ? `(${title})` : "";
+                
+                const maxAllowedWidth = 920;
+                ctx.font = "40px 'Hind Siliguri'";
+                const pW = ctx.measureText(prefix).width;
+                ctx.font = "bold 46px 'Hind Siliguri'";
+                const nW = ctx.measureText(name).width;
+                ctx.font = "italic 300 30px 'Hind Siliguri'";
+                const tW = ctx.measureText(formattedTitle).width;
+
+                const totalWidth = pW + nW + (title !== "" ? tW + 15 : 0);
+
+                if (totalWidth <= maxAllowedWidth) {
+                    const startXLabel = (1000 - totalWidth) / 2;
+                    ctx.textAlign = "left";
+                    ctx.font = "40px 'Hind Siliguri'"; ctx.fillStyle = "#e2e8f0";
+                    ctx.fillText(prefix, startXLabel, 1065);
+                    ctx.font = "bold 46px 'Hind Siliguri'"; ctx.fillStyle = "#FFFFFF";
+                    ctx.fillText(name, startXLabel + pW, 1065);
+                    if (title !== "") {
+                        ctx.font = "italic 300 30px 'Hind Siliguri'"; ctx.fillStyle = "#cbd5e1";
+                        ctx.fillText(formattedTitle, startXLabel + pW + nW + 15, 1065);
+                    }
+                } else {
+                    ctx.textAlign = "center";
+                    ctx.font = "40px 'Hind Siliguri'"; ctx.fillStyle = "#e2e8f0";
+                    const firstLineW = pW + nW;
+                    const startX1 = (1000 - firstLineW) / 2;
+                    ctx.textAlign = "left";
+                    ctx.fillText(prefix, startX1, 1055);
+                    ctx.font = "bold 46px 'Hind Siliguri'"; ctx.fillStyle = "#FFFFFF";
+                    ctx.fillText(name, startX1 + pW, 1055);
+                    if (title !== "") {
+                        ctx.font = "italic 300 30px 'Hind Siliguri'"; ctx.fillStyle = "#cbd5e1";
+                        ctx.textAlign = "center"; ctx.fillText(formattedTitle, 500, 1085);
+                    }
+                }
+            }
+        }
+
+        function changeFrame(src, element) {
+            frameImg.src = src;
+            frameImg.onload = draw;
+            document.querySelectorAll('.frame-option').forEach(el => el.classList.remove('active-frame'));
+            element.classList.add('active-frame');
+        }
+
+        function getDistance(touches) {
+            return Math.hypot(touches[0].pageX - touches[1].pageX, touches[0].pageY - touches[1].pageY);
+        }
+
+        function getPos(e) {
+            const rect = canvas.getBoundingClientRect();
+            const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+            const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+            return { x: (clientX - rect.left) * (1000 / rect.width), y: (clientY - rect.top) * (canvas.height / rect.height) };
+        }
+
+        canvas.addEventListener('mousedown', e => { if(!isUserLoaded) return; isDragging = true; const pos = getPos(e); startX = pos.x - currentX; startY = pos.y - currentY; });
+        window.addEventListener('mousemove', e => { if(!isDragging) return; const pos = getPos(e); currentX = pos.x - startX; currentY = pos.y - startY; draw(); });
+        window.addEventListener('mouseup', () => isDragging = false);
+        
+        canvas.addEventListener('touchstart', e => { 
+            if(!isUserLoaded) return; 
+            if (e.touches.length === 2) {
+                isDragging = false;
+                initialPinchDistance = getDistance(e.touches);
+            } else {
+                isDragging = true; 
+                const pos = getPos(e); 
+                startX = pos.x - currentX; 
+                startY = pos.y - currentY; 
+            }
+        }, {passive: false});
+
+        window.addEventListener('touchmove', e => { 
+            if(!isUserLoaded) return;
+            if (e.touches.length === 2 && initialPinchDistance) {
+                e.preventDefault();
+                const newDist = getDistance(e.touches);
+                const zoomFactor = newDist / initialPinchDistance;
+                scale = Math.min(Math.max(zoomSlider.min, scale * zoomFactor), zoomSlider.max);
+                zoomSlider.value = scale;
+                zoomVal.innerText = Math.round((scale / zoomSlider.min) * 100) + "%";
+                initialPinchDistance = newDist;
+                draw();
+            } else if(isDragging) { 
+                e.preventDefault(); 
+                const pos = getPos(e); 
+                currentX = pos.x - startX; 
+                currentY = pos.y - startY; 
+                draw(); 
+            } 
+        }, {passive: false});
+
+        window.addEventListener('touchend', () => { isDragging = false; initialPinchDistance = null; });
+
+        imageInput.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = (f) => {
+                userImg.src = f.target.result;
+                userImg.onload = () => {
+                    isUserLoaded = true;
+                    controls.classList.remove('hidden');
+                    const minScale = Math.max(1000 / userImg.width, 1000 / userImg.height);
+                    scale = minScale;
+                    zoomSlider.min = minScale * 0.5;
+                    zoomSlider.max = minScale * 4;
+                    zoomSlider.value = scale;
+                    zoomVal.innerText = "100%";
+                    draw();
+                };
+            };
+            reader.readAsDataURL(file);
+        });
+
+        zoomSlider.addEventListener('input', (e) => {
+            scale = parseFloat(e.target.value);
+            zoomVal.innerText = Math.round((scale / zoomSlider.min) * 100) + "%";
+            draw();
+        });
+
+        nameInput.addEventListener('input', draw);
+        titleInput.addEventListener('input', draw);
+
+        downloadBtn.addEventListener('click', () => {
+            if (!isUserLoaded) { showCustomAlert("দয়া করে ছবি আপলোড করুন"); return; }
+            const link = document.createElement('a');
+            link.download = 'thakur_abul_azam_banner.png';
+            try {
+                link.href = canvas.toDataURL('image/png', 1.0);
+                link.click();
+            } catch(e) { showCustomAlert("ডাউনলোড সম্ভব হচ্ছে না (CORS সমস্যা)"); }
+        });
+
+        function showCustomAlert(message) {
+            const alertBox = document.createElement('div');
+            alertBox.textContent = message;
+            Object.assign(alertBox.style, {
+                position: 'fixed', top: '20%', left: '50%', transform: 'translateX(-50%)',
+                backgroundColor: '#ff4d4d', color: 'white', padding: '15px 30px',
+                borderRadius: '8px', boxShadow: '0 4px 10px rgba(0,0,0,0.3)',
+                zIndex: '1000', fontWeight: 'bold', fontSize: '18px'
+            });
+            document.body.appendChild(alertBox);
+            setTimeout(() => alertBox.remove(), 2000);
+        }
+
+        loadFrames();
+        window.addEventListener('pageshow', () => { nameInput.value = ""; titleInput.value = ""; });
+    })();
+</script>
 </body>
 </html>
